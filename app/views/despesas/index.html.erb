@@ -8,6 +8,7 @@
       <th>Categoria</th>
       <th>Descricao</th>
       <th>Valor</th>
+      <th>Mes</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -15,9 +16,10 @@
   <tbody>
     <% @despesas.each do |despesa| %>
       <tr>
-        <td><%= despesa.categoria %></td>
+        <td><%= despesa.categoria&.name %></td>
         <td><%= despesa.descricao %></td>
         <td><%= despesa.valor %></td>
+        <td><%= despesa.mes %></td>
         <td><%= link_to 'Show', despesa %></td>
         <td><%= link_to 'Edit', edit_despesa_path(despesa) %></td>
         <td><%= link_to 'Destroy', despesa, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -12,11 +12,6 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :categoria %>
-    <%= form.number_field :categoria %>
-  </div>
-
-  <div class="field">
     <%= form.label :descricao %>
     <%= form.text_field :descricao %>
   </div>
@@ -24,6 +19,11 @@
   <div class="field">
     <%= form.label :valor %>
     <%= form.text_field :valor %>
+  </div>
+
+  <div class="field">
+    <%= form.label :categoria %>
+    <%= form.select(:categoria_id, Categoria.all.map { |c| [c.name, c.id] }) %>
   </div>
 
   <div class="actions">

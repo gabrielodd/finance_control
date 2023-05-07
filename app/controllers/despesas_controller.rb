@@ -65,6 +65,6 @@ class DespesasController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def despesa_params
-      params.require(:despesa).permit(:categoria, :descricao, :valor)
+      params.require(:despesa).permit(:categoria_id, :descricao, :valor)
     end
 end
