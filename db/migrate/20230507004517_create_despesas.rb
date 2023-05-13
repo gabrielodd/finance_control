@@ -1,9 +1,8 @@
 class CreateDespesas < ActiveRecord::Migration[6.0]
   def change
     create_table :despesas do |t|
-      t.integer :categoria
       t.string :descricao
-      t.decimal :valor
+      t.decimal :valor, precision: 15, scale: 2
 
       t.timestamps
     end
