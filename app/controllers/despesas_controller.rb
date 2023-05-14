@@ -21,7 +21,8 @@ class DespesasController < ApplicationController
 
   # POST /despesas or /despesas.json
   def create
-    @despesa = Despesa.new(despesa_params)
+    params = despesa_params.merge!(user_id: current_user.id)
+    @despesa = Despesa.new(params)
 
     respond_to do |format|
       if @despesa.save
@@ -65,6 +66,6 @@ class DespesasController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def despesa_params
-      params.require(:despesa).permit(:categoria_id, :descricao, :valor)
+      params.require(:despesa).permit(:categoria_id, :descricao, :valor, :user_id)
     end
 end

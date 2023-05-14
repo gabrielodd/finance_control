@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_13_015922) do
+ActiveRecord::Schema.define(version: 2023_05_13_021341) do
 
   create_table "categoria", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
@@ -23,7 +23,9 @@ ActiveRecord::Schema.define(version: 2023_05_13_015922) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "categoria_id"
+    t.bigint "user_id"
     t.index ["categoria_id"], name: "index_despesas_on_categoria_id"
+    t.index ["user_id"], name: "index_despesas_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -39,4 +41,5 @@ ActiveRecord::Schema.define(version: 2023_05_13_015922) do
   end
 
   add_foreign_key "despesas", "categoria", column: "categoria_id"
+  add_foreign_key "despesas", "users"
 end
