@@ -3,7 +3,12 @@ class DespesasController < ApplicationController
 
   # GET /despesas or /despesas.json
   def index
-    @despesas = Despesa.all
+    if user_signed_in?
+      date = Date.current
+      @despesas = Despesa.within_month_from_user(current_user.id, date)
+    else
+      @despesas = []
+    end
   end
 
   # GET /despesas/1 or /despesas/1.json
