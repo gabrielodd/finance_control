@@ -4,6 +4,7 @@
 // that code so it'll be compiled.
 
 import "bootstrap"
+import "@fortawesome/fontawesome-free/css/all"
 
 require("@rails/ujs").start()
 require("turbolinks").start()

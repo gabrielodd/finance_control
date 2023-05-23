@@ -6,6 +6,7 @@ class DespesasController < ApplicationController
     if user_signed_in?
       date = Date.current
       @despesas = Despesa.within_month_from_user(current_user.id, date)
+      @total = Despesa.total_spendings_current_month_from_user(current_user.id, date)
     else
       @despesas = []
     end

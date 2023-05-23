@@ -11,6 +11,7 @@
 
 <% else %>
 
+<br>
 <h3>Last Month Spendings</h3>
 
 <table class="table">
@@ -39,11 +40,13 @@
   </tbody>
 </table>
 
-<h3>Total Spent Last Month: </h3>
+<h3 class="total-spent">Total Spent Last Month: <%=@total%></h3>
 
 <br>
 
 <% end %>
 
-<%= link_to 'New Despesa', new_despesa_path %>
+<%= link_to new_despesa_path, class: 'btn btn-success spendings-button' do %>
+  New Spending <i class="fas fa-plus"></i>
+<% end %>
 
