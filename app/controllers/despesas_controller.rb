@@ -30,6 +30,7 @@ class DespesasController < ApplicationController
   # POST /despesas or /despesas.json
   def create
     params = despesa_params.merge!(user_id: current_user.id)
+    params[:date] = Date.today if params[:date].blank?
     @despesa = Despesa.new(params)
 
     respond_to do |format|
