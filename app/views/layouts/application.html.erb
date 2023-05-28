@@ -38,6 +38,9 @@
 						<li class="nav-item pl-1">
 							<%= link_to "Logout", destroy_user_session_path, method: :delete, class: "nav-link"  %>
 						</li>
+						<li class="nav-item pl-1">
+							<a class="nav-link" href="#"><i class="fa fa-user fa-fw mr-1"></i><%=current_user.email%></a>
+						</li>
 					<% else %>
 						<li class="nav-item pl-1">
 							<%= link_to "Sign up", new_user_registration_path, class: "nav-link"  %> 

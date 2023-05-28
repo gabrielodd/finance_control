@@ -5,8 +5,10 @@ class DespesasController < ApplicationController
   def index
     if user_signed_in?
       date = Date.current
+      date_last_month = 1.month.ago
       @despesas = Despesa.within_month_from_user(current_user.id, date)
       @total = Despesa.total_spendings_current_month_from_user(current_user.id, date)
+      @total_last_month = Despesa.total_spendings_current_month_from_user(current_user.id, date)
     else
       @despesas = []
     end
@@ -32,7 +34,7 @@ class DespesasController < ApplicationController
 
     respond_to do |format|
       if @despesa.save
-        format.html { redirect_to despesa_url(@despesa), notice: "Despesa was successfully created." }
+        format.html { redirect_to despesas_url, notice: "Despesa was successfully created." }
         format.json { render :show, status: :created, location: @despesa }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -72,6 +74,6 @@ class DespesasController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def despesa_params
-      params.require(:despesa).permit(:categoria_id, :descricao, :valor, :user_id)
+      params.require(:despesa).permit(:categoria_id, :descricao, :valor, :date, :user_id)
     end
 end

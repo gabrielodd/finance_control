@@ -11,6 +11,6 @@ class Despesa < ApplicationRecord
   }
 
   def mes
-    created_at.strftime("%B")
+    date ? date.strftime("%B") : created_at.strftime("%B")
   end
 end
