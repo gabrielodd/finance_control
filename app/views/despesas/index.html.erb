@@ -2,7 +2,7 @@
 <% if @despesas.blank? %>
 
 <div class="alert alert-warning" role="alert">
-  <% if user_signed_in? %>
+  <% unless user_signed_in? %>
     Log in to see your spendings!
   <% else %>
     You don't have any spendings this month!
@@ -40,7 +40,7 @@
   </tbody>
 </table>
 
-<h3 class="total-spent">Total Spent Last Month: <%=@total%></h3>
+<h3 class="total-spent">Total Spent This Month: <%=@total%></h3>
 
 <br>
 

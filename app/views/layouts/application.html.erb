@@ -19,14 +19,18 @@
 			<div class="collapse navbar-collapse" id="nvbCollapse">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item active pl-1">
-						<a class="nav-link" href="#"><i class="fa fa-th-list fa-fw mr-1"></i>Blog</a>
+						<%= link_to despesas_path, class: "nav-link" do %>
+							<i class="fa fa-th-list fa-fw mr-1"></i>Despesas
+						<% end %>
 					</li>
 					<li class="nav-item pl-1">
-						<a class="nav-link" href="#"><i class="fa fa-info-circle fa-fw mr-1"></i>Hakkımızda</a>
+						<a class="nav-link" href="#"><i class="fa fa-info-circle fa-fw mr-1"></i>Relatórios</a>
 					</li>
+					<!-- 
 					<li class="nav-item pl-1">
 						<a class="nav-link" href="#"><i class="fa fa-phone fa-fw fa-rotate-180 mr-1"></i>İletişim</a>
 					</li>
+					-->
 					<% if user_signed_in? %>
 						<li class="nav-item pl-1">
 							<%= link_to "Edit profile", edit_user_registration_path, class: "nav-link" %> 
