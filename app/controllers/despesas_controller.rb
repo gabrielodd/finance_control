@@ -9,7 +9,8 @@ class DespesasController < ApplicationController
       # @despesas = Despesa.within_month_from_user(current_user.id, date)
       @despesas = Despesa.where(user_id: current_user.id)
       @total = Despesa.total_spendings_current_month_from_user(current_user.id, date)
-      @total_last_month = Despesa.total_spendings_current_month_from_user(current_user.id, date)
+      @total_last_month = Despesa.total_spendings_current_month_from_user(current_user.id, date_last_month)
+      @difference = @total - @total_last_month
     else
       @despesas = []
     end

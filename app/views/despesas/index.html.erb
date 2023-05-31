@@ -40,7 +40,11 @@
   </tbody>
 </table>
 
-<h3 class="total-spent">Total Spent This Month: <%=@total%></h3>
+<h3 class="total-spent">Total Spent This Month: <%=@total%> 
+  <span style=<%=positive_negative_style(@difference)%>>
+    <%= sprintf("%+.2f", @difference)%> compared to last month
+  </span>
+</h3>
 
 <br>
 
