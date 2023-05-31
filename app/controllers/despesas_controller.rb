@@ -6,7 +6,8 @@ class DespesasController < ApplicationController
     if user_signed_in?
       date = Date.current
       date_last_month = 1.month.ago
-      @despesas = Despesa.within_month_from_user(current_user.id, date)
+      # @despesas = Despesa.within_month_from_user(current_user.id, date)
+      @despesas = Despesa.where(user_id: current_user.id)
       @total = Despesa.total_spendings_current_month_from_user(current_user.id, date)
       @total_last_month = Despesa.total_spendings_current_month_from_user(current_user.id, date)
     else
