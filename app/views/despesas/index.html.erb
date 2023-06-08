@@ -30,7 +30,7 @@
       <tr>
         <td><%= despesa.categoria&.name %></td>
         <td><%= despesa.descricao %></td>
-        <td><%= despesa.valor %></td>
+        <td><%= number_with_precision(despesa.valor, precision: 2) %></td>
         <td><%= despesa.mes %></td>
         <td><%= link_to 'Show', despesa %></td>
         <td><%= link_to 'Edit', edit_despesa_path(despesa) %></td>
@@ -40,8 +40,13 @@
   </tbody>
 </table>
 
-<h3 class="total-spent">Total Spent This Month: <%=@total%> 
-  <span style=<%=positive_negative_style(@difference)%>>
+<h3 class="total-spent">Total Spent This Month: <%=@total%>
+  <span style="<%=positive_negative_style(@difference)%>">
+    <% if @difference.positive? %>
+      <i class="fa-solid fa-arrow-up" style="color: #f41a1a;"></i>
+    <% else %>
+      <i class="fa-solid fa-arrow-down" style="color: #16c533;"></i>
+    <% end %>
     <%= sprintf("%+.2f", @difference)%> compared to last month
   </span>
 </h3>
