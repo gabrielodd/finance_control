@@ -21,7 +21,7 @@
       <th>Descricao</th>
       <th>Valor</th>
       <th>Mes</th>
-      <th colspan="3"></th>
+      <th colspan="3">Actions</th>
     </tr>
   </thead>
 
@@ -32,9 +32,9 @@
         <td><%= despesa.descricao %></td>
         <td><%= number_with_precision(despesa.valor, precision: 2) %></td>
         <td><%= despesa.mes %></td>
-        <td><%= link_to 'Show', despesa %></td>
-        <td><%= link_to 'Edit', edit_despesa_path(despesa) %></td>
-        <td><%= link_to 'Destroy', despesa, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', despesa, class: 'btn btn-sm btn-primary mr-1' %></td>
+        <td><%= link_to 'Edit', edit_despesa_path(despesa), class: 'btn btn-sm btn-secondary mr-1' %></td>
+        <td><%= link_to 'Destroy', despesa, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %></td>
       </tr>
     <% end %>
   </tbody>

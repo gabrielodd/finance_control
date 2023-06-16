@@ -16,6 +16,10 @@ class DespesasController < ApplicationController
     end
   end
 
+  def relatorio
+    @despesas = Despesa.where(user_id: current_user.id)
+  end
+
   # GET /despesas/1 or /despesas/1.json
   def show
   end
