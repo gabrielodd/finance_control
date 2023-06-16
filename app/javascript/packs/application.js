@@ -5,6 +5,7 @@
 
 import "bootstrap"
 import "@fortawesome/fontawesome-free/css/all"
+import "chartkick/chart.js"
 
 require("@rails/ujs").start()
 require("turbolinks").start()
