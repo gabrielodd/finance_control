@@ -4,6 +4,10 @@ class Despesa < ApplicationRecord
 
   delegate :name, to: :categoria
 
+  scope :per_user, -> (user_id) {
+    where(user_id: user_id)
+  }
+
   scope :within_month_from_user, -> (user_id, date) {
     where(user_id: user_id, date: date.beginning_of_month..date.end_of_month)
   }
@@ -15,9 +19,6 @@ class Despesa < ApplicationRecord
   scope :within_month_from_user, -> (user_id, date) {
     where(user_id: user_id, date: date.beginning_of_month..date.end_of_month)
   }
-  def categoria_name
-    categoria.name
-  end
 
   def mes
     date.strftime("%B")

@@ -1,3 +1,7 @@
 <h3> Relatório </h3>
 
-<%= pie_chart Despesa.group(:categoria_name).count %>
+<%= pie_chart Despesa.joins(:categoria).per_user(current_user.id).group(:name).sum(:valor) %>
+
+<%= bar_chart Despesa.joins(:categoria).per_user(current_user.id).group(:name).sum(:valor) %>
+
+<%= column_chart Despesa.joins(:categoria).per_user(current_user.id).group(:name).sum(:valor) %>
