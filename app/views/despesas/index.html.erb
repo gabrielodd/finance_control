@@ -27,13 +27,15 @@
 
   <tbody>
     <% @despesas.each do |despesa| %>
-      <tr>
+      <tr id="row-<%=despesa.id%>">
         <td><%= despesa.categoria&.name %></td>
         <td><%= despesa.descricao %></td>
         <td><%= number_with_precision(despesa.valor, precision: 2) %></td>
         <td><%= despesa.mes %></td>
         <td><%= link_to 'Show', despesa, class: 'btn btn-sm btn-primary mr-1' %></td>
-        <td><%= link_to 'Edit', edit_despesa_path(despesa), class: 'btn btn-sm btn-secondary mr-1' %></td>
+        <td>
+          <%= link_to 'Edit', '#', class: 'btn btn-sm btn-secondary mr-1 edit-button', data: { despesa_id: despesa.id } %>
+        </td>
         <td><%= link_to 'Destroy', despesa, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %></td>
       </tr>
     <% end %>
@@ -58,4 +60,8 @@
 <%= link_to new_despesa_path, class: 'btn btn-success spendings-button' do %>
   New Spending <i class="fas fa-plus"></i>
 <% end %>
+
+<div id="edit-form-container" style="display: none;">
+  <%= render partial: 'edit_form' %>
+</div>
 

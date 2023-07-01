@@ -11,6 +11,7 @@ require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
+require("jquery")
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
@@ -19,3 +20,17 @@ require("channels")
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+
+$(document).ready(function() {
+  $('.edit-button').on('click', function(e) {
+    console.log("teste");
+    e.preventDefault();
+    
+    var despesaId = $(this).data('despesa_id');
+    var row = $('#row-' + despesaId);
+    var editForm = $('#edit-form-container').html();
+    
+    row.html(editForm);
+    $('#edit-form').attr('action', '/despesas/' + despesaId);
+  });
+});

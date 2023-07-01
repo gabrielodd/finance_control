@@ -1,0 +1,7 @@
+<%= form_with(model: Despesa.first, id: "edit-form", local: true) do |form| %>
+  <td><%= form.collection_select :categoria_id, Categoria.all, :id, :name %></td>
+  <td><%= form.text_field :descricao %></td>
+  <td><%= form.text_field :valor %></td>
+  <td><%= form.text_field :mes %></td>
+  <td colspan="3"><%= form.submit 'Update', class: 'btn btn-sm btn-primary mr-1' %></td>
+<% end %>
