@@ -62,6 +62,6 @@
 <% end %>
 
 <div id="edit-form-container" style="display: none;">
-  <%= render partial: 'edit_form' %>
+  <%= render partial: 'edit_form', locals: { despesa: Despesa.first } %>
 </div>
 

@@ -23,10 +23,9 @@ require("jquery")
 
 $(document).ready(function() {
   $('.edit-button').on('click', function(e) {
-    console.log("teste");
     e.preventDefault();
     
-    var despesaId = $(this).data('despesa_id');
+    var despesaId = $(this).data('despesa-id');
     var row = $('#row-' + despesaId);
     var editForm = $('#edit-form-container').html();
     

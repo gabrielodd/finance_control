@@ -2,6 +2,6 @@
 
 <%= pie_chart Despesa.joins(:categoria).per_user(current_user.id).group(:name).sum(:valor) %>
 
-<%= bar_chart Despesa.joins(:categoria).per_user(current_user.id).group(:name).sum(:valor) %>
+<%#= bar_chart Despesa.joins(:categoria).per_user(current_user.id).group(:name).group_by_month(:created_at).sum(:valor) %>
 
-<%= column_chart Despesa.joins(:categoria).per_user(current_user.id).group(:name).sum(:valor) %>
+<%= column_chart Despesa.joins(:categoria).per_user(current_user.id).group(:name).group_by_month(:date).sum(:valor) %>
