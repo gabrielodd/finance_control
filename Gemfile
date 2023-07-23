@@ -23,6 +23,8 @@ gem 'jbuilder', '~> 2.7'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'trestle'
 gem 'devise'
+gem "groupdate"
+gem 'delayed_job'
 
 gem 'chartkick'
 # Use Active Storage variant
