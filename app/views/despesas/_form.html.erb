@@ -34,6 +34,11 @@
         <%= form.select(:categoria_id, Categoria.all.map { |c| [c.name, c.id] }, {}, class: 'form-control', required: true) %>
       </div>
 
+      <div class="form-check">
+        <%= form.check_box :repeating, class: 'form-check-input' %>
+        <%= form.label :Repetir, class: 'form-check-label' %> todo mês
+      </div>
+
       <div class="form-group">
         <%= form.submit 'Submit', class: 'btn btn-primary' %>
       </div>

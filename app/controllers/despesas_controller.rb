@@ -41,6 +41,9 @@ class DespesasController < ApplicationController
 
     respond_to do |format|
       if @despesa.save
+        if params[:repeating] == '1'
+          Despesa.delay(run_at: 1.minute.from_now).create_every_month(@despesa.id)
+        end
         format.html { redirect_to despesas_url, notice: "Despesa was successfully created." }
         format.json { render :show, status: :created, location: @despesa }
       else
@@ -81,6 +84,6 @@ class DespesasController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def despesa_params
-      params.require(:despesa).permit(:categoria_id, :descricao, :valor, :date, :user_id)
+      params.require(:despesa).permit(:categoria_id, :descricao, :valor, :date, :repeating, :user_id)
     end
 end
