@@ -28,10 +28,8 @@ class Despesa < ApplicationRecord
     despesa = Despesa.find(despesa_id)
     new_despesa = despesa.dup
 
-    # Adjust the date attribute to be 1 month from the original
     new_despesa.date = despesa.date + 1.month
 
-    # Save the new model
     new_despesa.save
   end
 end
