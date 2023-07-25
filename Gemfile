@@ -24,8 +24,8 @@ gem 'jbuilder', '~> 2.7'
 gem 'trestle'
 gem 'devise'
 gem "groupdate"
-# gem 'delayed_job'
 gem 'delayed_job_active_record'
+gem "cocoon"
 
 gem 'chartkick'
 # Use Active Storage variant
