@@ -7,7 +7,10 @@ class DespesasController < ApplicationController
       date = Date.current
       date_last_month = 1.month.ago
       # @despesas = Despesa.within_month_from_user(current_user.id, date)
-      @despesas = Despesa.where(user_id: current_user.id)
+      @despesas = Despesa.where(user_id: current_user.id).order(:date)
+      if params[:mes].present?
+        # @despesas = @despesas.where("EXTRACT(MONTH FROM mes) = ?", params[:filter_month])
+      end
       @total = Despesa.total_spendings_current_month_from_user(current_user.id, date)
       @total_last_month = Despesa.total_spendings_current_month_from_user(current_user.id, date_last_month)
       @difference = @total - @total_last_month
@@ -35,20 +38,27 @@ class DespesasController < ApplicationController
 
   # POST /despesas or /despesas.json
   def create
+    descricoes = despesa_params.delete(:descricao)
+    valores = despesa_params.delete(:valor)
     params = despesa_params.merge!(user_id: current_user.id)
     params[:date] = Date.today if params[:date].blank?
-    @despesa = Despesa.new(params)
 
     respond_to do |format|
-      if @despesa.save
-        if params[:repeating] == '1'
-          Despesa.delay(run_at: 1.minute.from_now).create_every_month(@despesa.id)
+      descricoes.each_with_index do |descricao, i|
+        @despesa = Despesa.new(params)
+        @despesa.valor = valores[i]
+        @despesa.descricao = descricao
+
+        if @despesa.save
+          if params[:repeating] == '1'
+            Despesa.delay(run_at: 3.weeks.from_now).create_every_month(@despesa.id)
+          end
+          format.html { redirect_to despesas_url, notice: "Despesa was successfully created." }
+          format.json { render :show, status: :created, location: @despesa }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @despesa.errors, status: :unprocessable_entity }
         end
-        format.html { redirect_to despesas_url, notice: "Despesa was successfully created." }
-        format.json { render :show, status: :created, location: @despesa }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @despesa.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -77,13 +87,12 @@ class DespesasController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_despesa
-      @despesa = Despesa.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def despesa_params
-      params.require(:despesa).permit(:categoria_id, :descricao, :valor, :date, :repeating, :user_id)
-    end
+  def set_despesa
+    @despesa = Despesa.find(params[:id])
+  end
+
+  def despesa_params
+    params.require(:despesa).permit(:categoria_id, :date, :repeating, :user_id, descricao: [], valor: [])
+  end
 end
