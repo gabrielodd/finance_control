@@ -1,5 +1,5 @@
 <div class="container">
-  <h3 class="text-center">New Despesa</h1>
+  <h3 class="text-center"><%=t('menu.new_despesa')%></h1>
   <div class="border p-4">
     <%= form_with(model: despesa, local: true, class: 'needs-validation') do |form| %>
       <% if despesa.errors.any? %>
@@ -36,7 +36,7 @@
 
       <div class="form-check">
         <%= form.check_box :repeating, class: 'form-check-input' %>
-        <%= form.label :Repetir, class: 'form-check-label' %> todo mês
+        <%= form.label :repetir, class: 'form-check-label' %>
       </div>
 
       <div class="form-group">

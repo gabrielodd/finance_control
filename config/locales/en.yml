@@ -31,3 +31,18 @@
 
 en:
   hello: "Hello world"
+  menu:
+    spendings: "Spendings"
+    reports: "Reports"
+    profile: "Profile"
+    signup: "Sign up"
+    logout: "Logout"
+    new_despesa: "New Spending"
+  helpers:
+    label:
+      despesa:
+        categoria: "Category"
+        descricao: "Description"
+        valor: "Price"
+        date: "Date"
+        repetir: "Repeat every month"

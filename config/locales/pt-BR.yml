@@ -1,0 +1,17 @@
+pt-BR:
+  hello: "Olá mundo"
+  menu:
+    spendings: "Despesas"
+    reports: "Relatório"
+    profile: "Perfil"
+    signup: "Registrar"
+    logout: "Sair"
+    new_despesa: "Nova despesa"
+  helpers:
+    label:
+      despesa:
+        categoria: "Categoria"
+        descricao: "Descrição"
+        valor: "Valor"
+        date: "Data"
+        repetir: "Repetir todo mês"
