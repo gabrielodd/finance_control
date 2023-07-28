@@ -20,12 +20,12 @@
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item pl-1">
 						<%= link_to despesas_path, class: "nav-link" do %>
-							<i class="fa fa-th-list fa-fw mr-1"></i>Despesas
+							<i class="fa fa-th-list fa-fw mr-1"></i><%= t('menu.spendings') %>
 						<% end %>
 					</li>
 					<li class="nav-item pl-1">
 						<%= link_to relatorio_path, class: "nav-link" do %>
-							<i class="fa fa-info-circle fa-fw mr-1"></i>Relatórios
+							<i class="fa fa-info-circle fa-fw mr-1"></i><%= t('menu.reports') %>
 						<% end %>
 					</li>
 					<!-- 
@@ -38,14 +38,14 @@
 							<%= link_to "Edit profile", edit_user_registration_path, class: "nav-link" %> 
 						</li>
 						<li class="nav-item pl-1">
-							<%= link_to "Logout", destroy_user_session_path, method: :delete, class: "nav-link"  %>
+							<%= link_to t('menu.logout'), destroy_user_session_path, method: :delete, class: "nav-link"  %>
 						</li>
 						<li class="nav-item pl-1">
 							<a class="nav-link" href="#"><i class="fa fa-user fa-fw mr-1"></i><%=current_user.email%></a>
 						</li>
 					<% else %>
 						<li class="nav-item pl-1">
-							<%= link_to "Sign up", new_user_registration_path, class: "nav-link"  %> 
+							<%= link_to t('menu.signup'), new_user_registration_path, class: "nav-link"  %> 
 						</li>
 						<li class="nav-item pl-1">
 							<%= link_to "Login", new_user_session_path, class: "nav-link"  %>
