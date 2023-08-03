@@ -16,41 +16,45 @@
   <h3 class="text-center">Despesas</h3>
   <div class="row">
     <% prev_mes = nil %>
-    <% @despesas.each do |despesa| %>
+    <% @despesas_grouped.each do |month, despesas| %>
+      <% despesas.group_by(&:categoria_id).each do |categoria_id, despesas| %>
       <div class="col-md-12">
-        <% if prev_mes != despesa.mes %>
+        <% if prev_mes != month %>
           <% if prev_mes.present? %>
-          <h4 class="text-center">Total: <%=Despesa.total_spendings_current_month_from_user(current_user.id, despesa.date - 1.month)%></h3>
+          <h4 class="text-center">Total: <%=Despesa.total_spendings_current_month_from_user(current_user.id, despesas.first.date - 1.month)%></h3>
           <% end %>
-          <% prev_mes = despesa.mes %>
+          <% prev_mes = month %>
           <hr style="height:1px;border:none;color:#333;background-color:#333;">
-          <h4 class="text-center"><%=despesa.mes%></h3>
+          <h4 class="text-center"><%=month%></h3>
         <% end %>
         <div class="panel panel-primary" style="background-color: #f7f7f7;">
           <div class="panel-heading">
-            <h3 class="panel-title"><%= despesa.descricao %></h3>
+            <h3 class="panel-title"><%= Categoria.find_by(id: categoria_id).name %></h3>
           </div>
-          <div class="panel-body">
-            <div class="row">
-              <div class="col-md-3">
-                <p><strong>Categoria:</strong> <%= despesa.categoria&.name %></p>
-              </div>
-              <div class="col-md-3">
-                <p><strong>Valor:</strong> <%= number_with_precision(despesa.valor, precision: 2) %></p>
-              </div>
-              <div class="col-md-3">
-                <p><strong>Mês:</strong> <%= despesa.mes %></p>
-              </div>
-              <div class="col-md-3">
-                <%= link_to 'Show', despesa, class: 'btn btn-primary btn-sm mr-1' %>
-                <%= link_to 'Edit', edit_despesa_path(despesa), class: 'btn btn-info btn-sm mr-1' %>
-                <%= link_to 'Destroy', despesa, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+          <% despesas.each do |despesa| %>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-3">
+                  <p><strong>Categoria:</strong> <%= despesa.descricao %></p>
+                </div>
+                <div class="col-md-3">
+                  <p><strong>Valor:</strong> <%= number_with_precision(despesa.valor, precision: 2) %></p>
+                </div>
+                <div class="col-md-3">
+                  <p><strong>Mês:</strong> <%= despesa.mes %></p>
+                </div>
+                <div class="col-md-3">
+                  <%= link_to 'Show', despesa, class: 'btn btn-primary btn-sm mr-1' %>
+                  <%= link_to 'Edit', edit_despesa_path(despesa), class: 'btn btn-info btn-sm mr-1' %>
+                  <%= link_to 'Destroy', despesa, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+                </div>
               </div>
             </div>
-          </div>
+          <% end %>
         </div>
         <br>
       </div>
+      <% end %>
     <% end %>
   </div>
 </div>

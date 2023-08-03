@@ -8,6 +8,7 @@ class DespesasController < ApplicationController
       date_last_month = 1.month.ago
       # @despesas = Despesa.within_month_from_user(current_user.id, date)
       @despesas = Despesa.where(user_id: current_user.id).order(:date)
+      @despesas_grouped = @despesas.group_by(&:mes)
       if params[:mes].present?
         # @despesas = @despesas.where("EXTRACT(MONTH FROM mes) = ?", params[:filter_month])
       end
