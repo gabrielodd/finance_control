@@ -35,7 +35,7 @@
             <div class="panel-body">
               <div class="row">
                 <div class="col-md-3">
-                  <p><strong>Categoria:</strong> <%= despesa.descricao %></p>
+                  <p><strong>Descrição:</strong> <%= despesa.descricao %></p>
                 </div>
                 <div class="col-md-3">
                   <p><strong>Valor:</strong> <%= number_with_precision(despesa.valor, precision: 2) %></p>
@@ -51,6 +51,12 @@
               </div>
             </div>
           <% end %>
+          <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-3">
+              <b>Total: <%= despesas.sum(&:valor) %></b>
+            </div>
+          </div>
         </div>
         <br>
       </div>
