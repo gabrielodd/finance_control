@@ -23,6 +23,16 @@ class DespesasController < ApplicationController
   def relatorio
     @despesas = Despesa.where(user_id: current_user.id)
   end
+  
+  def export_to_json
+    @despesas = Despesa.where(user_id: current_user.id).order(:date)
+
+    respond_to do |format|
+      format.json do
+        send_data @despesas.to_json, filename: "despesas.json"
+      end
+    end
+  end
 
   # GET /despesas/1 or /despesas/1.json
   def show

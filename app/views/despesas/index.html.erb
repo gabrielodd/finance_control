@@ -13,7 +13,7 @@
 
 <br>
 <div class="container">
-  <h3 class="text-center">Despesas</h3>
+  <h3 class="text-center">Despesas</h3> <%= link_to "Export to JSON", export_to_json_despesas_path(format: :json), class: "btn btn-primary" %>
   <div class="row">
     <% prev_mes = nil %>
     <% @despesas_grouped.each do |month, despesas| %>
