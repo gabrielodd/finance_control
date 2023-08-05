@@ -33,4 +33,10 @@ $(document).ready(function() {
     row.html(editForm);
     $('#edit-form').attr('action', '/despesas/' + despesaId);
   });
+
+  $('.toggle-month').click(function() {
+    const month = $(this).data('month');
+    $(`.panel[data-month="${month}"]`).toggle();
+    $(this).toggleClass("fa-chevron-down fa-chevron-up");
+  });
 });

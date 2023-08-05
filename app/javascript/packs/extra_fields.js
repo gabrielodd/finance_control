@@ -28,11 +28,24 @@ $(document).ready(function() {
     input2.setAttribute("required", true);
 
     const hr = document.createElement("hr")
+    const removeButton = document.createElement("button");
+    removeButton.textContent = "Remove";
+    removeButton.classList.add("btn", "btn-danger", "mt-2");
+
+    removeButton.addEventListener("click", function() {
+      formGroup.removeChild(label);
+      formGroup.removeChild(input);
+      formGroup.removeChild(label2);
+      formGroup.removeChild(input2);
+      formGroup.removeChild(hr);
+      formGroup.removeChild(removeButton);
+    });
 
     formGroup.insertBefore(label, addButton);
     formGroup.insertBefore(input, addButton);
     formGroup.insertBefore(label2, addButton);
     formGroup.insertBefore(input2, addButton);
     formGroup.insertBefore(hr, addButton);
+    addButton.insertAdjacentElement("afterend", removeButton);
   });
 });
