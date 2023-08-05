@@ -7,7 +7,9 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Categoria.find_or_create_by(name: "Condominio", description: "Gasto de condominio")
+Categoria.find_or_create_by(name: "Internet", description: "Internet")
 Categoria.find_or_create_by(name: "Conta de Energia", description: "Gasto de energia/luz")
 Categoria.find_or_create_by(name: "Comida", description: "Refeição/Delivery")
 Categoria.find_or_create_by(name: "Services", description: "General Services")
 Categoria.find_or_create_by(name: "Credit Card", description: "Credit card spendings")
+Categoria.find_or_create_by(name: "Gas", description: "Gas spendings")
