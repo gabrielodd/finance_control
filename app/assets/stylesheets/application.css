@@ -28,3 +28,8 @@ footer .cizgi { border-right: 1px solid #535e67; }
   border: 2px solid #000; /* Use any color you like, #000 is black */
   padding: 10px; /* Optional: Add padding to create space between content and border */
 }
+
+.panel-highlight {
+  border: 2px solid #00cc00; /* Green border */
+  box-shadow: 0 0 8px #00cc00; /* Green shadow */
+}
