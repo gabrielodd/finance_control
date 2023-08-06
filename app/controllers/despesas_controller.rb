@@ -30,9 +30,31 @@ class DespesasController < ApplicationController
 
     respond_to do |format|
       format.json do
-        send_data @despesas.to_json, filename: "despesas.json"
+        send_data @despesas.to_json(except: [:id, :user_id, :created_at, :updated_at]), filename: "despesas.json"
       end
     end
+  end
+
+  def import_json
+    file = params[:file]
+
+    if file.content_type == 'application/json'
+      json_data = JSON.parse(file.read)
+
+      # Assuming the JSON data is an array of objects, each representing a despesa
+      json_data.each do |despesa_data|
+        despesa_data['user_id'] = current_user.id
+
+        # Create the Despesa object using the updated attributes
+        Despesa.create(despesa_data)
+      end
+
+      flash[:success] = 'JSON data imported successfully!'
+    else
+      flash[:error] = 'Invalid JSON file format. Please upload a valid JSON file.'
+    end
+
+    redirect_to despesas_url
   end
 
   # GET /despesas/1 or /despesas/1.json

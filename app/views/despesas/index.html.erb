@@ -26,7 +26,13 @@
   </div>
 </div>
   <%= link_to "Export JSON", export_to_json_despesas_path(format: :json), class: "btn btn-primary" %>
-  <%= link_to "Import JSON", export_to_json_despesas_path(format: :json), class: "btn btn-success" %>
+  <%= form_tag import_despesas_path, multipart: true, class: 'needs-validation' do %>
+    <div class="form-group">
+      <%= label_tag 'file', 'Choose JSON File', class: 'mr-2' %>
+      <%= file_field_tag 'file', accept: 'application/json', required: true %>
+    </div>
+    <%= submit_tag 'Import JSON', class: 'btn btn-primary' %>
+  <% end %>
   <div class="row">
     <% prev_mes = nil %>
     <% @despesas_grouped.each do |month, despesas| %>

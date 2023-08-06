@@ -3,9 +3,13 @@ Rails.application.routes.draw do
   root to: 'despesas#index'
 
   resources :despesas do
-    get :export_to_json, on: :collection
+    collection do
+      get :export_to_json
+      get 'import', to: 'despesas#import'
+      post 'import', to: 'despesas#import_json'
+    end
   end
-  
+
   get 'relatorio', to: 'despesas#relatorio'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
