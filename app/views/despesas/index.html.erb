@@ -44,31 +44,31 @@
         <% end %>
         <div class="panel panel-primary" style="background-color: #f7f7f7;" data-month="<%= month %>">
           <div class="panel-heading">
-            <h3 class="panel-title"><%= Categoria.find_by(id: categoria_id).name %></h3>
+            <h3 class="panel-title"><%= Categoria.find_by(id: categoria_id).name %> 
+              <i class="fas fa-calendar-alt"></i>
+              <span class="month"> <%= despesas.first.mes%></span>
+            </h3>
           </div>
           <% despesas.each do |despesa| %>
             <div class="panel-body <%= 'panel-highlight' if despesa == @newest_record %>">
               <div class="row">
-                <div class="col-md-3">
-                  <p><strong>Descrição:</strong> <%= despesa.descricao %></p>
+                <div class="col-md-4">
+                  <p style="line-height: 30px;"><strong>Descrição:</strong> <%= despesa.descricao %></p>
                 </div>
-                <div class="col-md-3">
-                  <p><strong>Valor:</strong> <%= number_with_precision(despesa.valor, precision: 2) %></p>
+                <div class="col-md-4">
+                  <p style="line-height: 30px;"><strong>Valor:</strong> <%= number_with_precision(despesa.valor, precision: 2) %></p>
                 </div>
-                <div class="col-md-3">
-                  <p><strong>Mês:</strong> <%= despesa.mes %></p>
-                </div>
-                <div class="col-md-3">
-                  <%= link_to 'Show', despesa, class: 'btn btn-primary btn-sm mr-1' %>
-                  <%= link_to 'Edit', edit_despesa_path(despesa), class: 'btn btn-info btn-sm mr-1' %>
-                  <%= link_to 'Destroy', despesa, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+                <div class="col-md-4">
+                  <%= link_to 'Show', despesa, class: 'btn btn-sm btn-info' %>
+                  <%= link_to 'Edit', edit_despesa_path(despesa), class: 'btn btn-sm btn-primary' %>
+                  <%= link_to 'Destroy', despesa, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %>
                 </div>
               </div>
             </div>
           <% end %>
           <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-3">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
               <b>Total: <%= despesas.sum(&:valor) %></b>
             </div>
           </div>
