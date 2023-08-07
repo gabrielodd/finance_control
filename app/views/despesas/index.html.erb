@@ -24,42 +24,11 @@
   </div>
 </div>
 
-<%= link_to "Export JSON", export_to_json_despesas_path(format: :json), class: "btn btn-primary" %>
+<%= link_to export_to_json_despesas_path(format: :json), class: "btn btn-primary" do %>
+  <i class="fas fa-file-export"></i> Export to JSON
+<% end %>
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#importModal">
-  Import JSON
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="importModalLabel">Import JSON</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div id="importAccordion">
-          <div class="card">
-            <div id="importCollapse" class="collapse show" aria-labelledby="importHeading" data-parent="#importAccordion">
-              <%= form_tag import_despesas_path, multipart: true, class: 'needs-validation' do %>
-                <div class="card-body">
-                  <div class="form-group">
-                    <%= label_tag 'file', 'Choose JSON File', class: 'mr-2' %>
-                    <%= file_field_tag 'file', accept: 'application/json', required: true %>
-                  </div>
-                  <%= submit_tag 'Import JSON', class: 'btn btn-primary' %>
-                </div>
-              <% end %>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<%= render 'import_modal' %>
 
   <div class="row">
     <% prev_mes = nil %>
