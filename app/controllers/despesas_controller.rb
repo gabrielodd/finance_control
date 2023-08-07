@@ -27,10 +27,10 @@ class DespesasController < ApplicationController
   
   def export_to_json
     @despesas = Despesa.where(user_id: current_user.id).order(:date)
-
+    date = Date.today.strftime("%Y-%m-%d")
     respond_to do |format|
       format.json do
-        send_data @despesas.to_json(except: [:id, :user_id, :created_at, :updated_at]), filename: "despesas.json"
+        send_data @despesas.to_json(except: [:id, :user_id, :created_at, :updated_at]), filename: "despesas-#{date}.json"
       end
     end
   end
