@@ -41,6 +41,17 @@ footer .cizgi { border-right: 1px solid #535e67; }
   float: right;
 }
 
+.toggle-month {
+  transition: color 0.3s; /* Smooth color transition on hover */
+}
+
+/* Style for the icon when hovered */
+.toggle-month:hover {
+  color: #3498db; /* Change to the desired hover color */
+  cursor: pointer; /* Change cursor to pointer on hover */
+  transform: scale(1.2); /* Optional: Add a slight scale effect on hover */
+}
+
 /* Style the Font Awesome icon */
 i.fas.fa-calendar-alt {
   float: right;
