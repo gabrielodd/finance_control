@@ -33,14 +33,22 @@ $(document).ready(function() {
     row.html(editForm);
     $('#edit-form').attr('action', '/despesas/' + despesaId);
   });
-
-  $('.toggle-month').click(function() {
-    const month = $(this).data('month');
-    $(`.panel[data-month="${month}"]`).toggle();
-    $(this).toggleClass("fa-chevron-down fa-chevron-up");
-  });
-
-  const newestRecord = document.querySelector('.panel-highlight');
-
-  newestRecord.scrollIntoView({ behavior: 'smooth', block: 'start' });
 });
+
+function setValorMask() {
+  $("#despesa_valor").inputmask("currency", {
+      radixPoint: ',', groupSeparator: '.', prefix: 'R$',
+      removeMaskOnSubmit: true,
+      onUnMask: function (maskedValue, unmaskedValue) {
+          return unmaskedValue.replace(/\./g, "").replace(",", ".");
+      },
+      onBeforeMask: function (value, opts) {
+          if (value.includes(',')) {
+              return value;
+          } else {
+              var processedValue = value.replace(".", ",");
+              return processedValue;
+          }
+      }
+  });
+}
