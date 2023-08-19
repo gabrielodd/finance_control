@@ -6,4 +6,8 @@ module DespesasHelper
       'color:green; font-size:20px;'
     end
   end
+
+  def formatted_date(date)
+    date.strftime('%b %e, %Y')
+  end
 end

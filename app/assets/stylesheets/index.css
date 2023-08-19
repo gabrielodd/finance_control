@@ -8,6 +8,10 @@
   box-shadow: 0 0 8px #00cc00; /* Green shadow */
 }
 
+.green-text {
+  color: green;
+}
+
 .month {
   font-size: 24px; /* Customize the font size as needed */
   color: green; /* Set the green color for the month text */
@@ -32,4 +36,29 @@ i.fas.fa-calendar-alt {
   font-size: 24px; /* Customize the icon size as needed */
   color: #555; /* Customize the icon color as needed */
   margin-left: 10px; /* Add some spacing between the month and the icon */
+}
+
+@keyframes colorChange {
+  0% {
+    color: #ffffff; /* Very light green */
+  }
+  20% {
+    color: #77ff77; /* Light green */
+  }
+  40% {
+    color: #00cc00; /* Green */
+  }
+  60% {
+    color: #08a808; /* Dark green */
+  }
+  80% {
+    color: #006600; /* Dark green */
+  }
+  100% {
+    color: #004e00; /* Dark green */
+  }
+}
+
+.animated-text {
+  animation: colorChange 1s;
 }
