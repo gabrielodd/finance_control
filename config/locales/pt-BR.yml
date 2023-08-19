@@ -1,4 +1,8 @@
 pt-BR:
+  number:
+    format:
+      delimiter: "."
+      separator: ","
   hello: "Olá mundo"
   menu:
     spendings: "Despesas"
