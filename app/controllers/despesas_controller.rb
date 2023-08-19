@@ -85,10 +85,9 @@ class DespesasController < ApplicationController
 
         if @despesa.save
           if params[:repeating] == '1'
-            Despesa.delay(run_at: 3.weeks.from_now).create_every_month(@despesa.id)
+            Despesa.delay(run_at: 1.minute.from_now).create_every_month(@despesa.id)
           end
           format.html { redirect_to despesas_url, notice: "Despesa was successfully created." }
-          format.json { render :show, status: :created, location: @despesa }
         else
           format.html { render :new, status: :unprocessable_entity }
           format.json { render json: @despesa.errors, status: :unprocessable_entity }
