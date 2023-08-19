@@ -11,5 +11,9 @@ $(document).ready(function() {
 
   const newestRecord = document.querySelector('.panel-highlight');
 
+  setTimeout(function() {
+    newestRecord.classList.remove("panel-highlight");
+  }, 1000);
+
   newestRecord.scrollIntoView({ behavior: 'smooth', block: 'start' });
 });
