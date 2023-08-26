@@ -1,4 +1,6 @@
 class Despesa < ApplicationRecord
+  before_validation :set_default_valor
+
   belongs_to :categoria
   belongs_to :user
 
@@ -33,5 +35,11 @@ class Despesa < ApplicationRecord
     new_despesa.save
 
     Despesa.delay(run_at: 1.month.from_now).create_every_month(new_despesa.id)
+  end
+
+  private
+
+  def set_default_valor
+    self.valor ||= 0
   end
 end
