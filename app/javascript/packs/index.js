@@ -20,25 +20,40 @@ $(document).ready(function() {
   $('.edit-valor-btn').click(function() {
     const despesaId = $(this).data('despesa-id');
     const valorSpan = $(`#despesa-${despesaId}-valor`);
-    const valorInput = $(`input[data-despesa-id="${despesaId}"]`);
+    const valorInput = $(`input[data-despesa-id="${despesaId}"].edit-valor-input`);
+
+    const descriptionSpan = $(`#despesa-${despesaId}-descricao`);
+    const descriptionInput = $(`input[data-despesa-id="${despesaId}"].edit-descricao-input`);
+    const updateBtn = $(`button[data-despesa-id="${despesaId}"].update-valor-btn`);
 
     valorSpan.hide();
-    valorInput.show().focus();
+    valorInput.show();
+    updateBtn.show();
+    $(this).hide();
+
+    descriptionSpan.hide();
+    descriptionInput.show();
   });
 
-  $('.edit-valor-input').blur(function() {
+  $('.update-valor-btn').click(function() {
     const despesaId = $(this).data('despesa-id');
     const valorSpan = $(`#despesa-${despesaId}-valor`);
-    const valorInput = $(this);
+    const valorInput = $(`input[data-despesa-id="${despesaId}"].edit-valor-input`);
+    const descriptionSpan = $(`#despesa-${despesaId}-descricao`);
+    const descriptionInput = $(`input[data-despesa-id="${despesaId}"].edit-descricao-input`);
     
     $.ajax({
       type: 'PATCH',
       url: `/despesas/${despesaId}/update_valor`,
-      data: { valor: valorInput.val() },
+      data: { valor: valorInput.val(), descricao: descriptionInput.val() },
       dataType: 'script'
     });
 
+    descriptionInput.hide();
+    descriptionSpan.text(descriptionInput.val()).show();
     valorInput.hide();
     valorSpan.text(valorInput.val()).show();
+    $(this).hide();
+    $('.edit-valor-btn').show();
   });
 });

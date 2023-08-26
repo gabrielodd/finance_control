@@ -73,7 +73,7 @@ class DespesasController < ApplicationController
 
   def update_valor
     @despesa = Despesa.find(params[:id])
-    @despesa.update(valor: params[:valor])
+    @despesa.update(valor: params[:valor], descricao: params[:descricao])
   
     respond_to do |format|
       format.js
