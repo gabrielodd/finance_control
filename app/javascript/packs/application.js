@@ -6,6 +6,7 @@
 import "bootstrap"
 import "@fortawesome/fontawesome-free/css/all"
 import "chartkick/chart.js"
+import 'inputmask';
 
 require("@rails/ujs").start()
 require("turbolinks").start()
@@ -22,7 +23,7 @@ require("@nathanvda/cocoon")
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
-$(document).ready(function() {
+$(document).ready(function($) {
   $('.edit-button').on('click', function(e) {
     e.preventDefault();
     

@@ -16,4 +16,29 @@ $(document).ready(function() {
   }, 1000);
 
   newestRecord.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  $('.edit-valor-btn').click(function() {
+    const despesaId = $(this).data('despesa-id');
+    const valorSpan = $(`#despesa-${despesaId}-valor`);
+    const valorInput = $(`input[data-despesa-id="${despesaId}"]`);
+
+    valorSpan.hide();
+    valorInput.show().focus();
+  });
+
+  $('.edit-valor-input').blur(function() {
+    const despesaId = $(this).data('despesa-id');
+    const valorSpan = $(`#despesa-${despesaId}-valor`);
+    const valorInput = $(this);
+    
+    $.ajax({
+      type: 'PATCH',
+      url: `/despesas/${despesaId}/update_valor`,
+      data: { valor: valorInput.val() },
+      dataType: 'script'
+    });
+
+    valorInput.hide();
+    valorSpan.text(valorInput.val()).show();
+  });
 });

@@ -1,5 +1,6 @@
 class DespesasController < ApplicationController
   before_action :set_despesa, only: %i[ show edit update destroy ]
+  skip_before_action :verify_authenticity_token
 
   # GET /despesas or /despesas.json
   def index
@@ -68,6 +69,15 @@ class DespesasController < ApplicationController
 
   # GET /despesas/1/edit
   def edit
+  end
+
+  def update_valor
+    @despesa = Despesa.find(params[:id])
+    @despesa.update(valor: params[:valor])
+  
+    respond_to do |format|
+      format.js
+    end
   end
 
   # POST /despesas or /despesas.json

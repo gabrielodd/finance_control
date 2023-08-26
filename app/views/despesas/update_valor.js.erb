@@ -1,0 +1,7 @@
+<% if @despesa.errors.empty? %>
+  // Update the displayed value with the updated valor
+  const valorElement = document.querySelector(`#despesa-<%= @despesa.id %>-valor`);
+  valorElement.textContent = "<%= formatted_decimal(@despesa.valor) %>";
+<% else %>
+  
+<% end %>

@@ -7,6 +7,10 @@ Rails.application.routes.draw do
       get :export_to_json
       get 'import', to: 'despesas#import'
       post 'import', to: 'despesas#import_json'
+      post 'update_valor'
+    end
+    member do
+      patch 'update_valor'
     end
   end
 
