@@ -1,7 +1,10 @@
 $(document).ready(function() {
   var latestMonth = $('.toggle-month').last().data('month');
+  var secondToLastMonth = $('.toggle-month').eq(-2).data('month');
+
   $('.panel').hide();
   $('.panel[data-month="' + latestMonth + '"]').show();
+  $('.panel[data-month="' + secondToLastMonth + '"]').show();
 
   $('.toggle-month').click(function() {
     const month = $(this).data('month');

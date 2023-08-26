@@ -84,6 +84,7 @@ class DespesasController < ApplicationController
   def create
     descricoes = despesa_params.delete(:descricao)
     valores = despesa_params.delete(:valor)
+    dates = despesa_params.delete(:date)
     params = despesa_params.merge!(user_id: current_user.id)
     params[:date] = Date.today if params[:date].blank?
 
@@ -92,6 +93,11 @@ class DespesasController < ApplicationController
         @despesa = Despesa.new(params)
         @despesa.valor = valores[i]
         @despesa.descricao = descricao
+        if dates[i].blank?
+          @despesa.date = Date.today
+        else
+          @despesa.date = dates[i]
+        end
 
         if @despesa.save
           if params[:repeating] == '1'
@@ -136,6 +142,6 @@ class DespesasController < ApplicationController
   end
 
   def despesa_params
-    params.require(:despesa).permit(:categoria_id, :date, :repeating, :user_id, descricao: [], valor: [])
+    params.require(:despesa).permit(:categoria_id, :repeating, :user_id, date: [], descricao: [], valor: [])
   end
 end

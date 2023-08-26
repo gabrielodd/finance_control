@@ -27,6 +27,16 @@ $(document).ready(function() {
     input2.setAttribute("class", "form-control mt-2");
     input2.setAttribute("required", true);
 
+    const label3 = document.createElement("label");
+    label3.textContent = "Date";
+    label3.setAttribute("for", "date");
+    label3.classList.add("mr-2"); 
+
+    const input3 = document.createElement("input");
+    input3.setAttribute("type", "date");
+    input3.setAttribute("name", "despesa[date][]");
+    input3.setAttribute("class", "form-control mt-2");
+
     const hr = document.createElement("hr")
     const removeButton = document.createElement("button");
     removeButton.textContent = "Remove";
@@ -37,6 +47,8 @@ $(document).ready(function() {
       formGroup.removeChild(input);
       formGroup.removeChild(label2);
       formGroup.removeChild(input2);
+      formGroup.removeChild(label3);
+      formGroup.removeChild(input3);
       formGroup.removeChild(hr);
       formGroup.removeChild(removeButton);
     });
@@ -45,6 +57,8 @@ $(document).ready(function() {
     formGroup.insertBefore(input, addButton);
     formGroup.insertBefore(label2, addButton);
     formGroup.insertBefore(input2, addButton);
+    formGroup.insertBefore(label3, addButton);
+    formGroup.insertBefore(input3, addButton);
     formGroup.insertBefore(hr, addButton);
     addButton.insertAdjacentElement("afterend", removeButton);
   });

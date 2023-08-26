@@ -14,20 +14,22 @@
         </div>
       <% end %>
 
-      <div class="form-group">
-        <%= form.label :descricao %>
-        <%= form.text_field :descricao, name: "despesa[descricao][]", class: 'form-control', required: true %>
+    <div class="panel panel-primary">
+      <div class="panel-body">
+        <div class="form-group">
+          <%= form.label :descricao %>
+          <%= form.text_field :descricao, name: "despesa[descricao][]", class: 'form-control', required: true %>
 
-        <%= form.label :valor %>
-        <%= form.text_field :valor, name: "despesa[valor][]", class: 'form-control', required: true %>
-        <hr>
-        <button type="button" id="add-descricao" class="btn btn-secondary mt-2">Add Spending</button>
-      </div>
+          <%= form.label :valor %>
+          <%= form.text_field :valor, name: "despesa[valor][]", class: 'form-control', required: true %>
 
-      <div class="form-group">
-        <%= form.label :date %>
-        <%= form.date_field :date, class: 'form-control', required: false %>
+          <%= form.label :date %>
+          <%= form.date_field :date, name: "despesa[date][]", class: 'form-control', required: false %>
+          <hr>
+          <button type="button" id="add-descricao" class="btn btn-secondary mt-2">Add Spending</button>
+        </div>
       </div>
+    </div>
 
       <div class="form-group">
         <%= form.label :categoria %>
