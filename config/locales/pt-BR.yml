@@ -1,4 +1,8 @@
 pt-BR:
+  attributes:
+    description: "Descrição"
+    value: "Valor"
+    date: "Data"
   number:
     format:
       delimiter: "."

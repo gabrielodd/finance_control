@@ -30,6 +30,10 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  attributes:
+    description: "Description"
+    value: "Value"
+    date: "Date"
   number:
     format:
       delimiter: ","

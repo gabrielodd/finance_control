@@ -58,7 +58,7 @@
             <div class="panel-body <%= 'panel-highlight animated-text' if despesa == @newest_record %>">
               <div class="row">
                 <div class="col-md-3">
-                  <p style="line-height: 30px;"><strong>Descrição:</strong> 
+                  <p style="line-height: 30px;"><strong><%=t('attributes.description')%>:</strong> 
                   <span id="despesa-<%= despesa.id %>-descricao"><%= despesa.descricao %></span>
                   <input
                     type="text"
@@ -71,7 +71,7 @@
                 </div>
                 <div class="col-md-3">
                   <p style="line-height: 30px;"><strong>
-                  Valor:</strong> 
+                  <%=t('attributes.value')%>:</strong> 
                   <span id="despesa-<%= despesa.id %>-valor"><%= formatted_decimal(despesa.valor) %></span>
                   <input
                     type="text"
@@ -82,7 +82,7 @@
                   ></p>
                 </div>
                 <div class="col-md-3">
-                  <p style="line-height: 30px;"><strong>Data:</strong> <%= formatted_date(despesa.date) %></p>
+                  <p style="line-height: 30px;"><strong><%=t('attributes.date')%>:</strong> <%= formatted_date(despesa.date) %></p>
                 </div>
                 <div class="col-md-3 text-center">
                   <%#= link_to 'Show', despesa, class: 'btn btn-sm btn-info' %>
