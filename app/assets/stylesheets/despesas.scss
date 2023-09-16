@@ -6,10 +6,12 @@
 
 h1,h2,h3,h4,h5,h6 {
   font-family: 'Roboto Slab', serif;
-  /* Other styles for the "total-spent" class */
 }
 
 .panel1 {
-  background: linear-gradient(to bottom, #dcb3dd, #cd7ad8); /* Replace these colors with your desired gradient colors */
-  /* Other styling properties for the panel */
+  background: linear-gradient(to bottom, #dcb3dd, #cd7ad8); 
+}
+
+.panel-body-font {
+  font-family: "Courier", Courier;
 }
