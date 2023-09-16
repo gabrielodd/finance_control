@@ -58,16 +58,13 @@ class DespesasController < ApplicationController
     redirect_to despesas_url
   end
 
-  # GET /despesas/1 or /despesas/1.json
   def show
   end
 
-  # GET /despesas/new
   def new
     @despesa = Despesa.new
   end
 
-  # GET /despesas/1/edit
   def edit
   end
 
@@ -80,7 +77,6 @@ class DespesasController < ApplicationController
     end
   end
 
-  # POST /despesas or /despesas.json
   def create
     descricoes = despesa_params.delete(:descricao)
     valores = despesa_params.delete(:valor)
@@ -101,7 +97,7 @@ class DespesasController < ApplicationController
 
         if @despesa.save
           if params[:repeating] == '1'
-            Despesa.delay(run_at: 1.minute.from_now).create_every_month(@despesa.id)
+            Despesa.create_every_month(@despesa.id)
           end
           format.html { redirect_to despesas_url, notice: "Despesa was successfully created." }
         else

@@ -5,6 +5,14 @@ $(document).ready(function() {
     const addButton = document.getElementById("add-descricao");
     const formGroup = document.querySelector(".form-group");
 
+    function getPreviousValue() {
+      const previousInput = document.getElementById("despesa_descricao")
+      if (previousInput) {
+        return previousInput.value;
+      }
+      return "";
+    }
+
     const label = document.createElement("label");
     label.textContent = "Descrição";
     label.setAttribute("for", "descricao");
@@ -15,6 +23,7 @@ $(document).ready(function() {
     input.setAttribute("name", "despesa[descricao][]");
     input.setAttribute("class", "form-control mt-2");
     input.setAttribute("required", true);
+    input.value = getPreviousValue();
 
     const label2 = document.createElement("label");
     label2.textContent = "Valor";
