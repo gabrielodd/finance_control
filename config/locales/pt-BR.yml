@@ -1,4 +1,7 @@
 pt-BR:
+  despesa:
+    descriptions:
+      food: "Comida"
   attributes:
     description: "Descrição"
     value: "Valor"

@@ -30,6 +30,14 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  despesa:
+    descriptions:
+      food: "Food"
+      housing: "Housing"
+      utilities: "Utilities"
+      credit_card: "Credit Card"
+      services: "Services"
+      internet: "Internet"
   attributes:
     description: "Description"
     value: "Value"
@@ -45,7 +53,7 @@ en:
     profile: "Profile"
     signup: "Sign up"
     logout: "Logout"
-    new_despesa: "New Spending"
+    new_despesa: "New Expense"
   helpers:
     label:
       despesa:

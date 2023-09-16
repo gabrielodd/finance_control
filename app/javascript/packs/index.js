@@ -29,6 +29,8 @@ $(document).ready(function() {
     const descriptionInput = $(`input[data-despesa-id="${despesaId}"].edit-descricao-input`);
     const updateBtn = $(`button[data-despesa-id="${despesaId}"].update-valor-btn`);
 
+    $(this).closest('.panel-body').find('.btn-danger').hide();
+
     valorSpan.hide();
     valorInput.show();
     updateBtn.show();
@@ -52,6 +54,7 @@ $(document).ready(function() {
       dataType: 'script'
     });
 
+    $(this).closest('.panel-body').find('.btn-danger').show();
     descriptionInput.hide();
     descriptionSpan.text(descriptionInput.val()).show();
     valorInput.hide();
