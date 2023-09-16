@@ -54,11 +54,23 @@
               -->
             </h3>
           </div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-3">
+                <p style=""><strong><%=t('attributes.description')%></strong>
+              </div>
+              <div class="col-md-3">
+                <p style=""><strong><%=t('attributes.value')%></strong>
+              </div>
+              <div class="col-md-3">
+                <p style=""><strong><%=t('attributes.date')%></strong>
+              </div>
+            </div>
+          </div>
           <% despesas.each do |despesa| %>
             <div class="panel-body <%= 'panel-highlight animated-text' if despesa == @newest_record %>">
               <div class="row">
                 <div class="col-md-3">
-                  <p style="line-height: 30px;"><strong><%=t('attributes.description')%>:</strong> 
                   <span class="panel-body-font" id="despesa-<%= despesa.id %>-descricao"><%= despesa.descricao %></span>
                   <input
                     type="text"
@@ -67,11 +79,10 @@
                     value="<%= despesa.descricao %>"
                     style="display: none;"
                   >
-                  </p>
+
                 </div>
                 <div class="col-md-3">
-                  <p style="line-height: 30px;"><strong>
-                  <%=t('attributes.value')%>:</strong> 
+
                   <span class="panel-body-font" id="despesa-<%= despesa.id %>-valor"><%= formatted_decimal(despesa.valor) %></span>
                   <input
                     type="text"
@@ -79,10 +90,10 @@
                     data-despesa-id="<%= despesa.id %>"
                     value="<%= formatted_decimal(despesa.valor) %>"
                     style="display: none;"
-                  ></p>
+                  >
                 </div>
                 <div class="col-md-3">
-                  <p class="panel-body-font" style="line-height: 30px;"><strong><%=t('attributes.date')%>:</strong> <%= formatted_date(despesa.date) %></p>
+                  <p class="panel-body-font"><%= formatted_date(despesa.date) %></p>
                 </div>
                 <div class="col-md-3 text-center">
                   <%#= link_to 'Show', despesa, class: 'btn btn-sm btn-info' %>
@@ -99,7 +110,7 @@
           <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-3">
-              <b>Total: <%= formatted_decimal(despesas.sum(&:valor)) %></b>
+              <b class="panel-body-font">Total: <%= formatted_decimal(despesas.sum(&:valor)) %></b>
             </div>
           </div>
         </div>
