@@ -44,9 +44,15 @@ $(document).ready(function() {
     const despesaId = $(this).data('despesa-id');
     const valorSpan = $(`#despesa-${despesaId}-valor`);
     const valorInput = $(`input[data-despesa-id="${despesaId}"].edit-valor-input`);
+    const oldValue = parseFloat($(`#despesa-${despesaId}-valor`).text().replace(',', '.'));
+    const newValue = parseFloat(valorInput.val().replace(',', '.'));
     const descriptionSpan = $(`#despesa-${despesaId}-descricao`);
     const descriptionInput = $(`input[data-despesa-id="${despesaId}"].edit-descricao-input`);
-    
+    const currentPanel = $(this).closest('.panel');
+    const totalElement = currentPanel.find('.panel-body-font.total-value');
+    const currentTotal = parseFloat(totalElement.text().replace(',', '.'));
+    const newTotal = currentTotal - oldValue + newValue;
+
     $.ajax({
       type: 'PATCH',
       url: `/despesas/${despesaId}/update_valor`,
@@ -60,6 +66,7 @@ $(document).ready(function() {
     valorInput.hide();
     valorSpan.text(valorInput.val()).show();
     $(this).hide();
+    totalElement.text(newTotal.toFixed(2));
     $('.edit-valor-btn').show();
   });
 });

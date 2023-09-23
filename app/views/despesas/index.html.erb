@@ -45,9 +45,9 @@
             <i class="fas fa-chevron-down toggle-month" data-month="<%= month %>"></i>
           </h4>
         <% end %>
-        <div class="panel panel-primary bg-1" data-month="<%= month %>">
+        <div class="panel panel-primary bg-2" data-month="<%= month %>">
           <div class="panel-heading">
-            <h3 class="panel-title">
+            <h4 class="panel-title" style="color: white;">
             <%= I18n.t("despesa.descriptions.#{Categoria.find_by(id: categoria_id).name.downcase}", 
                         default: Categoria.find_by(id: categoria_id).name) %> 
               <!-- 
@@ -112,7 +112,7 @@
             <div class="row">
               <div class="col-md-3"><b class="panel-body-font ml-3">Total: </b></div>
               <div class="col-md-3">
-                <b class="panel-body-font"><%= formatted_decimal(despesas.sum(&:valor)) %></b>
+                <b class="panel-body-font total-value"><%= formatted_decimal(despesas.sum(&:valor)) %></b>
               </div>
             </div>
           </div>

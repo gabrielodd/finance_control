@@ -20,11 +20,15 @@ h1,h2,h3,h4,h5,h6 {
   background-image: radial-gradient( circle farthest-corner at 1.5% 1.4%,  rgba(159,227,255,1) 0%, rgba(255,177,219,1) 100.2% );
 }
 
+.bg-2 {
+  background-image: linear-gradient(to right,#2775ff,#7202bb)
+}
+
 .panel-heading {
   // border-top: 2px solid black;
   // border-bottom: 2px solid black;
   text-align: center;
-  padding: 4px;
+  padding: 3px;
 }
 
 .panel {
