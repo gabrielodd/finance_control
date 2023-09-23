@@ -38,6 +38,7 @@ $(document).ready(function() {
 
     descriptionSpan.hide();
     descriptionInput.show();
+    $(".panel-highlight").removeClass("animated-text");
   });
 
   $('.update-valor-btn').click(function() {
@@ -48,11 +49,19 @@ $(document).ready(function() {
     const newValue = parseFloat(valorInput.val().replace(',', '.'));
     const descriptionSpan = $(`#despesa-${despesaId}-descricao`);
     const descriptionInput = $(`input[data-despesa-id="${despesaId}"].edit-descricao-input`);
+
     const currentPanel = $(this).closest('.panel');
     const totalElement = currentPanel.find('.panel-body-font.total-value');
     const currentTotal = parseFloat(totalElement.text().replace(',', '.'));
     const newTotal = currentTotal - oldValue + newValue;
 
+    const month = $(this).closest('.col-md-12').data('month')
+    const totalMonthElement = $(`.col-md-12[data-month="${month}"]`).last().next().find('.total-month');
+    const totalSpentText = totalMonthElement.text();
+    const floatValue = parseFloat(totalSpentText.match(/[\d.]+/));
+    const newTotalMonth = floatValue - oldValue + newValue;
+
+    console.log(month);
     $.ajax({
       type: 'PATCH',
       url: `/despesas/${despesaId}/update_valor`,
@@ -67,6 +76,8 @@ $(document).ready(function() {
     valorSpan.text(valorInput.val()).show();
     $(this).hide();
     totalElement.text(newTotal.toFixed(2));
+    totalMonthElement.text("Total: " + newTotalMonth.toFixed(2));
     $('.edit-valor-btn').show();
+    $(".panel-highlight").addClass("animated-text");
   });
 });
