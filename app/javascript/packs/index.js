@@ -27,6 +27,10 @@ $(document).ready(function() {
 
     const descriptionSpan = $(`#despesa-${despesaId}-descricao`);
     const descriptionInput = $(`input[data-despesa-id="${despesaId}"].edit-descricao-input`);
+
+    const dateSpan = $(`#despesa-${despesaId}-date`);
+    const dateInput = $(`input[data-despesa-id="${despesaId}"].edit-date-input`);
+
     const updateBtn = $(`button[data-despesa-id="${despesaId}"].update-valor-btn`);
 
     $(this).closest('.panel-body').find('.btn-danger').hide();
@@ -34,10 +38,13 @@ $(document).ready(function() {
     valorSpan.hide();
     valorInput.show();
     updateBtn.show();
-    $(this).hide();
+    // $(".edit-valor-btn").hide();
 
     descriptionSpan.hide();
     descriptionInput.show();
+
+    dateSpan.hide();
+    dateInput.show();
     $(".panel-highlight").removeClass("animated-text");
   });
 
@@ -45,10 +52,13 @@ $(document).ready(function() {
     const despesaId = $(this).data('despesa-id');
     const valorSpan = $(`#despesa-${despesaId}-valor`);
     const valorInput = $(`input[data-despesa-id="${despesaId}"].edit-valor-input`);
-    const oldValue = parseFloat($(`#despesa-${despesaId}-valor`).text().replace(',', '.'));
-    const newValue = parseFloat(valorInput.val().replace(',', '.'));
+    const dateSpan = $(`#despesa-${despesaId}-date`);
+    const dateInput = $(`input[data-despesa-id="${despesaId}"].edit-date-input`);
     const descriptionSpan = $(`#despesa-${despesaId}-descricao`);
     const descriptionInput = $(`input[data-despesa-id="${despesaId}"].edit-descricao-input`);
+
+    const oldValue = parseFloat($(`#despesa-${despesaId}-valor`).text().replace(',', '.'));
+    const newValue = parseFloat(valorInput.val().replace(',', '.'));
 
     const currentPanel = $(this).closest('.panel');
     const totalElement = currentPanel.find('.panel-body-font.total-value');
@@ -61,11 +71,10 @@ $(document).ready(function() {
     const floatValue = parseFloat(totalSpentText.match(/[\d.]+/));
     const newTotalMonth = floatValue - oldValue + newValue;
 
-    console.log(month);
     $.ajax({
       type: 'PATCH',
       url: `/despesas/${despesaId}/update_valor`,
-      data: { valor: valorInput.val(), descricao: descriptionInput.val() },
+      data: { valor: valorInput.val(), descricao: descriptionInput.val(), date: dateInput.val() },
       dataType: 'script'
     });
 
@@ -74,10 +83,15 @@ $(document).ready(function() {
     descriptionSpan.text(descriptionInput.val()).show();
     valorInput.hide();
     valorSpan.text(valorInput.val()).show();
+    dateInput.hide();
+    dateSpan.text(dateInput.val()).show();
+
     $(this).hide();
     totalElement.text(newTotal.toFixed(2));
     totalMonthElement.text("Total: " + newTotalMonth.toFixed(2));
     $('.edit-valor-btn').show();
     $(".panel-highlight").addClass("animated-text");
+
+    console.log(month);
   });
 });

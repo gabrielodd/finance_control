@@ -9,7 +9,13 @@ class DespesasController < ApplicationController
       date_last_month = 1.month.ago
       # @despesas = Despesa.within_month_from_user(current_user.id, date)
       @despesas = Despesa.where(user_id: current_user.id).order(:date)
-      @newest_record = Despesa.where(user_id: current_user.id).order(created_at: :desc).first
+      most_recent_created = Despesa.where(user_id: current_user.id).order(created_at: :desc).first
+      most_recent_updated = Despesa.where(user_id: current_user.id).order(updated_at: :desc).first
+      if most_recent_created.created_at > most_recent_updated.updated_at
+        @newest_record = most_recent_created
+      else
+        @newest_record = most_recent_updated
+      end
       @despesas_grouped = @despesas.group_by(&:mes)
       if params[:mes].present?
         # @despesas = @despesas.where("EXTRACT(MONTH FROM mes) = ?", params[:filter_month])
@@ -42,11 +48,9 @@ class DespesasController < ApplicationController
     if file.content_type == 'application/json'
       json_data = JSON.parse(file.read)
 
-      # Assuming the JSON data is an array of objects, each representing a despesa
       json_data.each do |despesa_data|
         despesa_data['user_id'] = current_user.id
 
-        # Create the Despesa object using the updated attributes
         Despesa.create(despesa_data)
       end
 
@@ -70,7 +74,7 @@ class DespesasController < ApplicationController
 
   def update_valor
     @despesa = Despesa.find(params[:id])
-    @despesa.update(valor: params[:valor], descricao: params[:descricao])
+    @despesa.update(valor: params[:valor], descricao: params[:descricao], date: params[:date])
   
     respond_to do |format|
       format.js
@@ -108,7 +112,6 @@ class DespesasController < ApplicationController
     end
   end
 
-  # PATCH/PUT /despesas/1 or /despesas/1.json
   def update
     respond_to do |format|
       if @despesa.update(despesa_params)
@@ -121,7 +124,6 @@ class DespesasController < ApplicationController
     end
   end
 
-  # DELETE /despesas/1 or /despesas/1.json
   def destroy
     @despesa.destroy
 

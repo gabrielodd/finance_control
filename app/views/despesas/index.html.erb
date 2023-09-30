@@ -95,6 +95,13 @@
                 </div>
                 <div class="col-md-3 edit-valor-btn" data-despesa-id="<%= despesa.id %>">
                   <span class="panel-body-font" id="despesa-<%= despesa.id %>-date"><%= formatted_date(despesa.date) %></span>
+                  <input
+                    type="date"
+                    class="form-control edit-date-input"
+                    data-despesa-id="<%= despesa.id %>"
+                    value="<%= despesa.date %>"
+                    style="display: none;"
+                  >
                 </div>
                 <div class="col-md-3 text-center">
                   <%#= link_to 'Show', despesa, class: 'btn btn-sm btn-info' %>
