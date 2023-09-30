@@ -72,7 +72,7 @@
           <% despesas.each do |despesa| %>
             <div class="panel-body <%= 'panel-highlight animated-text' if despesa == @newest_record %>">
               <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-3 edit-valor-btn" data-despesa-id="<%= despesa.id %>">
                   <span class="panel-body-font ml-3" id="despesa-<%= despesa.id %>-descricao"><%= despesa.descricao %></span>
                   <input
                     type="text"
@@ -82,7 +82,7 @@
                     style="display: none;"
                   >
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 edit-valor-btn" data-despesa-id="<%= despesa.id %>">
 
                   <span class="panel-body-font" id="despesa-<%= despesa.id %>-valor"><%= formatted_decimal(despesa.valor) %></span>
                   <input
@@ -93,8 +93,8 @@
                     style="display: none;"
                   >
                 </div>
-                <div class="col-md-3">
-                  <span class="panel-body-font"><%= formatted_date(despesa.date) %></span>
+                <div class="col-md-3 edit-valor-btn" data-despesa-id="<%= despesa.id %>">
+                  <span class="panel-body-font" id="despesa-<%= despesa.id %>-date"><%= formatted_date(despesa.date) %></span>
                 </div>
                 <div class="col-md-3 text-center">
                   <%#= link_to 'Show', despesa, class: 'btn btn-sm btn-info' %>
@@ -113,6 +113,11 @@
               <div class="col-md-3"><b class="panel-body-font ml-3">Total: </b></div>
               <div class="col-md-3">
                 <b class="panel-body-font total-value"><%= formatted_decimal(despesas.sum(&:valor)) %></b>
+              </div>
+              <div class="col-md-6">
+                <%= link_to new_despesa_path, class: 'btn btn-sm btn-success', style: 'line-height: 1; padding: 3px;' do %>
+                  <i class="fas fa-plus"></i>
+                <% end %>
               </div>
             </div>
           </div>
@@ -141,10 +146,6 @@
 <%= link_to new_despesa_path, class: 'btn btn-success spendings-button' do %>
   <%=t('menu.new_despesa')%> <i class="fas fa-plus"></i>
 <% end %>
-
-<div id="edit-form-container" style="display: none;">
-  <%= render partial: 'edit_form', locals: { despesa: Despesa.first } %>
-</div>
 
 <%= stylesheet_link_tag 'index', media: 'all' %>
 
