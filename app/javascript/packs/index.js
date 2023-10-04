@@ -33,7 +33,7 @@ $(document).ready(function() {
 
     const updateBtn = $(`button[data-despesa-id="${despesaId}"].update-valor-btn`);
 
-    $(this).closest('.panel-body').find('.btn-danger').hide();
+    $(this).closest('.panel-body').find('.btn-danger').show();
 
     valorSpan.hide();
     valorInput.show();
@@ -78,7 +78,7 @@ $(document).ready(function() {
       dataType: 'script'
     });
 
-    $(this).closest('.panel-body').find('.btn-danger').show();
+    $(this).closest('.panel-body').find('.btn-danger').hide();
     descriptionInput.hide();
     descriptionSpan.text(descriptionInput.val()).show();
     valorInput.hide();

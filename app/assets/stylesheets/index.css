@@ -4,8 +4,8 @@
 }
 
 .panel-highlight {
-  border: 2px solid #00cc00; /* Green border */
-  box-shadow: 0 0 8px #00cc00; /* Green shadow */
+  border: 2px solid #00cc00; 
+  box-shadow: 0 0 8px #00cc00;
 }
 
 .green-text {
@@ -60,5 +60,5 @@ i.fas.fa-calendar-alt {
 }
 
 .animated-text {
-  animation: colorChange 1s;
+  animation: colorChange 2s;
 }

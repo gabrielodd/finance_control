@@ -58,14 +58,14 @@
           </div>
           <div class="panel-body">
             <div class="row">
-              <div class="col-md-3 ml-3">
-                <p style=""><strong><%=t('attributes.description')%></strong>
+              <div class="col-md-3 mb-2 ml-3">
+                <strong><%=t('attributes.description')%></strong>
               </div>
               <div class="col-md-3">
-                <p style=""><strong><%=t('attributes.value')%></strong>
+                <strong><%=t('attributes.value')%></strong>
               </div>
               <div class="col-md-3">
-                <p style=""><strong><%=t('attributes.date')%></strong>
+                <strong><%=t('attributes.date')%></strong>
               </div>
             </div>
           </div>
@@ -108,9 +108,11 @@
                   <button class="btn btn-sm btn-success update-valor-btn" data-despesa-id="<%= despesa.id %>" style="display: none;">
                     <i class="fas fa-check"></i>
                   </button>
-                  <button class="btn btn-sm btn-info edit-valor-btn" data-despesa-id="<%= despesa.id %>">Edit</button>
+                  <!-- <button class="btn btn-sm btn-info edit-valor-btn" data-despesa-id="<%= despesa.id %>">Edit</button> -->
                   <%#= link_to 'Edit', edit_despesa_path(despesa), class: 'btn btn-sm btn-primary' %>
-                  <%= link_to 'Delete', despesa, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %>
+                  <%= link_to despesa, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger', style: 'display: none;' do %>
+                    <i class="fas fa-trash"></i>
+                  <% end %>
                 </div>
               </div>
             </div>
