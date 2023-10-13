@@ -108,6 +108,9 @@
                   <button class="btn btn-sm btn-success update-valor-btn" data-despesa-id="<%= despesa.id %>" style="display: none;">
                     <i class="fas fa-check"></i>
                   </button>
+                  <button class="btn btn-sm btn-primary cancel-update-btn" data-despesa-id="<%= despesa.id %>" style="display: none;">
+                    <i class="fas fa-close"></i>
+                  </button>
                   <!-- <button class="btn btn-sm btn-info edit-valor-btn" data-despesa-id="<%= despesa.id %>">Edit</button> -->
                   <%#= link_to 'Edit', edit_despesa_path(despesa), class: 'btn btn-sm btn-primary' %>
                   <%= link_to despesa, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger', style: 'display: none;' do %>
@@ -118,15 +121,43 @@
             </div>
           <% end %>
           <div class="panel-body">
+            <div class="row new-despesa" style="display: none;">
+              <%#= form_tag(add_despesa_despesa_path(despesas.last.id), method: "post", remote: true) do %>
+                <div class="col-md-3">
+                  <input
+                    type="text"
+                    class="form-control new-descricao-input"
+                    value="<%= despesas.last.descricao %>"
+                  >
+                </div>
+                <div class="col-md-3">
+                  <input
+                    type="text"
+                    class="form-control new-valor-input"
+                    value="<%= despesas.last.valor %>"
+                  >
+                </div>
+                <div class="col-md-3">
+                  <input
+                    type="date"
+                    class="form-control new-date-input"
+                    value="<%= despesas.last.date %>"
+                  >
+                </div>
+                <div class="col-md-3">
+                  <%= submit_tag "Save", class: "btn btn-success" %>
+                </div>
+              <%# end %>
+            </div>
             <div class="row">
               <div class="col-md-3"><b class="panel-body-font ml-3">Total: </b></div>
               <div class="col-md-3">
                 <b class="panel-body-font total-value"><%= formatted_decimal(despesas.sum(&:valor)) %></b>
               </div>
               <div class="col-md-6">
-                <%= link_to new_despesa_path, class: 'btn btn-sm btn-success', style: 'line-height: 1; padding: 3px;' do %>
+                <button class="btn btn-sm btn-success add-despesa-btn" style='line-height: 1; padding: 3px;'>
                   <i class="fas fa-plus"></i>
-                <% end %>
+                </button>
               </div>
             </div>
           </div>

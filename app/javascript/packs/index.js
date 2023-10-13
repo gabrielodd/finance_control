@@ -34,6 +34,7 @@ $(document).ready(function() {
     const updateBtn = $(`button[data-despesa-id="${despesaId}"].update-valor-btn`);
 
     $(this).closest('.panel-body').find('.btn-danger').show();
+    $(this).closest('.panel-body').find('.btn-primary').show();
 
     valorSpan.hide();
     valorInput.show();
@@ -46,6 +47,30 @@ $(document).ready(function() {
     dateSpan.hide();
     dateInput.show();
     $(".panel-highlight").removeClass("animated-text");
+  });
+
+  $('.add-despesa-btn').click(function() {
+    $(this).closest('.panel-body').find('.new-despesa').show();
+  });
+
+  $('.cancel-update-btn').click(function() {
+    const despesaId = $(this).data('despesa-id');
+    const valorSpan = $(`#despesa-${despesaId}-valor`);
+    const valorInput = $(`input[data-despesa-id="${despesaId}"].edit-valor-input`);
+    const dateSpan = $(`#despesa-${despesaId}-date`);
+    const dateInput = $(`input[data-despesa-id="${despesaId}"].edit-date-input`);
+    const descriptionSpan = $(`#despesa-${despesaId}-descricao`);
+    const descriptionInput = $(`input[data-despesa-id="${despesaId}"].edit-descricao-input`);
+
+    $(this).closest('.panel-body').find('.update-valor-btn').hide();
+    $(this).closest('.panel-body').find('.btn-danger').hide();
+    $(this).hide();
+    descriptionInput.hide();
+    descriptionSpan.show();
+    valorInput.hide();
+    dateInput.hide();
+    valorSpan.show();
+    dateSpan.show();
   });
 
   $('.update-valor-btn').click(function() {
@@ -79,6 +104,7 @@ $(document).ready(function() {
     });
 
     $(this).closest('.panel-body').find('.btn-danger').hide();
+    $(this).closest('.panel-body').find('.cancel-update-btn').hide();
     descriptionInput.hide();
     descriptionSpan.text(descriptionInput.val()).show();
     valorInput.hide();
