@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       get 'import', to: 'despesas#import'
       post 'import', to: 'despesas#import_json'
       post 'update_valor'
+      post 'add_despesa'
     end
     member do
       patch 'update_valor'

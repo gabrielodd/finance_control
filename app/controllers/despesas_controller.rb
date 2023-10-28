@@ -81,6 +81,17 @@ class DespesasController < ApplicationController
     end
   end
 
+  def add_despesa
+    params = add_despesa_params.merge!(user_id: current_user.id)
+    @despesa = Despesa.new(params)
+
+    if @despesa.save
+      redirect_to despesas_url, notice: "Despesa was successfully created."
+    else
+      render json: { errors: @despesa.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
   def create
     descricoes = despesa_params.delete(:descricao)
     valores = despesa_params.delete(:valor)
@@ -141,5 +152,9 @@ class DespesasController < ApplicationController
 
   def despesa_params
     params.require(:despesa).permit(:categoria_id, :repeating, :user_id, date: [], descricao: [], valor: [])
+  end
+
+  def add_despesa_params
+    params.require(:despesa).permit(:descricao, :valor, :date, :categoria_id)
   end
 end

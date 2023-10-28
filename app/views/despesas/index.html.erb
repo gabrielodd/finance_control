@@ -104,6 +104,7 @@
                   >
                 </div>
                 <div class="col-md-3 text-center">
+                  <input type="checkbox" <%= despesa.repeating ? 'checked' : '' %> disabled>
                   <%#= link_to 'Show', despesa, class: 'btn btn-sm btn-info' %>
                   <button class="btn btn-sm btn-success update-valor-btn" data-despesa-id="<%= despesa.id %>" style="display: none;">
                     <i class="fas fa-check"></i>
@@ -121,33 +122,18 @@
             </div>
           <% end %>
           <div class="panel-body">
-            <div class="row new-despesa" style="display: none;">
-              <%#= form_tag(add_despesa_despesa_path(despesas.last.id), method: "post", remote: true) do %>
-                <div class="col-md-3">
-                  <input
-                    type="text"
-                    class="form-control new-descricao-input"
-                    value="<%= despesas.last.descricao %>"
-                  >
-                </div>
-                <div class="col-md-3">
-                  <input
-                    type="text"
-                    class="form-control new-valor-input"
-                    value="<%= despesas.last.valor %>"
-                  >
-                </div>
-                <div class="col-md-3">
-                  <input
-                    type="date"
-                    class="form-control new-date-input"
-                    value="<%= despesas.last.date %>"
-                  >
-                </div>
-                <div class="col-md-3">
+            <div class="new-despesa" style="display: none;">
+              <%= form_with(model: Despesa.new, url: add_despesa_despesas_path, remote: true) do |form| %>
+                <div class="input-group">
+                  <%= form.text_field :descricao, value: despesas.last.descricao, class: 'form-control', required: true %>
+
+                  <%= form.text_field :valor, value: despesas.last.valor, class: 'form-control', required: true %>
+                  <%= form.date_field :date, value: despesas.last.date, class: 'form-control', required: false %>
+                  <%= form.select(:categoria_id, Categoria.all.map { |c| [c.name, c.id] }, {}, class: 'form-control', required: true) %>
+
                   <%= submit_tag "Save", class: "btn btn-success" %>
                 </div>
-              <%# end %>
+              <% end %>
             </div>
             <div class="row">
               <div class="col-md-3"><b class="panel-body-font ml-3">Total: </b></div>
