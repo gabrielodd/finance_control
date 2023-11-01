@@ -33,7 +33,7 @@
 
       <div class="form-group">
         <%= form.label :categoria %>
-        <%= form.select(:categoria_id, Categoria.all.map { |c| [c.name, c.id] }, {}, class: 'form-control', required: true) %>
+        <%= form.select(:categoria_id, Categoria.all.map { |c| [c.name.capitalize, c.id] }, {}, class: 'form-control', required: true) %>
       </div>
 
       <div class="form-check">
