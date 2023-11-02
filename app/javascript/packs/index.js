@@ -3,6 +3,7 @@ $(document).ready(function() {
   var secondToLastMonth = $('.toggle-month').eq(-2).data('month');
 
   $('.panel').hide();
+  // $('.abc').show();
   $('.panel[data-month="' + latestMonth + '"]').show();
   $('.panel[data-month="' + secondToLastMonth + '"]').show();
 

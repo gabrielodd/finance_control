@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     end
   end
 
+  post '/run_delayed_job/:id', to: 'delayed_jobs#run', as: 'run_delayed_job'
   get 'relatorio', to: 'despesas#relatorio'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
