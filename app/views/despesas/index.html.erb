@@ -169,25 +169,27 @@
 
 <% Delayed::Job.where("run_at > ?", Time.now).each do |job| %>
   <% handler = YAML.load(job.handler) %>
-  <div class="panel-body">
-    <div class="row">
-      <div class="col-md-1">
-        <%= job.id %>
-      </div>
-      <div class="col-md-3">
-        <%= handler.method_name %>
-      </div>
-      <div class="col-md-3">
-        <%= job.run_at %>
-      </div>
-      <div class="col-md-3">
-        <%= Despesa.find_by(id: handler.args.first)&.descricao %>
-      </div>
-      <div class="col-md-2">
-        <%= button_to 'Run Now', run_delayed_job_path(job.id), method: :post, remote: true, class: 'btn btn-sm btn-primary' %>
+  <% if Despesa.where(id: handler.args.first).present? %>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-1">
+          <%= job.id %>
+        </div>
+        <div class="col-md-3">
+          <%= handler.method_name %>
+        </div>
+        <div class="col-md-3">
+          <%= job.run_at %>
+        </div>
+        <div class="col-md-3">
+          <%= Despesa.find_by(id: handler.args.first)&.descricao %>
+        </div>
+        <div class="col-md-2">
+          <%= button_to 'Run Now', run_delayed_job_path(job.id), method: :post, remote: true, class: 'btn btn-sm btn-primary' %>
+        </div>
       </div>
     </div>
-  </div>
+  <% end %>
 <% end %>
 
 <% end %>

@@ -4,9 +4,10 @@ class DelayedJobsController < ApplicationController
 
     if job.present?
       job.invoke_job # Execute the Delayed::Job immediately
-      render json: { message: 'Job executed successfully' }, status: :ok
+      job.destroy
+      redirect_to despesas_url, notice: "Job added."
     else
-      render json: { message: 'Job not found' }, status: :not_found
+      redirect_to despesas_url, alert: "Error"
     end
   end
 end
