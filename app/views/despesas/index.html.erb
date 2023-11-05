@@ -1,18 +1,18 @@
+<div class="container">
 
 <% if @despesas.blank? %>
 
 <div class="alert alert-warning" role="alert">
   <% unless user_signed_in? %>
-    Log in to see your spendings!
+    Log in to see your expenses!
   <% else %>
-    You don't have any spendings this month!
+    You don't have any expenses!
   <% end %>
 </div>
 
 <% else %>
 
 <br>
-<div class="container">
   <h3 class="text-center">Despesas</h3>
   <div class="btn-group">
   <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -54,7 +54,7 @@
               <i class="fas fa-calendar-alt"></i>
               <span class="month"> <%= despesas.first.mes%></span>
               -->
-            </h3>
+            </h4>
           </div>
           <div class="panel-body">
             <div class="row">
@@ -152,7 +152,6 @@
       <% end %>
     <% end %>
   </div>
-</div>
 
 <h3 class="total-spent text-center" style="margin-top: 10px;">Total: <%=formatted_decimal(@total) %>
   <span style="<%=positive_negative_style(@difference)%>">
@@ -167,36 +166,45 @@
 
 <br>
 
-<% Delayed::Job.where("run_at > ?", Time.now).each do |job| %>
-  <% handler = YAML.load(job.handler) %>
-  <% if Despesa.where(id: handler.args.first).present? %>
-    <div class="panel-body">
-      <div class="row">
-        <div class="col-md-1">
-          <%= job.id %>
-        </div>
-        <div class="col-md-3">
-          <%= handler.method_name %>
-        </div>
-        <div class="col-md-3">
-          <%= job.run_at %>
-        </div>
-        <div class="col-md-3">
-          <%= Despesa.find_by(id: handler.args.first)&.descricao %>
-        </div>
-        <div class="col-md-2">
-          <%= button_to 'Run Now', run_delayed_job_path(job.id), method: :post, remote: true, class: 'btn btn-sm btn-primary' %>
+<div class="panel delayed-job-panel bg-2 mb-2">
+  <div class="panel-heading">
+    <h4 class="panel-title" style="color: white;">
+      Future expenses
+    </h4>
+  </div>
+  <% Delayed::Job.where("run_at > ?", Time.now).each do |job| %>
+    <% handler = YAML.load(job.handler) %>
+    <% if Despesa.where(id: handler.args.first).present? %>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-3">
+            <span class='panel-body-font ml-3'><%= Despesa.find_by(id: handler.args.first)&.descricao %> </span>
+          </div>
+          <div class="col-md-3">
+            <%= job.run_at.strftime('%d/%m/%Y') %>
+          </div>
+          <div class="col-md-3">
+            <span class='panel-body-font'><%= formatted_date(Despesa.find_by(id: handler.args.first)&.date + 1.month) %></span>
+          </div>
+          <div class="col-md-3 input-group">
+            <%= button_to 'Run Now', run_delayed_job_path(job.id), method: :post, remote: true, class: 'btn btn-sm btn-primary' %>
+            <%= link_to '#', method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' do %>
+              <i class="fas fa-trash"></i>
+            <% end %>
+          </div>
         </div>
       </div>
-    </div>
+    <% end %>
   <% end %>
-<% end %>
+</div>
 
 <% end %>
 
 <%= link_to new_despesa_path, class: 'btn btn-success spendings-button' do %>
   <%=t('menu.new_despesa')%> <i class="fas fa-plus"></i>
 <% end %>
+
+</div>
 
 <%= stylesheet_link_tag 'index', media: 'all' %>
 
