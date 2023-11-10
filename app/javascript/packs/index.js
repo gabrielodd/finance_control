@@ -34,6 +34,9 @@ $(document).ready(function() {
 
     const updateBtn = $(`button[data-despesa-id="${despesaId}"].update-valor-btn`);
 
+    // const repeatingInput = $(`input[data-despesa-id="${despesaId}"].edit-repeating-input`);
+    const repeatingSpan = $(`#despesa-${despesaId}-repeating`);
+
     $(this).closest('.panel-body').find('.btn-danger').show();
     $(this).closest('.panel-body').find('.btn-primary').show();
 
@@ -47,6 +50,8 @@ $(document).ready(function() {
 
     dateSpan.hide();
     dateInput.show();
+
+    repeatingSpan.hide();
     $(".panel-highlight").removeClass("animated-text");
   });
 
