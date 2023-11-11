@@ -42,6 +42,7 @@ en:
     description: "Description"
     value: "Value"
     date: "Date"
+    repeating: "Every month"
   number:
     format:
       delimiter: ","

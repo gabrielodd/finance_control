@@ -32,10 +32,10 @@ $(document).ready(function() {
     const dateSpan = $(`#despesa-${despesaId}-date`);
     const dateInput = $(`input[data-despesa-id="${despesaId}"].edit-date-input`);
 
-    const updateBtn = $(`button[data-despesa-id="${despesaId}"].update-valor-btn`);
-
     // const repeatingInput = $(`input[data-despesa-id="${despesaId}"].edit-repeating-input`);
     const repeatingSpan = $(`#despesa-${despesaId}-repeating`);
+
+    const updateBtn = $(`button[data-despesa-id="${despesaId}"].update-valor-btn`);
 
     $(this).closest('.panel-body').find('.btn-danger').show();
     $(this).closest('.panel-body').find('.btn-primary').show();
@@ -51,7 +51,7 @@ $(document).ready(function() {
     dateSpan.hide();
     dateInput.show();
 
-    repeatingSpan.hide();
+    repeatingSpan.prop('disabled', false);
     $(".panel-highlight").removeClass("animated-text");
   });
 
@@ -87,6 +87,7 @@ $(document).ready(function() {
     const dateInput = $(`input[data-despesa-id="${despesaId}"].edit-date-input`);
     const descriptionSpan = $(`#despesa-${despesaId}-descricao`);
     const descriptionInput = $(`input[data-despesa-id="${despesaId}"].edit-descricao-input`);
+    const repeatingInput = $(`input[data-despesa-id="${despesaId}"].edit-repeating-input`);
 
     const oldValue = parseFloat($(`#despesa-${despesaId}-valor`).text().replace(',', '.'));
     const newValue = parseFloat(valorInput.val().replace(',', '.'));

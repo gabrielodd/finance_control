@@ -58,14 +58,17 @@
           </div>
           <div class="panel-body">
             <div class="row">
-              <div class="col-md-3 mb-2 ml-3">
-                <strong><%=t('attributes.description')%></strong>
+              <div class="col-md-3 mb-2">
+                <span class="ml-3 font-weight-bold panel-body-font"><%=t('attributes.description')%></span>
               </div>
               <div class="col-md-3">
-                <strong><%=t('attributes.value')%></strong>
+                <span class="font-weight-bold panel-body-font"><%=t('attributes.value')%></span>
               </div>
               <div class="col-md-3">
-                <strong><%=t('attributes.date')%></strong>
+                <span class="font-weight-bold panel-body-font"><%=t('attributes.date')%></span>
+              </div>
+              <div class="col-md-3">
+                <span class="font-weight-bold panel-body-font"><%=t('attributes.repeating')%></span>
               </div>
             </div>
           </div>
@@ -104,7 +107,7 @@
                   >
                 </div>
                 <div class="col-md-3 text-center">
-                  <input id="despesa-<%= despesa.id %>-repeating" type="checkbox" <%= despesa.repeating ? 'checked' : '' %> disabled>
+                  <input class="float-left" id="despesa-<%= despesa.id %>-repeating" type="checkbox" <%= despesa.repeating ? 'checked' : '' %> disabled>
                   <%#= link_to 'Show', despesa, class: 'btn btn-sm btn-info' %>
                   <button class="btn btn-sm btn-success update-valor-btn" data-despesa-id="<%= despesa.id %>" style="display: none;">
                     <i class="fas fa-check"></i>
