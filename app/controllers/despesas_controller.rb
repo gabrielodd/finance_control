@@ -2,7 +2,6 @@ class DespesasController < ApplicationController
   before_action :set_despesa, only: %i[ show edit update destroy ]
   skip_before_action :verify_authenticity_token
 
-  # GET /despesas or /despesas.json
   def index
     if user_signed_in?
       date = Date.current
@@ -17,9 +16,10 @@ class DespesasController < ApplicationController
         @newest_record = most_recent_updated
       end
       @despesas_grouped = @despesas.group_by(&:mes)
-      if params[:mes].present?
-        # @despesas = @despesas.where("EXTRACT(MONTH FROM mes) = ?", params[:filter_month])
-      end
+      @despesas_grouped_by_year = @despesas.group_by(&:ano)
+      # if params[:mes].present?
+      #   # @despesas = @despesas.where("EXTRACT(MONTH FROM mes) = ?", params[:filter_month])
+      # end
       @total = Despesa.total_spendings_current_month_from_user(current_user.id, date)
       @total_last_month = Despesa.total_spendings_current_month_from_user(current_user.id, date_last_month)
       @difference = @total - @total_last_month

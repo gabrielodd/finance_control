@@ -26,6 +26,14 @@ class Despesa < ApplicationRecord
     date.strftime("%B")
   end
 
+  def mes_ano
+    date.strftime("%B %Y")
+  end
+
+  def ano
+    date.strftime("%Y")
+  end
+
   def self.create_every_month(despesa_id)
     despesa = Despesa.find(despesa_id)
     new_despesa = despesa.dup

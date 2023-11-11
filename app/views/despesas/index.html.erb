@@ -32,8 +32,19 @@
 
   <div class="row">
     <% prev_mes = nil %>
-    <% @despesas_grouped.each do |month, despesas| %>
+    <% prev_year = nil %>
+    <% @despesas_grouped_by_year.each do |year, despesas| %>
+      <% despesas.group_by(&:mes).each do |month, despesas| %>
       <% despesas.group_by(&:categoria_id).each do |categoria_id, despesas| %>
+      <div class="col-md-12" data-year="<%= year %>">
+        <% if prev_year != year %>
+          <% prev_year = year %>
+          <hr style="height:1px;border:none;color:#333;background-color:#333;">
+          <h4 class="text-center"><%=year%>
+            <i class="fas fa-chevron-down toggle-year" data-year="<%= year %>"></i>
+          </h4>
+        <% end %>
+      </div>
       <div class="col-md-12" data-month="<%= month %>">
         <% if prev_mes != month %>
           <% if prev_mes.present? %>
@@ -153,6 +164,7 @@
         </div>
       </div>
       <% end %>
+    <% end %>
     <% end %>
   </div>
 
