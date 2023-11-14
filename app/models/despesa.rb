@@ -34,7 +34,7 @@ class Despesa < ApplicationRecord
     date.strftime("%Y")
   end
 
-  def self.create_every_month(despesa_id)
+  def self.create_every_month(despesa_id, user_id)
     despesa = Despesa.find(despesa_id)
     new_despesa = despesa.dup
 
@@ -42,7 +42,7 @@ class Despesa < ApplicationRecord
 
     new_despesa.save
 
-    Despesa.delay(run_at: 1.month.from_now).create_every_month(new_despesa.id)
+    Despesa.delay(run_at: 1.month.from_now).create_every_month(new_despesa.id, new_despesa.user_id)
   end
 
   private

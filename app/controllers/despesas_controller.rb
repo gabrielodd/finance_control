@@ -23,6 +23,7 @@ class DespesasController < ApplicationController
       @total = Despesa.total_spendings_current_month_from_user(current_user.id, date)
       @total_last_month = Despesa.total_spendings_current_month_from_user(current_user.id, date_last_month)
       @difference = @total - @total_last_month
+      @jobs = Delayed::Job.where("run_at > ?", Time.now)
     else
       @despesas = []
     end
@@ -112,7 +113,7 @@ class DespesasController < ApplicationController
 
         if @despesa.save
           if params[:repeating] == '1'
-            Despesa.create_every_month(@despesa.id)
+            Despesa.create_every_month(@despesa.id, params[:user_id])
           end
           format.html { redirect_to despesas_url, notice: "Despesa was successfully created." }
         else

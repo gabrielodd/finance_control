@@ -38,8 +38,10 @@
       <% despesas.group_by(&:categoria_id).each do |categoria_id, despesas| %>
       <div class="col-md-12" data-year="<%= year %>">
         <% if prev_year != year %>
+          <% if prev_year != nil %> 
+            <hr style="height:1px;border:none;color:#333;background-color:#333;">
+          <% end %>
           <% prev_year = year %>
-          <hr style="height:1px;border:none;color:#333;background-color:#333;">
           <h4 class="text-center"><%=year%>
             <i class="fas fa-chevron-down toggle-year" data-year="<%= year %>"></i>
           </h4>
@@ -187,16 +189,16 @@
       Future expenses
     </h4>
   </div>
-  <% Delayed::Job.where("run_at > ?", Time.now).each do |job| %>
+  <% @jobs.each do |job| %>
     <% handler = YAML.load(job.handler) %>
-    <% if Despesa.where(id: handler.args.first).present? %>
+    <% if Despesa.where(id: handler.args.first, user_id: handler.args.last).present? %>
       <div class="panel-body">
         <div class="row">
           <div class="col-md-3">
             <span class='panel-body-font ml-3'><%= Despesa.find_by(id: handler.args.first)&.descricao %> </span>
           </div>
           <div class="col-md-3">
-            <%= job.run_at.strftime('%d/%m/%Y') %>
+            <span class='panel-body-font ml-3'><%= Despesa.find_by(id: handler.args.first)&.valor %> </span>
           </div>
           <div class="col-md-3">
             <span class='panel-body-font'><%= formatted_date(Despesa.find_by(id: handler.args.first)&.date + 1.month) %></span>
