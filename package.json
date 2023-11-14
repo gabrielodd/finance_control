@@ -13,6 +13,7 @@
     "chartkick": "^5.0.1",
     "inputmask": "^5.0.8",
     "jquery": "^3.7.0",
+    "jquery.inputmask": "^3.3.4",
     "popper.js": "^1.16.1",
     "turbolinks": "^5.2.0"
   },
