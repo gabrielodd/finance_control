@@ -55,6 +55,8 @@ en:
     signup: "Sign up"
     logout: "Logout"
     new_despesa: "New Expense"
+    filters: "Filters"
+    export_json: "Export to JSON"
   helpers:
     label:
       despesa:

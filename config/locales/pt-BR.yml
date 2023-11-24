@@ -18,6 +18,8 @@ pt-BR:
     signup: "Registrar"
     logout: "Sair"
     new_despesa: "Nova despesa"
+    filters: "Filtros"
+    export_json: "Exportar para JSON"
   helpers:
     label:
       despesa:
