@@ -13,19 +13,20 @@
 <% else %>
 
 <br>
-  <h3 class="text-center">Despesas</h3>
+  <h3 class="text-center"><%= I18n.t('menu.spendings')%></h3>
   <div class="btn-group">
   <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Filtros
+    <%= I18n.t('menu.filters')%>
   </button>
   <div class="dropdown-menu">
-    <a class="dropdown-item" href="#">Option 1</a>
-    <a class="dropdown-item" href="#">Option 2</a>
+    <% @years_with_despesas.each do |year| %>
+      <%= link_to year, { year: year }, class: 'dropdown-item' %>
+    <% end %>
   </div>
 </div>
 
 <%= link_to export_to_json_despesas_path(format: :json), class: "btn btn-primary" do %>
-  <i class="fas fa-file-export"></i> Export to JSON
+  <i class="fas fa-file-export"></i> <%= I18n.t('menu.export_json')%>
 <% end %>
 
 <%= render 'import_modal' %>
@@ -191,7 +192,7 @@
   </div>
   <% @jobs.each do |job| %>
     <% handler = YAML.load(job.handler) %>
-    <% if Despesa.where(id: handler.args.first, user_id: handler.args.last).present? %>
+    <% if Despesa.where(id: handler.args.first, user_id: handler.args.last).present? && current_user.id == handler.args.last %>
       <div class="panel-body">
         <div class="row">
           <div class="col-md-3">

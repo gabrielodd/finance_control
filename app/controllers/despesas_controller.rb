@@ -6,24 +6,28 @@ class DespesasController < ApplicationController
     if user_signed_in?
       date = Date.current
       date_last_month = 1.month.ago
-      # @despesas = Despesa.within_month_from_user(current_user.id, date)
-      @despesas = Despesa.where(user_id: current_user.id).order(:date)
+      @despesas = Despesa.where(user_id: current_user.id)
+
       most_recent_created = Despesa.where(user_id: current_user.id).order(created_at: :desc).first
       most_recent_updated = Despesa.where(user_id: current_user.id).order(updated_at: :desc).first
+
       if most_recent_created.created_at > most_recent_updated.updated_at
         @newest_record = most_recent_created
       else
         @newest_record = most_recent_updated
       end
+
+      if params[:year].present?
+        @despesas = @despesas.where("EXTRACT(YEAR FROM date) = ?", params[:year])
+      end
+
       @despesas_grouped = @despesas.group_by(&:mes)
       @despesas_grouped_by_year = @despesas.group_by(&:ano)
-      # if params[:mes].present?
-      #   # @despesas = @despesas.where("EXTRACT(MONTH FROM mes) = ?", params[:filter_month])
-      # end
       @total = Despesa.total_spendings_current_month_from_user(current_user.id, date)
       @total_last_month = Despesa.total_spendings_current_month_from_user(current_user.id, date_last_month)
       @difference = @total - @total_last_month
       @jobs = Delayed::Job.where("run_at > ?", Time.now)
+      @years_with_despesas = @despesas.pluck("DISTINCT EXTRACT(YEAR FROM date)").map(&:to_i)
     else
       @despesas = []
     end

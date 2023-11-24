@@ -6,6 +6,8 @@ class Despesa < ApplicationRecord
 
   delegate :name, to: :categoria
 
+  validates :user, :date, presence: true
+
   scope :per_user, -> (user_id) {
     where(user_id: user_id)
   }
