@@ -146,7 +146,7 @@
 
                   <%= form.text_field :valor, value: despesas.last.valor, class: 'form-control', required: true %>
                   <%= form.date_field :date, value: despesas.last.date, class: 'form-control', required: false %>
-                  <%= form.select(:categoria_id, Categoria.all.map { |c| [c.name.capitalize, c.id] }, {}, value: despesas.last.categoria, class: 'form-control', required: true) %>
+                  <%= form.select(:categoria_id, options_for_select(Categoria.all.map { |c| [c.name.gsub(/_/, ' ').capitalize, c.id] }, despesas.last.categoria_id), { include_blank: 'Select Category' }, class: 'form-control', required: true) %>
 
                   <%= submit_tag "Save", class: "btn btn-success" %>
                 </div>
