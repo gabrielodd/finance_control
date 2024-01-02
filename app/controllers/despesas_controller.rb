@@ -11,10 +11,12 @@ class DespesasController < ApplicationController
       most_recent_created = Despesa.where(user_id: current_user.id).order(created_at: :desc).first
       most_recent_updated = Despesa.where(user_id: current_user.id).order(updated_at: :desc).first
 
-      if most_recent_created.created_at > most_recent_updated.updated_at
-        @newest_record = most_recent_created
-      else
-        @newest_record = most_recent_updated
+      if most_recent_created.present?
+        if most_recent_created.created_at > most_recent_updated.updated_at
+          @newest_record = most_recent_created
+        else
+          @newest_record = most_recent_updated
+        end
       end
 
       if params[:year].present?
