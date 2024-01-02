@@ -6,7 +6,7 @@ ruby '2.7.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.0.6', '>= 6.0.6.1'
 gem 'mysql2', '>= 0.4.4'
-gem 'puma', '~> 4.1'
+gem 'puma', '~> 5'
 gem 'webpacker', '~> 4.0'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
@@ -21,6 +21,7 @@ gem 'delayed_job_active_record'
 gem "cocoon"
 
 gem 'chartkick'
+gem "sassc-rails"
 # gem 'inputmask-rails'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
