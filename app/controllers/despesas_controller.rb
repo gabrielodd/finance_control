@@ -29,7 +29,7 @@ class DespesasController < ApplicationController
       @total_last_month = Despesa.total_spendings_current_month_from_user(current_user.id, date_last_month)
       @difference = @total - @total_last_month
       @jobs = Delayed::Job.where("run_at > ?", Time.now)
-      @years_with_despesas = @despesas.pluck("DISTINCT EXTRACT(YEAR FROM date)").map(&:to_i)
+      @years_with_despesas = Despesa.where(user_id: current_user.id).pluck("DISTINCT EXTRACT(YEAR FROM date)").map(&:to_i)
     else
       @despesas = []
     end
