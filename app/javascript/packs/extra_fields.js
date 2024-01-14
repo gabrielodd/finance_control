@@ -46,8 +46,22 @@ $(document).ready(function() {
     input3.setAttribute("name", "despesa[date][]");
     input3.setAttribute("class", "form-control mt-2");
 
+    const label4 = document.createElement("label");
+    label4.textContent = "Repeat every month";
+    label4.setAttribute("for", "despesa_repetir");
+    label4.setAttribute("class", "form-check-label");
+    label4.classList.add("mr-2"); 
+
+    const input4 = document.createElement("input");
+    input4.setAttribute("type", "checkbox");
+    input4.setAttribute("name", "despesa[repeating][]");
+    input4.setAttribute("class", "form-check-input");
+
     const hr = document.createElement("hr")
     const removeButton = document.createElement("button");
+    const checkboxDiv = document.createElement("div");
+    checkboxDiv.setAttribute("class", "form-check mt-2");
+
     removeButton.textContent = "Remove";
     removeButton.classList.add("btn", "btn-danger", "mt-2");
 
@@ -58,9 +72,13 @@ $(document).ready(function() {
       formGroup.removeChild(input2);
       formGroup.removeChild(label3);
       formGroup.removeChild(input3);
+      formGroup.removeChild(checkboxDiv);
       formGroup.removeChild(hr);
       formGroup.removeChild(removeButton);
     });
+
+    checkboxDiv.appendChild(input4);
+    checkboxDiv.appendChild(label4);
 
     formGroup.insertBefore(label, addButton);
     formGroup.insertBefore(input, addButton);
@@ -68,6 +86,7 @@ $(document).ready(function() {
     formGroup.insertBefore(input2, addButton);
     formGroup.insertBefore(label3, addButton);
     formGroup.insertBefore(input3, addButton);
+    formGroup.insertBefore(checkboxDiv, addButton);
     formGroup.insertBefore(hr, addButton);
     addButton.insertAdjacentElement("afterend", removeButton);
   });

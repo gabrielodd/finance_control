@@ -103,6 +103,7 @@ class DespesasController < ApplicationController
     descricoes = despesa_params.delete(:descricao)
     valores = despesa_params.delete(:valor)
     dates = despesa_params.delete(:date)
+    repeating = despesa_params.delete(:repeating)
     params = despesa_params.merge!(user_id: current_user.id)
     params[:date] = Date.today if params[:date].blank?
 
@@ -111,6 +112,7 @@ class DespesasController < ApplicationController
         @despesa = Despesa.new(params)
         @despesa.valor = valores[i]
         @despesa.descricao = descricao
+        @despesa.repeating = repeating[i]
         if dates[i].blank?
           @despesa.date = Date.today
         else
@@ -118,10 +120,10 @@ class DespesasController < ApplicationController
         end
 
         if @despesa.save
-          if params[:repeating] == '1'
+          if repeating[i] == '1'
             Despesa.create_every_month(@despesa.id, params[:user_id])
           end
-          format.html { redirect_to despesas_url, notice: "Despesa was successfully created." }
+          format.html { redirect_to despesas_url, notice: "Expenses were successfully created." }
         else
           format.html { render :new, status: :unprocessable_entity }
           format.json { render json: @despesa.errors, status: :unprocessable_entity }
@@ -158,7 +160,7 @@ class DespesasController < ApplicationController
   end
 
   def despesa_params
-    params.require(:despesa).permit(:categoria_id, :repeating, :user_id, date: [], descricao: [], valor: [])
+    params.require(:despesa).permit(:categoria_id, :user_id, date: [], descricao: [], valor: [], repeating: [])
   end
 
   def add_despesa_params

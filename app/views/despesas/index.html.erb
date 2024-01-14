@@ -19,8 +19,9 @@
     <%= I18n.t('menu.filters')%>
   </button>
   <div class="dropdown-menu">
+    <%= link_to 'Todos', despesas_path, class: 'dropdown-item' %>
     <% @years_with_despesas.each do |year| %>
-      <%= link_to year, { year: year }, class: 'dropdown-item' %>
+      <%= link_to year, despesas_path(year: year), class: 'dropdown-item' %>
     <% end %>
   </div>
 </div>
