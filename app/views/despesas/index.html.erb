@@ -207,7 +207,7 @@
           </div>
           <div class="col-md-3 input-group">
             <%= button_to 'Run Now', run_delayed_job_path(job.id), method: :post, remote: true, class: 'btn btn-sm btn-primary' %>
-            <%= link_to '#', method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' do %>
+            <%= button_to delayed_job_path(job.id), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-danger" do %>
               <i class="fas fa-trash"></i>
             <% end %>
           </div>
