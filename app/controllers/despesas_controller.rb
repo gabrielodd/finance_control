@@ -100,34 +100,35 @@ class DespesasController < ApplicationController
   end
 
   def create
-    descricoes = despesa_params.delete(:descricao)
-    valores = despesa_params.delete(:valor)
-    dates = despesa_params.delete(:date)
-    repeating = despesa_params.delete(:repeating)
-    params = despesa_params.merge!(user_id: current_user.id)
-    params[:date] = Date.today if params[:date].blank?
-
+    common_params = despesa_params.except(:descricao, :valor, :date, :repeating, :categoria_id).merge(user_id: current_user.id)
+    created_despesas = []
+    errors = []
+  
+    despesa_params[:descricao].each_with_index do |descricao, i|
+      despesa_attributes = common_params.merge({
+        descricao: descricao,
+        valor: despesa_params[:valor][i],
+        date: despesa_params[:date][i].present? ? despesa_params[:date][i] : Date.today,
+        repeating: despesa_params[:repeating][i],
+        categoria_id: despesa_params[:categoria_id][i].to_i
+      })
+      
+      @despesa = Despesa.new(despesa_attributes)
+  
+      if @despesa.save
+        Despesa.create_every_month(@despesa.id, common_params[:user_id]) if despesa_params[:repeating][i] == '1'
+        created_despesas << @despesa
+      else
+        errors << @despesa.errors.full_messages
+      end
+    end
+  
     respond_to do |format|
-      descricoes.each_with_index do |descricao, i|
-        @despesa = Despesa.new(params)
-        @despesa.valor = valores[i]
-        @despesa.descricao = descricao
-        @despesa.repeating = repeating[i]
-        if dates[i].blank?
-          @despesa.date = Date.today
-        else
-          @despesa.date = dates[i]
-        end
-
-        if @despesa.save
-          if repeating[i] == '1'
-            Despesa.create_every_month(@despesa.id, params[:user_id])
-          end
-          format.html { redirect_to despesas_url, notice: "Expenses were successfully created." }
-        else
-          format.html { render :new, status: :unprocessable_entity }
-          format.json { render json: @despesa.errors, status: :unprocessable_entity }
-        end
+      if errors.empty?
+        format.html { redirect_to despesas_url, notice: "Expenses were successfully created." }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: errors.flatten, status: :unprocessable_entity }
       end
     end
   end
@@ -160,7 +161,7 @@ class DespesasController < ApplicationController
   end
 
   def despesa_params
-    params.require(:despesa).permit(:categoria_id, :user_id, date: [], descricao: [], valor: [], repeating: [])
+    params.require(:despesa).permit(:user_id, categoria_id: [], date: [], descricao: [], valor: [], repeating: [])
   end
 
   def add_despesa_params

@@ -36,19 +36,19 @@
                 <%= form.label :repetir, class: 'form-check-label' %>
               </div>
             </div>
+            </div class="col-md-12">
+              <%= form.label :categoria %>
+              <%= form.select(:categoria_id, Categoria.all.map { |c| [c.name.capitalize, c.id] }, {}, name: "despesa[categoria_id][]", class: 'form-control', required: true) %>
+            </div>
           </div>
           <button type="button" class="btn btn-danger remove-button mt-2">Remove</button>
           <hr>
         </div>
-      </div>
-        <%= form.label :categoria %>
-        <%= form.select(:categoria_id, Categoria.all.map { |c| [c.name.capitalize, c.id] }, {}, class: 'form-control', required: true) %>
-      </div>
       <hr>
     </div>
 
-    <button type="button" id="add-descricao" class="btn btn-secondary mt-2">Add Spending</button>
-      <%= form.submit 'Submit', class: 'btn btn-primary' %>
+    <button type="button" id="add-descricao" class="btn btn-secondary mt-2">Add Expense</button>
+      <%= form.submit 'Create', class: 'btn btn-primary' %>
       <%= link_to 'Cancel', despesas_path, class: 'btn btn-default' %>
 
     <% end %>
