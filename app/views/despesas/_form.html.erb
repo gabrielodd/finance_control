@@ -30,27 +30,27 @@
               <%= form.label :date %>
               <%= form.date_field :date, name: "despesa[date][]", class: 'form-control', required: false %>
             </div>
+            <div class="col-md-12">
+              <%= form.label :categoria %>
+              <%= form.select(:categoria_id, Categoria.all.map { |c| [c.name.capitalize, c.id] }, {}, name: "despesa[categoria_id][]", class: 'form-control', required: true) %>
+            </div>
             <div class="col-md-6 mt-2">
               <div class="form-check">
                 <%= form.check_box :repeating, name: "despesa[repeating][]", class: 'form-check-input' %>
                 <%= form.label :repetir, class: 'form-check-label' %>
               </div>
             </div>
-            </div class="col-md-12">
-              <%= form.label :categoria %>
-              <%= form.select(:categoria_id, Categoria.all.map { |c| [c.name.capitalize, c.id] }, {}, name: "despesa[categoria_id][]", class: 'form-control', required: true) %>
-            </div>
-          </div>
-          <button type="button" class="btn btn-danger remove-button mt-2">Remove</button>
-          <hr>
+            <button type="button" class="btn btn-danger remove-button mt-2">Remove</button>
+            <hr>
+        </div>
         </div>
       <hr>
     </div>
+  </div>
 
-    <button type="button" id="add-descricao" class="btn btn-secondary mt-2">Add Expense</button>
+  <button type="button" id="add-descricao" class="btn btn-secondary mt-2">Add Expense</button>
       <%= form.submit 'Create', class: 'btn btn-primary' %>
       <%= link_to 'Cancel', despesas_path, class: 'btn btn-default' %>
 
     <% end %>
-  </div>
 </div>
