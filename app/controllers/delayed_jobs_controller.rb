@@ -15,6 +15,9 @@ class DelayedJobsController < ApplicationController
     job = Delayed::Job.find(params[:id])
 
     if job.present?
+      handler = YAML.load(job.handler)
+      despesa = Despesa.find(handler.args.first)
+      despesa.update(repeating: false) if despesa.present?
       job.destroy
       redirect_to despesas_url, notice: "Job destroyed."
     end
