@@ -32,12 +32,12 @@
             </div>
             <div class="col-md-12">
               <%= form.label :categoria %>
-              <%= form.select(:categoria_id, Categoria.all.map { |c| [c.name.capitalize, c.id] }, {}, name: "despesa[categoria_id][]", class: 'form-control', required: true) %>
+              <%= form.select(:categoria_id, category_options, {}, name: "despesa[categoria_id][]", class: 'form-control', required: true) %>
             </div>
             <div class="col-md-6 mt-2">
               <div class="form-check">
                 <%#= hidden_field_tag "despesa[repeating][]", "separate" %>
-                <%= form.check_box :repeating, name: "despesa[repeating][]", class: 'form-check-input', include_hidden: false %>
+                <%= form.check_box :repeating, name: "despesa[repeating][]", class: 'form-check-input' %>
                 <%= form.label :repetir, class: 'form-check-label' %>
               </div>
             </div>

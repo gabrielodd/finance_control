@@ -1,4 +1,14 @@
 pt-BR:
+  active_record:
+    attributes:
+      categoria:
+        names:
+          food: "Alimentação"
+          housing: "Moradia"
+          utilities: "Utilidades"
+          services: "Serviços"
+          credit_card: "Cartão de Crédito"
+          internet: "Internet"
   despesa:
     descriptions:
       food: "Comida"
@@ -10,7 +20,6 @@ pt-BR:
     format:
       delimiter: "."
       separator: ","
-  hello: "Olá mundo"
   menu:
     spendings: "Despesas"
     reports: "Relatório"
