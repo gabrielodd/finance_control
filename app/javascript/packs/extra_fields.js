@@ -5,6 +5,7 @@ $(document).ready(function() {
   $("#add-descricao").on("click", function () {
     var clonedRow = $(".fields:last").clone();
     $(".fields:last").after(clonedRow);
+    clonedRow.find('.remove-button').removeClass('d-none')
   });
 
   $(document).on("click", ".remove-button", function () {
