@@ -102,21 +102,28 @@ class DespesasController < ApplicationController
   def create
     common_params = despesa_params.except(:descricao, :valor, :date, :repeating, :categoria_id).merge(user_id: current_user.id)
     created_despesas = []
+    repeating_params = []
     errors = []
+
+    despesa_params[:repeating].each_with_index do |v, i|
+      if v == "x"
+        repeating_params << despesa_params[:repeating][i - 1]
+      end
+    end
   
     despesa_params[:descricao].each_with_index do |descricao, i|
       despesa_attributes = common_params.merge({
         descricao: descricao,
         valor: despesa_params[:valor][i],
         date: despesa_params[:date][i].present? ? despesa_params[:date][i] : Date.today,
-        repeating: despesa_params[:repeating][i],
+        repeating: repeating_params[i],
         categoria_id: despesa_params[:categoria_id][i].to_i
       })
       
       @despesa = Despesa.new(despesa_attributes)
   
       if @despesa.save
-        Despesa.create_every_month(@despesa.id, common_params[:user_id]) if despesa_params[:repeating][i] == '1'
+        Despesa.create_every_month(@despesa.id, common_params[:user_id]) if repeating_params[i] == '1'
         created_despesas << @despesa
       else
         errors << @despesa.errors.full_messages
