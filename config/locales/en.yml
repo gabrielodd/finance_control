@@ -66,11 +66,12 @@ en:
     new_despesa: "New Expense"
     filters: "Filters"
     export_json: "Export to JSON"
+    submit_button: "Continue"
   helpers:
     label:
       despesa:
         categoria: "Category"
         descricao: "Description"
-        valor: "Price"
+        valor: "Amount"
         date: "Date"
-        repetir: "Repeat every month"
+        repetir: "Repeating every month"
