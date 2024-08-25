@@ -38,13 +38,12 @@ class Despesa < ApplicationRecord
 
   def self.create_every_month(despesa_id, user_id)
     despesa = Despesa.find(despesa_id)
-    new_despesa = despesa.dup
-
-    new_despesa.date = despesa.date + 1.month
-
-    new_despesa.save
-
-    Despesa.delay(run_at: 1.month.from_now).create_every_month(new_despesa.id, new_despesa.user_id)
+    # new_despesa = despesa.dup
+    # new_despesa.date = despesa.date + 1.month
+    # new_despesa.save
+    # Despesa.delay(run_at: 1.month.from_now).create_every_month(new_despesa.id, new_despesa.user_id)
+    
+    Despesa.delay(run_at: 1.month.from_now).create_every_month(despesa.id, despesa.user_id)
   end
 
   private
