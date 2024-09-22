@@ -7,7 +7,7 @@ class DelayedJobsController < ApplicationController
       job.destroy
       redirect_to despesas_url, notice: "Job added."
     else
-      redirect_to despesas_url, alert: "Error"
+      redirect_to despesas_url, alert: "Job not found"
     end
   end
 

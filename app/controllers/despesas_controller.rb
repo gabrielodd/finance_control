@@ -123,7 +123,7 @@ class DespesasController < ApplicationController
       @despesa = Despesa.new(despesa_attributes)
   
       if @despesa.save
-        Despesa.create_every_month(@despesa.id, common_params[:user_id]) if repeating_params[i] == '1'
+        Despesa.delay(run_at: 1.month.from_now).create_every_month(@despesa.id, common_params[:user_id]) if repeating_params[i] == '1'
         created_despesas << @despesa
       else
         errors << @despesa.errors.full_messages
