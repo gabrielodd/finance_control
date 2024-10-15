@@ -24,11 +24,11 @@ class DespesasController < ApplicationController
       end
 
       @despesas_grouped = @despesas.group_by(&:mes)
-      @despesas_grouped_by_year = @despesas.group_by(&:ano)
+      @despesas_grouped_by_year = @despesas.order(:date).group_by(&:ano)
       @total = Despesa.total_spendings_current_month_from_user(current_user.id, date)
       @total_last_month = Despesa.total_spendings_current_month_from_user(current_user.id, date_last_month)
       @difference = @total - @total_last_month
-      @jobs = Delayed::Job.where("run_at > ?", Time.now)
+      @jobs = Delayed::Job.all
       @years_with_despesas = Despesa.where(user_id: current_user.id).pluck("DISTINCT EXTRACT(YEAR FROM date)").map(&:to_i)
     else
       @despesas = []
@@ -123,7 +123,7 @@ class DespesasController < ApplicationController
       @despesa = Despesa.new(despesa_attributes)
   
       if @despesa.save
-        Despesa.delay(run_at: 1.month.from_now).create_every_month(@despesa.id, common_params[:user_id]) if repeating_params[i] == '1'
+        Despesa.delay(run_at: @despesa.date + 1.month).create_every_month(@despesa.id, common_params[:user_id]) if repeating_params[i] == '1'
         created_despesas << @despesa
       else
         errors << @despesa.errors.full_messages
