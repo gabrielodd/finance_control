@@ -4,15 +4,14 @@ class DespesasController < ApplicationController
 
   def index
     if user_signed_in?
-      presenter = DespesaPresenter.new(current_user, params)
-      @despesas = presenter.despesas
-      @newest_record = presenter.newest_record
-      @despesas_grouped_by_year = presenter.despesas_grouped_by_year
-      @total = presenter.total
-      @total_last_month = presenter.total_last_month
-      @difference = presenter.difference
-      @jobs = presenter.jobs
-      @years_with_despesas = presenter.years_with_despesas
+      @presenter = DespesaPresenter.new(current_user, params)
+      @despesas = @presenter.despesas
+      @newest_record = @presenter.newest_record
+      @despesas_grouped_by_year = @presenter.despesas_grouped_by_year
+      @total = @presenter.total
+      @total_last_month = @presenter.total_last_month
+      @difference = @presenter.difference
+      @years_with_despesas = @presenter.years_with_despesas
     else
       @despesas = []
     end

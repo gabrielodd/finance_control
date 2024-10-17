@@ -191,29 +191,27 @@
       Future expenses
     </h4>
   </div>
-  <% @jobs.each do |job| %>
+  <% @presenter.jobs.each do |job| %>
     <% handler = YAML.load(job.handler) %>
-    <% if Despesa.where(id: handler.args.first, user_id: handler.args.last).present? && current_user.id == handler.args.last %>
-      <div class="panel-body">
-        <div class="row">
-          <div class="col-md-3">
-            <span class='panel-body-font ml-3'><%= Despesa.find_by(id: handler.args.first)&.descricao %> </span>
-          </div>
-          <div class="col-md-3">
-            <span class='panel-body-font ml-3'><%= Despesa.find_by(id: handler.args.first)&.valor %> </span>
-          </div>
-          <div class="col-md-3">
-            <span class='panel-body-font'><%= formatted_date(Despesa.find_by(id: handler.args.first)&.date + 1.month) %></span>
-          </div>
-          <div class="col-md-3 input-group">
-            <%= button_to 'Run Now', run_delayed_job_path(job.id), method: :post, remote: true, class: 'btn btn-sm btn-primary' %>
-            <%= button_to delayed_job_path(job.id), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-danger" do %>
-              <i class="fas fa-trash"></i>
-            <% end %>
-          </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-3">
+          <span class='panel-body-font ml-3'><%= Despesa.find_by(id: handler.args.first)&.descricao %> </span>
+        </div>
+        <div class="col-md-3">
+          <span class='panel-body-font ml-3'><%= Despesa.find_by(id: handler.args.first)&.valor %> </span>
+        </div>
+        <div class="col-md-3">
+          <span class='panel-body-font'><%= formatted_date(Despesa.find_by(id: handler.args.first)&.date + 1.month) %></span>
+        </div>
+        <div class="col-md-3 input-group">
+          <%= button_to 'Run Now', run_delayed_job_path(job.id), method: :post, remote: true, class: 'btn btn-sm btn-primary' %>
+          <%= button_to delayed_job_path(job.id), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-danger" do %>
+            <i class="fas fa-trash"></i>
+          <% end %>
         </div>
       </div>
-    <% end %>
+    </div>
   <% end %>
 </div>
 

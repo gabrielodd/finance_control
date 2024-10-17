@@ -44,7 +44,11 @@ class DespesaPresenter
   end
 
   def jobs
-    Delayed::Job.all
+    Delayed::Job.all.select do |job|
+      handler = YAML.load(job.handler)
+      user_id = handler.args.last if handler.respond_to?(:args)
+      user_id == @user.id
+    end
   end
 
   def years_with_despesas
