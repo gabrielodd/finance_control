@@ -51,9 +51,6 @@
       </div>
       <div class="col-md-12" data-month="<%= month %>">
         <% if prev_mes != month %>
-          <% if prev_mes.present? %>
-          <h4 class="text-center total-month" style="margin-top: 10px;">Total: <%=Despesa.total_spendings_current_month_from_user(current_user.id, despesas.first.date - 1.month)%></h4>
-          <% end %>
           <% prev_mes = month %>
           <hr style="height:1px;border:none;color:#333;background-color:#333;">
           <h4 class="text-center"><%=month%>
@@ -168,6 +165,9 @@
         </div>
       </div>
       <% end %>
+      <div class="col-md-12">
+        <h4 class="text-center total-month" style="margin-top: 10px;">Total: <%=Despesa.total_spendings_current_month_from_user(current_user.id, despesas.first.date)%></h4>
+      </div>
     <% end %>
     <% end %>
   </div>

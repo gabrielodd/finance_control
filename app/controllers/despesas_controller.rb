@@ -4,32 +4,15 @@ class DespesasController < ApplicationController
 
   def index
     if user_signed_in?
-      date = Date.current
-      date_last_month = 1.month.ago
-      @despesas = Despesa.where(user_id: current_user.id)
-
-      most_recent_created = Despesa.where(user_id: current_user.id).order(created_at: :desc).first
-      most_recent_updated = Despesa.where(user_id: current_user.id).order(updated_at: :desc).first
-
-      if most_recent_created.present?
-        if most_recent_created.created_at > most_recent_updated.updated_at
-          @newest_record = most_recent_created
-        else
-          @newest_record = most_recent_updated
-        end
-      end
-
-      if params[:year].present?
-        @despesas = @despesas.where("EXTRACT(YEAR FROM date) = ?", params[:year])
-      end
-
-      @despesas_grouped = @despesas.group_by(&:mes)
-      @despesas_grouped_by_year = @despesas.order(:date).group_by(&:ano)
-      @total = Despesa.total_spendings_current_month_from_user(current_user.id, date)
-      @total_last_month = Despesa.total_spendings_current_month_from_user(current_user.id, date_last_month)
-      @difference = @total - @total_last_month
-      @jobs = Delayed::Job.all
-      @years_with_despesas = Despesa.where(user_id: current_user.id).pluck("DISTINCT EXTRACT(YEAR FROM date)").map(&:to_i)
+      presenter = DespesaPresenter.new(current_user, params)
+      @despesas = presenter.despesas
+      @newest_record = presenter.newest_record
+      @despesas_grouped_by_year = presenter.despesas_grouped_by_year
+      @total = presenter.total
+      @total_last_month = presenter.total_last_month
+      @difference = presenter.difference
+      @jobs = presenter.jobs
+      @years_with_despesas = presenter.years_with_despesas
     else
       @despesas = []
     end
