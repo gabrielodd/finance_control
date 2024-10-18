@@ -31,8 +31,8 @@ class DespesaPresenter
     despesas.order(:date).group_by(&:ano)
   end
 
-  def total
-    @total ||= Despesa.total_spendings_current_month_from_user(@user.id, @date)
+  def total_current_month
+    @total_current_month ||= Despesa.total_spendings_current_month_from_user(@user.id, @date)
   end
 
   def total_last_month
@@ -40,7 +40,7 @@ class DespesaPresenter
   end
 
   def difference
-    total - total_last_month
+    total_current_month - total_last_month
   end
 
   def jobs

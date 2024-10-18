@@ -20,7 +20,7 @@
   </button>
   <div class="dropdown-menu">
     <%= link_to 'Todos', despesas_path, class: 'dropdown-item' %>
-    <% @years_with_despesas.each do |year| %>
+    <% @presenter.years_with_despesas.each do |year| %>
       <%= link_to year, despesas_path(year: year), class: 'dropdown-item' %>
     <% end %>
   </div>
@@ -35,7 +35,7 @@
   <div class="row">
     <% prev_mes = nil %>
     <% prev_year = nil %>
-    <% @despesas_grouped_by_year.each do |year, despesas| %>
+    <% @presenter.despesas_grouped_by_year.each do |year, despesas| %>
       <% despesas.group_by(&:mes).each do |month, despesas| %>
       <% despesas.group_by(&:categoria_id).each do |categoria_id, despesas| %>
       <div class="col-md-12" data-year="<%= year %>">
@@ -85,7 +85,7 @@
             </div>
           </div>
           <% despesas.each do |despesa| %>
-            <div class="panel-body <%= 'panel-highlight animated-text' if despesa == @newest_record %>">
+            <div class="panel-body <%= 'panel-highlight animated-text' if despesa == @presenter.newest_record %>">
               <div class="row">
                 <div class="col-md-3 edit-valor-btn" data-despesa-id="<%= despesa.id %>">
                   <span class="panel-body-font ml-3" id="despesa-<%= despesa.id %>-descricao"><%= despesa.descricao %></span>
@@ -172,14 +172,14 @@
     <% end %>
   </div>
 
-<h3 class="total-spent text-center" style="margin-top: 10px;">Total: <%=formatted_decimal(@total) %>
-  <span style="<%=positive_negative_style(@difference)%>">
-    <% if @difference.positive? %>
+<h3 class="total-spent text-center" style="margin-top: 10px;">Total: <%=formatted_decimal(@presenter.total_current_month) %>
+  <span style="<%=positive_negative_style(@presenter.difference)%>">
+    <% if @presenter.difference.positive? %>
       <i class="fa-solid fa-arrow-up" style="color: #f41a1a;"></i>
     <% else %>
       <i class="fa-solid fa-arrow-down" style="color: #16c533;"></i>
     <% end %>
-    <%= sprintf("%+.2f", @difference)%> compared to last month
+    <%= sprintf("%+.2f", @presenter.difference)%> compared to last month
   </span>
 </h3>
 
