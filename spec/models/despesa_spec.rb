@@ -35,6 +35,45 @@ RSpec.describe Despesa, type: :model do
       despesa = build(:despesa, date: Date.new(2023, 1, 1))
       expect(despesa.ano).to eq('2023')
     end
+
+    describe '.total_spendings_current_month_from_user' do
+      let(:user) { create(:user) }
+      let(:other_user) { create(:user, email: 'abc@gmail.com') }
+      let(:current_date) { Date.current }
+      let(:last_month) { 1.month.ago }
+  
+      before do
+        # Create despesas for the current month for the specified user
+        create(:despesa, user: user, date: current_date.beginning_of_month + 1.day, valor: 100.0)
+        create(:despesa, user: user, date: current_date.end_of_month - 1.day, valor: 200.0)
+  
+        # Create despesas for another user for the current month
+        create(:despesa, user: other_user, date: current_date.beginning_of_month + 1.day, valor: 500.0)
+  
+        # Create despesas for the specified user for the previous month
+        create(:despesa, user: user, date: last_month, valor: 400.0)
+      end
+  
+      it 'returns the total spendings for the current month for the user' do
+        total = Despesa.total_spendings_current_month_from_user(user.id, current_date)
+        expect(total).to eq(300.0) # 100.0 + 200.0
+      end
+  
+      it 'does not include spendings from other users' do
+        total = Despesa.total_spendings_current_month_from_user(user.id, current_date)
+        expect(total).to_not eq(500.0) # Other user's despesas should not be included
+      end
+  
+      it 'does not include spendings from previous months' do
+        total = Despesa.total_spendings_current_month_from_user(user.id, current_date)
+        expect(total).to_not eq(400.0) # Previous month's despesas should not be included
+      end
+  
+      it 'returns 0 if there are no spendings for the user in the current month' do
+        total = Despesa.total_spendings_current_month_from_user(other_user.id, last_month)
+        expect(total).to eq(0.0)
+      end
+    end
   end
 
   describe 'callbacks' do
@@ -49,7 +88,6 @@ RSpec.describe Despesa, type: :model do
     it 'should create every month' do
       despesa = create(:despesa, user: user)
       Despesa.create_every_month(despesa.id, user.id)
-      # Add expectations for the created despesas in subsequent months
     end
   end
 end
