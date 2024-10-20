@@ -68,6 +68,7 @@ en:
     export_json: "Export to JSON"
     submit_button: "Continue"
     all: "All"
+    settings: "Settings"
   helpers:
     label:
       despesa:

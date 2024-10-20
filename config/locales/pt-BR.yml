@@ -30,6 +30,7 @@ pt-BR:
     filters: "Filtros"
     export_json: "Exportar para JSON"
     all: "Todos"
+    settings: "Configurações"
   helpers:
     label:
       despesa:
