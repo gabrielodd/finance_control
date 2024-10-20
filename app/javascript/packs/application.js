@@ -14,6 +14,7 @@ require("@rails/activestorage").start()
 require("channels")
 require("jquery")
 require("@nathanvda/cocoon")
+require('inputmask');
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
@@ -36,20 +37,20 @@ $(document).ready(function($) {
   });
 });
 
-function setValorMask() {
-  $("#despesa_valor").inputmask("currency", {
-      radixPoint: ',', groupSeparator: '.', prefix: 'R$',
-      removeMaskOnSubmit: true,
-      onUnMask: function (maskedValue, unmaskedValue) {
-          return unmaskedValue.replace(/\./g, "").replace(",", ".");
-      },
-      onBeforeMask: function (value, opts) {
-          if (value.includes(',')) {
-              return value;
-          } else {
-              var processedValue = value.replace(".", ",");
-              return processedValue;
-          }
-      }
-  });
-}
+// function setValorMask() {
+//   $("#despesa_valor").inputmask("currency", {
+//       radixPoint: ',', groupSeparator: '.', prefix: 'R$',
+//       removeMaskOnSubmit: true,
+//       onUnMask: function (maskedValue, unmaskedValue) {
+//           return unmaskedValue.replace(/\./g, "").replace(",", ".");
+//       },
+//       onBeforeMask: function (value, opts) {
+//           if (value.includes(',')) {
+//               return value;
+//           } else {
+//               var processedValue = value.replace(".", ",");
+//               return processedValue;
+//           }
+//       }
+//   });
+// }
