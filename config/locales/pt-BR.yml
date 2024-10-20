@@ -29,6 +29,7 @@ pt-BR:
     new_despesa: "Nova despesa"
     filters: "Filtros"
     export_json: "Exportar para JSON"
+    all: "Todos"
   helpers:
     label:
       despesa:

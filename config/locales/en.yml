@@ -58,7 +58,7 @@ en:
       delimiter: ","
       separator: "."
   menu:
-    spendings: "Spendings"
+    spendings: "Expenses"
     reports: "Reports"
     profile: "Profile"
     signup: "Sign up"
@@ -67,11 +67,12 @@ en:
     filters: "Filters"
     export_json: "Export to JSON"
     submit_button: "Continue"
+    all: "All"
   helpers:
     label:
       despesa:
         categoria: "Category"
         descricao: "Description"
-        valor: "Amount"
+        valor: "Value"
         date: "Date"
         repetir: "Repeating every month"
