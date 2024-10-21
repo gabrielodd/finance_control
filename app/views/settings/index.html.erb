@@ -1,10 +1,31 @@
 <div class="container">
   <h3 class="text-center">Settings</h3>
 
-  <div class="language-switcher">
-    <%= form_with url: change_locale_settings_path, method: :patch, local: true, class: 'locale-switcher-form' do |form| %>
-      <%= form.select :locale, { 'English' => 'en', 'Português' => 'pt-BR' }, selected: I18n.locale, class: 'form-control' %>
-      <%= form.submit 'Change Locale', class: 'btn btn-primary' %>
-    <% end %>
-  </div>
+  <%= form_with url: change_locale_settings_path, method: :patch, local: true, id: 'locale-switcher-form' do |form| %>
+    <div class="language" role="radiogroup" aria-labelledby="language-switcher1">
+      <p class="hidden" id="language-switcher1">Language:</p>
+      <div class="language__container--left language__container--en">
+        <input class="language__control" type="radio" id="language1-1" name="locale" value="en"
+        <%= 'checked' if session[:locale] == 'en' %> > 
+        <label class="language__label" for="language1-1">
+          EN
+        </label>
+      </div>
+      <div class="language__container--right language__container--pt">
+        <input class="language__control" type="radio" id="language1-2" name="locale" value="pt-BR"
+        <%= 'checked' if session[:locale] == 'pt-BR' %> >
+        <label class="language__label" for="language1-2">
+          PT
+        </label>
+      </div>
+    </div>
+  <% end %>
 </div>
+
+<script>
+  document.querySelectorAll('input[name="locale"]').forEach(function(radio) {
+    radio.addEventListener('change', function() {
+      document.getElementById('locale-switcher-form').submit();
+    });
+  });
+</script>
