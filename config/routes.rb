@@ -16,7 +16,11 @@ Rails.application.routes.draw do
   end
 
   resources :investments, only: [:index]
-  resources :settings, only: [:index]
+  resources :settings, only: [:index] do
+    collection do
+      patch :change_locale
+    end
+  end
 
   resources :delayed_jobs, only: [:destroy]
   post '/run_delayed_job/:id', to: 'delayed_jobs#run', as: 'run_delayed_job'

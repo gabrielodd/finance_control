@@ -2,7 +2,7 @@
   <h3 class="text-center">Settings</h3>
 
   <div class="language-switcher">
-    <%= form_with url: change_locale_path, method: :patch, local: true, class: 'locale-switcher-form' do |form| %>
+    <%= form_with url: change_locale_settings_path, method: :patch, local: true, class: 'locale-switcher-form' do |form| %>
       <%= form.select :locale, { 'English' => 'en', 'Português' => 'pt-BR' }, selected: I18n.locale, class: 'form-control' %>
       <%= form.submit 'Change Locale', class: 'btn btn-primary' %>
     <% end %>
