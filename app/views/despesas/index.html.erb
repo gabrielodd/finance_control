@@ -175,7 +175,7 @@
     <% else %>
       <i class="fa-solid fa-arrow-down" style="color: #16c533;"></i>
     <% end %>
-    <%= sprintf("%+.2f", @presenter.difference)%> compared to last month
+    <%= sprintf("%+.2f", @presenter.difference)%> <%= I18n.t('text.comp_last_month')%>
   </span>
 </h3>
 
@@ -184,7 +184,7 @@
 <div class="panel delayed-job-panel bg-2 mb-2">
   <div class="panel-heading">
     <h4 class="panel-title" style="color: white;">
-      Future expenses
+      <%= I18n.t('text.future_expenses')%>
     </h4>
   </div>
   <% @presenter.jobs.each do |job| %>
@@ -201,7 +201,9 @@
           <span class='panel-body-font'><%= formatted_date(Despesa.find_by(id: handler.args.first)&.date + 1.month) %></span>
         </div>
         <div class="col-md-3 input-group">
-          <%= button_to 'Run Now', run_delayed_job_path(job.id), method: :post, remote: true, class: 'btn btn-sm btn-primary' %>
+          <%= button_to run_delayed_job_path(job.id), method: :post, remote: true, class: 'btn btn-sm btn-primary' do %>
+            <i class="fas fa-check"></i>
+          <% end %>
           <%= button_to delayed_job_path(job.id), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-danger" do %>
             <i class="fas fa-trash"></i>
           <% end %>
