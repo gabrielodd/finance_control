@@ -48,7 +48,16 @@ class DespesaPresenter
       handler = YAML.load(job.handler)
       user_id = handler.args.last if handler.respond_to?(:args)
       user_id == @user.id
-    end
+    end.map do |job|
+      handler = YAML.load(job.handler)
+      despesa = Despesa.find_by(id: handler.args.first)
+      {
+        job_id: job.id,
+        descricao: despesa&.descricao,
+        valor: despesa&.valor,
+        date: despesa&.date
+      }
+    end.compact.sort_by { |job| job[:date] }
   end
 
   def years_with_despesas
