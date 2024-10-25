@@ -1,25 +1,76 @@
-<div class="container">
-  <h3 class="text-center">Settings</h3>
-
-  <%= form_with url: change_locale_settings_path, method: :patch, local: true, id: 'locale-switcher-form' do |form| %>
-    <div class="language" role="radiogroup" aria-labelledby="language-switcher1">
-      <p class="hidden" id="language-switcher1">Language:</p>
-      <div class="language__container--left language__container--en">
-        <input class="language__control" type="radio" id="language1-1" name="locale" value="en"
-        <%= 'checked' if session[:locale] == 'en' %> > 
-        <label class="language__label" for="language1-1">
-          EN
-        </label>
-      </div>
-      <div class="language__container--right language__container--pt">
-        <input class="language__control" type="radio" id="language1-2" name="locale" value="pt-BR"
-        <%= 'checked' if session[:locale] == 'pt-BR' %> >
-        <label class="language__label" for="language1-2">
-          PT
-        </label>
+<div class="container my-5">
+  <div class="row">
+    <!-- Sidebar Menu -->
+    <div class="col-md-3">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Profile Settings</h4>
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Account</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Password</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Privacy and safety</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Email notifications</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Web notifications</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Widgets</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Your data</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-danger" href="#">Delete account</a>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
-  <% end %>
+
+    <!-- Main Content Area -->
+    <div class="col-md-9">
+      <!-- Public Info Section -->
+      <div class="card mb-4">
+        <div class="card-header">
+          Configurations
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+              <%= form_with url: change_locale_settings_path, method: :patch, local: true, id: 'locale-switcher-form' do |form| %>
+                <div class="language" role="radiogroup" aria-labelledby="language-switcher1">
+                  <p class="hidden" id="language-switcher1">Language:</p>
+                  <div class="language__container--left language__container--en">
+                    <input class="language__control" type="radio" id="language1-1" name="locale" value="en"
+                    <%= 'checked' if session[:locale] == 'en' %> > 
+                    <label class="language__label" for="language1-1">
+                      EN
+                    </label>
+                  </div>
+                  <div class="language__container--right language__container--pt">
+                    <input class="language__control" type="radio" id="language1-2" name="locale" value="pt-BR"
+                    <%= 'checked' if session[:locale] == 'pt-BR' %> >
+                    <label class="language__label" for="language1-2">
+                      PT
+                    </label>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </div>
 
 <script>
