@@ -61,6 +61,7 @@ en:
     spendings: "Expenses"
     reports: "Reports"
     profile: "Profile"
+    edit_profile: "Edit Profile"
     signup: "Sign up"
     logout: "Logout"
     new_despesa: "New Expense"

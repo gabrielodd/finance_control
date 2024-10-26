@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   resources :settings, only: [:index] do
     collection do
       patch :change_locale
+      get :categorias
     end
   end
 

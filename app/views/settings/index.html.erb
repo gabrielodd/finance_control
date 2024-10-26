@@ -14,10 +14,10 @@
               <%= link_to t('menu.settings'), settings_path, class: "nav-link"  %>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Categories</a>
+              <%= link_to t('menu.categories'), categorias_settings_path, class: "nav-link"%>
             </li>
             <li class="nav-item">
-              <%= link_to "Edit Profile", edit_user_registration_path, class: "nav-link"  %>
+              <%= link_to t('menu.edit_profile'), edit_user_registration_path, class: "nav-link"  %>
             </li>
             <li class="nav-item">
               <a class="nav-link text-danger" href="#">Delete account</a>
