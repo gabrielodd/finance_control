@@ -3,6 +3,10 @@ class SettingsController < ApplicationController
     @user = current_user
   end
 
+  def categorias
+
+  end
+
   def change_locale
     locale = params[:locale]
     

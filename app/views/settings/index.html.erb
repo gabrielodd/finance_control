@@ -1,35 +1,9 @@
 <div class="container my-5">
   <div class="row">
     <!-- Sidebar Menu -->
-    <div class="col-md-3">
-      <div class="card">
-        <div class="card-body">
-          <h4 class="card-title">Profile Settings</h4>
-          <hr>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link active" href="#">Account</a>
-            </li>
-            <li class="nav-item">
-              <%= link_to t('menu.settings'), settings_path, class: "nav-link"  %>
-            </li>
-            <li class="nav-item">
-              <%= link_to t('menu.categories'), categorias_settings_path, class: "nav-link"%>
-            </li>
-            <li class="nav-item">
-              <%= link_to t('menu.edit_profile'), edit_user_registration_path, class: "nav-link"  %>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-danger" href="#">Delete account</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
+    <%= render 'profile_sidebar' %>
 
-    <!-- Main Content Area -->
     <div class="col-md-9">
-      <!-- Public Info Section -->
       <div class="card mb-4">
         <div class="card-header card-header-settings">
           Configurations

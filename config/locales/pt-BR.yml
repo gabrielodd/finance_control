@@ -12,6 +12,11 @@ pt-BR:
   despesa:
     descriptions:
       food: "Comida"
+      housing: "Moradia"
+      utilities: "Utilidades"
+      credit_card: "Cartão de Crédito"
+      services: "Serviços"
+      internet: "Internet"
   attributes:
     description: "Descrição"
     value: "Valor"
@@ -24,6 +29,7 @@ pt-BR:
     spendings: "Despesas"
     reports: "Relatório"
     profile: "Perfil"
+    edit_profile: "Editar perfil"
     signup: "Registrar"
     logout: "Sair"
     new_despesa: "Nova despesa"
@@ -31,6 +37,7 @@ pt-BR:
     export_json: "Exportar para JSON"
     all: "Todos"
     settings: "Configurações"
+    categories: "Categorias"
   text:
     future_expenses: "Lançamentos futuros"
     comp_last_month: "comparado ao ultimo mês"
