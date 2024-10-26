@@ -1,0 +1,16 @@
+.nav-link {
+  color: #333;
+  font-weight: 500;
+}
+
+.nav-link.active {
+  color: #28a745;
+  border-left: 4px solid #28a745;
+  padding-left: 10px;
+}
+
+.card-header-settings {
+  background-color: #fff;
+  border-bottom: none;
+  font-weight: bold;
+}

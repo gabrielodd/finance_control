@@ -5,27 +5,19 @@
       <div class="card">
         <div class="card-body">
           <h4 class="card-title">Profile Settings</h4>
+          <hr>
           <ul class="nav flex-column">
             <li class="nav-item">
               <a class="nav-link active" href="#">Account</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Password</a>
+              <%= link_to t('menu.settings'), settings_path, class: "nav-link"  %>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Privacy and safety</a>
+              <a class="nav-link" href="#">Categories</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Email notifications</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Web notifications</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Widgets</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Your data</a>
+              <%= link_to "Edit Profile", edit_user_registration_path, class: "nav-link"  %>
             </li>
             <li class="nav-item">
               <a class="nav-link text-danger" href="#">Delete account</a>
@@ -39,7 +31,7 @@
     <div class="col-md-9">
       <!-- Public Info Section -->
       <div class="card mb-4">
-        <div class="card-header">
+        <div class="card-header card-header-settings">
           Configurations
         </div>
         <div class="card-body">
