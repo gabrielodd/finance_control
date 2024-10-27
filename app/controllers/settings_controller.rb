@@ -4,7 +4,7 @@ class SettingsController < ApplicationController
   end
 
   def categorias
-
+    @categories = Categoria.where(user_id: [nil, current_user.id])
   end
 
   def change_locale
