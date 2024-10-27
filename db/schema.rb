@@ -10,11 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_07_24_133930) do
+ActiveRecord::Schema.define(version: 2024_10_27_002911) do
 
   create_table "categoria", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.text "description"
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_categoria_on_user_id"
   end
 
   create_table "delayed_jobs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -58,6 +60,7 @@ ActiveRecord::Schema.define(version: 2023_07_24_133930) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "categoria", "users"
   add_foreign_key "despesas", "categoria", column: "categoria_id"
   add_foreign_key "despesas", "users"
 end
