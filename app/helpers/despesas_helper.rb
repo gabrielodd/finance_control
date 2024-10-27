@@ -16,6 +16,6 @@ module DespesasHelper
   end
 
   def category_options
-    Categoria.all.map { |c| [Categoria.human_attribute_value(:name, c.name), c.id] }
+    Categoria.user_categories(current_user).map { |c| [Categoria.human_attribute_value(:name, c.name), c.id] }
   end
 end
