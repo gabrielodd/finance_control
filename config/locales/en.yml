@@ -34,6 +34,7 @@ en:
     signup: "Sign up"
     logout: "Logout"
     new_despesa: "New Expense"
+    new_despesas: "New expenses"
     filters: "Filters"
     export_json: "Export to JSON"
     submit_button: "Continue"

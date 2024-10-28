@@ -33,6 +33,7 @@ pt-BR:
     signup: "Registrar"
     logout: "Sair"
     new_despesa: "Nova despesa"
+    new_Despesas: "Novas despesas"
     filters: "Filtros"
     export_json: "Exportar para JSON"
     all: "Todos"

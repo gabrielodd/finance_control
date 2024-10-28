@@ -2,9 +2,9 @@
 
 <% if @despesas.blank? %>
 
-<div class="alert alert-warning" role="alert">
+<div class="alert alert-warning mt-1" role="alert">
   <% unless user_signed_in? %>
-    Log in to see your expenses!
+    <%= link_to "Log in", new_user_session_path %> to see your expenses!
   <% else %>
     You don't have any expenses!
   <% end %>
@@ -214,8 +214,10 @@
 
 <% end %>
 
-<%= link_to new_despesa_path, class: 'btn btn-success spendings-button' do %>
-  <%=t('menu.new_despesa')%> <i class="fas fa-plus"></i>
+<% if user_signed_in? %>
+  <%= link_to new_despesa_path, class: 'btn btn-success spendings-button' do %>
+    <%=t('menu.new_despesas')%> <i class="fas fa-plus"></i>
+  <% end %>
 <% end %>
 
 </div>

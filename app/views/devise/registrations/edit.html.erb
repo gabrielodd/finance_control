@@ -32,8 +32,11 @@
     </div>
     
     <div class="devise-button-group">
-      <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, class:'devise-extra-button', method: :delete %>
+      <button type="button" class="devise-extra-button" onclick="document.getElementById('real-cancel-button').click();">Cancel my account</button>
+
       <%= button_to "Back", root_path, class: 'devise-extra-button' %>
     </div>
   <% end %>
+
+  <%= button_to "", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, id: "real-cancel-button", class:'d-none', method: :delete %>
 </div>
