@@ -1,54 +1,55 @@
+<div class="devise-form-wrapper">
+    
+      <%= form_with(model: despesa, local: true, class: 'needs-validation') do |form| %>
+        <% if despesa.errors.any? %>
+          <div id="error_explanation" class="alert alert-danger">
+            <h2><%= pluralize(despesa.errors.count, "error") %> prohibited this despesa from being saved:</h2>
 
-  <h3 class="text-center"><%=t('menu.new_despesa')%></h3>
-    <%= form_with(model: despesa, local: true, class: 'needs-validation') do |form| %>
-      <% if despesa.errors.any? %>
-        <div id="error_explanation" class="alert alert-danger">
-          <h2><%= pluralize(despesa.errors.count, "error") %> prohibited this despesa from being saved:</h2>
-
-          <ul>
-            <% despesa.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
-  <div class="container-fluid">
-    <div class="row justify-content-center">
-      <div class=" col-lg-6 col-md-8">
-        <div class="card p-3">
-          <div class="form-group fields">
-            <div class="row">
-              <div class="col-md-12">
-                <%= form.label :descricao %>
-                <%= form.text_field :descricao, name: "despesa[descricao][]", class: 'form-control', required: true %>
-              </div>
-              <div class="col-md-6">
-                <%= form.label :valor %>
-                <%= form.text_field :valor, name: "despesa[valor][]", class: 'form-control valor', required: true %>
-              </div>
-              <div class="col-md-6">
-                <%= form.label :date %>
-                <%= form.date_field :date, name: "despesa[date][]", value: Date.today, class: 'form-control', required: false %>
-              </div>
-              <div class="col-md-12">
-                <%= form.label :categoria %>
-                <%= form.select(:categoria_id, category_options, {}, name: "despesa[categoria_id][]", class: 'form-control', required: true) %>
-              </div>
-              <div class="col-md-6 mt-2">
-                <div class="form-check">
-                  <%= form.check_box :repeating, name: "despesa[repeating][]", class: 'form-check-input' %>
-                  <%= form.label :repetir, class: 'form-check-label' %>
-                  <%= hidden_field_tag "despesa[repeating][]", "x" %>
-                </div>
-              </div>
-              <button type="button" class="btn btn-sm btn-danger remove-button mt-2 d-none">Remove</button>
-            </div>
+            <ul>
+              <% despesa.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
           </div>
-        <hr>
-        <button type="button" id="add-descricao" class="btn btn-secondary mt-2">Add Expense</button>
-      </div>
-      <%= form.submit 'Continue', class: 'btn btn-success mt-2 p-2 btn-block' %>
+        <% end %>
+    <div class="create">
+      <h3 class="text-center"><%=t('menu.new_despesa')%></h3>
+      <div class="row justify-content-center">
+        <div class="form-group fields">
+          <div class="row">
+            <div class="col-md-12">
+              <%= form.label :descricao, class:"devise-label" %>
+              <%= form.text_field :descricao, name: "despesa[descricao][]", class: 'form-control', required: true %>
+            </div>
+            <div class="col-md-6">
+              <%= form.label :valor, class:"devise-label" %>
+              <%= form.text_field :valor, name: "despesa[valor][]", class: 'form-control valor', required: true %>
+            </div>
+            <div class="col-md-6">
+              <%= form.label :date, class:"devise-label" %>
+              <%= form.date_field :date, name: "despesa[date][]", value: Date.today, class: 'form-control', required: false %>
+            </div>
+            <div class="col-md-12">
+              <%= form.label :categoria, class:"devise-label" %>
+              <%= form.select(:categoria_id, category_options, {}, name: "despesa[categoria_id][]", class: 'form-control', required: true) %>
+            </div>
+            <div class="col-md-6 mt-2">
+              <div class="form-check">
+                <%= form.check_box :repeating, name: "despesa[repeating][]", class: 'form-check-input' %>
+                <%= form.label :repetir, class: 'form-check-label devise-label' %>
+                <%= hidden_field_tag "despesa[repeating][]", "x" %>
+              </div>
+            </div>
+            <button type="button" class="btn btn-sm btn-danger remove-button mt-2 d-none">Remove</button>
+          </div>
+          <br>
+          <hr>
+        </div>
+      <button type="button" id="add-descricao" class="btn btn-secondary mt-2">Add Expense</button>
+
+      <%= form.submit 'Save', class: 'btn btn-success mt-2 p-2 btn-block' %>
+
     </div>
+    <% end %>
   </div>
-  <% end %>
 </div>

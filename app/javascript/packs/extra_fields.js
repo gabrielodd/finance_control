@@ -22,6 +22,10 @@ $(document).ready(function() {
     var clonedRow = $(".fields:last").clone();
     $(".fields:last").after(clonedRow);
     clonedRow.find('.remove-button').removeClass('d-none')
+
+    clonedRow.find('.valor').each(function () {
+      inputmask.mask(this);
+    });
   });
 
   $(document).on("click", ".remove-button", function () {

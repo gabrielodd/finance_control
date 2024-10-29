@@ -38,3 +38,27 @@ h1,h2,h3,h4,h5,h6 {
 .panel-body {
   background-color: #ffffff;
 }
+
+.create {
+  width: 600px;
+  background-color: rgba(255,255,255,0.13);
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255,255,255,0.1);
+  box-shadow: 0 0 40px rgba(8,7,16,0.6);
+  padding: 50px 35px;
+  font-family: 'Roboto Slab', serif;
+  color: black;
+  letter-spacing: 0.5px;
+  outline: none;
+}
+
+.create hr {
+  height: 2px;
+  width: calc(100% + 41px); /* 70px accounts for 50px + 35px padding on each side */
+  margin-left: -21px; /* Moves it to start from the very edge of the container */
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 1px solid rgb(255, 255, 255);
+  box-shadow: 0 -5px 5px rgba(3, 2, 5, 0.6);
+}
