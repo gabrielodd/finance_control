@@ -52,9 +52,6 @@ class DespesasController < ApplicationController
     @despesa = Despesa.new
   end
 
-  def edit
-  end
-
   def update_valor
     @despesa = Despesa.find(params[:id])
     @despesa.update(valor: params[:valor], descricao: params[:descricao], date: params[:date])
@@ -76,54 +73,15 @@ class DespesasController < ApplicationController
   end
 
   def create
-    common_params = despesa_params.except(:descricao, :valor, :date, :repeating, :categoria_id).merge(user_id: current_user.id)
-    created_despesas = []
-    repeating_params = []
-    errors = []
+    service = DespesaService.new(despesa_params, current_user.id)
+    result = service.call
 
-    despesa_params[:repeating].each_with_index do |v, i|
-      if v == "x"
-        repeating_params << despesa_params[:repeating][i - 1]
-      end
-    end
-  
-    despesa_params[:descricao].each_with_index do |descricao, i|
-      despesa_attributes = common_params.merge({
-        descricao: descricao,
-        valor: despesa_params[:valor][i],
-        date: despesa_params[:date][i].present? ? despesa_params[:date][i] : Date.today,
-        repeating: repeating_params[i],
-        categoria_id: despesa_params[:categoria_id][i].to_i
-      })
-      
-      @despesa = Despesa.new(despesa_attributes)
-  
-      if @despesa.save
-        Despesa.delay(run_at: @despesa.date + 1.month).create_every_month(@despesa.id, common_params[:user_id]) if repeating_params[i] == '1'
-        created_despesas << @despesa
-      else
-        errors << @despesa.errors.full_messages
-      end
-    end
-  
     respond_to do |format|
-      if errors.empty?
+      if result[:errors].empty?
         format.html { redirect_to despesas_url, notice: "Expenses were successfully created." }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: errors.flatten, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def update
-    respond_to do |format|
-      if @despesa.update(despesa_params)
-        format.html { redirect_to despesa_url(@despesa), notice: "Despesa was successfully updated." }
-        format.json { render :show, status: :ok, location: @despesa }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @despesa.errors, status: :unprocessable_entity }
+        format.json { render json: result[:errors].flatten, status: :unprocessable_entity }
       end
     end
   end
