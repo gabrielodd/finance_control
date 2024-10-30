@@ -40,12 +40,16 @@
                 <%= hidden_field_tag "despesa[repeating][]", "x" %>
               </div>
             </div>
-            <button type="button" class="btn btn-sm btn-danger remove-button mt-2 d-none">Remove</button>
+
+            <div class="col-md-6 mt-3 d-flex align-items-center justify-content-end">
+              <button type="button" class="btn btn-sm btn-danger remove-button d-none">Remove</button>
+            </div>
+
           </div>
           <br>
           <hr>
         </div>
-      <button type="button" id="add-descricao" class="btn btn-secondary mt-2">Add Expense</button>
+      <button type="button" id="add-descricao" class="btn btn-secondary mt-2">Add More</button>
 
       <%= form.submit 'Save', class: 'btn btn-success mt-2 p-2 btn-block' %>
 
