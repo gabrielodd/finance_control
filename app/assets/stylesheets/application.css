@@ -23,3 +23,17 @@
 footer a.text-light:hover { color: #fed136!important; text-decoration: none; }
 footer .cizgi { border-right: 1px solid #535e67; }
 @media (max-width: 992px) { footer .cizgi { border-right: none; } }
+
+.notice{
+  position: fixed; /* Sticks it to the top of the viewport */
+  top: 0; /* Aligns it to the top */
+  left: 0; /* Starts from the left edge */
+  width: 100%; /* Full-width */
+  padding: 10px 20px; /* Padding for some breathing room */
+  background-color: #fffae5; /* Background color for the notice */
+  color: #333; /* Text color */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow for some depth */
+  z-index: 1000; /* Ensure it stays above other elements */
+  text-align: center; /* Center-align text */
+  font-size: 16px; /* Font size for readability */
+}
