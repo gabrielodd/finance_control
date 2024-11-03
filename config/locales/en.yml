@@ -37,13 +37,16 @@ en:
     new_despesas: "New expenses"
     filters: "Filters"
     export_json: "Export to JSON"
-    submit_button: "Continue"
+    submit_button: "Save"
     all: "All"
     settings: "Settings"
     categories: "Categories"
   text:
     future_expenses: "Future expenses"
     comp_last_month: "compared to last month"
+  json:
+    success: "JSON data imported successfully!"
+    error: "Invalid JSON file format. Please upload a valid JSON file."
   helpers:
     label:
       despesa:

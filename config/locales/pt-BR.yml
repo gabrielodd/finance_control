@@ -21,6 +21,7 @@ pt-BR:
     description: "Descrição"
     value: "Valor"
     date: "Data"
+    repeating: "Mensalmente"
   number:
     format:
       delimiter: "."
@@ -36,12 +37,16 @@ pt-BR:
     new_Despesas: "Novas despesas"
     filters: "Filtros"
     export_json: "Exportar para JSON"
+    submit_button: "Salvar"
     all: "Todos"
     settings: "Configurações"
     categories: "Categorias"
   text:
     future_expenses: "Lançamentos futuros"
     comp_last_month: "comparado ao ultimo mês"
+  json:
+    success: "Data importada com sucesso!"
+    error: "Formato JSON inválido. Por favor envie um arquivo JSON válido."
   helpers:
     label:
       despesa:

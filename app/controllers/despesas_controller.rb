@@ -27,21 +27,16 @@ class DespesasController < ApplicationController
 
   def import_json
     file = params[:file]
-
     if file.content_type == 'application/json'
       json_data = JSON.parse(file.read)
-
       json_data.each do |despesa_data|
         despesa_data['user_id'] = current_user.id
-
         Despesa.create(despesa_data)
       end
-
-      flash[:success] = 'JSON data imported successfully!'
+      flash[:success] = I18n.t('json.success')
     else
-      flash[:error] = 'Invalid JSON file format. Please upload a valid JSON file.'
+      flash[:error] = I18n.t('json.error')
     end
-
     redirect_to despesas_url
   end
 
