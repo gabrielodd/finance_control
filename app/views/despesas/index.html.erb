@@ -1,231 +1,39 @@
 <div class="container">
 
-<% if @despesas.blank? %>
+  <% if @despesas.blank? %>
 
-<div class="alert alert-warning mt-1" role="alert">
-  <% unless user_signed_in? %>
-    <%= link_to "Log in", new_user_session_path %> to see your expenses!
-  <% else %>
-    You don't have any expenses!
-  <% end %>
-</div>
-
-<% else %>
-
-<br>
-  <h3 class="text-center"><%= I18n.t('menu.spendings')%></h3>
-  <div class="btn-group">
-  <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    <%= I18n.t('menu.filters')%>
-  </button>
-  <div class="dropdown-menu">
-    <%= link_to I18n.t('menu.all'), despesas_path, class: 'dropdown-item' %>
-    <% @presenter.years_with_despesas.each do |year| %>
-      <%= link_to year, despesas_path(year: year), class: 'dropdown-item' %>
-    <% end %>
-  </div>
-</div>
-
-<%= link_to export_to_json_despesas_path(format: :json), class: "btn btn-primary" do %>
-  <i class="fas fa-file-export"></i> <%= I18n.t('menu.export_json')%>
-<% end %>
-
-<div class="d-none current_month_year" data-current-month-year="<%= @presenter.current_month_year %>"></div>
-<%= render 'import_modal' %>
-
-  <div class="row">
-    <% prev_mes = nil %>
-    <% prev_year = nil %>
-    <% @presenter.despesas_grouped_by_year.each do |year, despesas| %>
-      <% despesas.group_by(&:mes).each do |month, despesas| %>
-      <% despesas.group_by(&:categoria_id).each do |categoria_id, despesas| %>
-      <div class="col-md-12" data-year="<%= year %>">
-        <% if prev_year != year %>
-          <% if prev_year != nil %> 
-            <hr style="height:1px;border:none;color:#333;background-color:#333;">
-          <% end %>
-          <% prev_year = year %>
-          <h4 class="text-center"><%=year%>
-            <i class="fas fa-chevron-down toggle-year" data-year="<%= year %>"></i>
-          </h4>
-        <% end %>
-      </div>
-      <div class="col-md-12">
-
-        <% if prev_mes != despesas.first.mes %>
-          <% prev_mes = despesas.first.mes %>
-          <hr style="height:1px;border:none;color:#333;background-color:#333;">
-          <h4 class="text-center"><%=despesas.first.mes%>
-            <i class="fas fa-chevron-down toggle-month" data-month="<%= despesas.first.mes_ano %>"></i>
-          </h4>
-        <% end %>
-
-        <div class="panel panel-primary bg-2" data-month="<%= despesas.first.mes_ano %>">
-          <div class="panel-heading">
-            <h4 class="panel-title" style="color: white;">
-            <%= I18n.t("despesa.descriptions.#{Categoria.find_by(id: categoria_id).name.downcase}", 
-                        default: Categoria.find_by(id: categoria_id).name) %> 
-            </h4>
-          </div>
-          <div class="panel-body">
-            <div class="row">
-              <div class="col-md-3 mb-2">
-                <span class="ml-3 font-weight-bold panel-body-font"><%=t('attributes.description')%></span>
-              </div>
-              <div class="col-md-3">
-                <span class="font-weight-bold panel-body-font"><%=t('attributes.value')%></span>
-              </div>
-              <div class="col-md-3">
-                <span class="font-weight-bold panel-body-font"><%=t('attributes.date')%></span>
-              </div>
-              <div class="col-md-3">
-                <span class="font-weight-bold panel-body-font"><%=t('attributes.repeating')%></span>
-              </div>
-            </div>
-          </div>
-          <% despesas.each do |despesa| %>
-            <div class="panel-body <%= 'panel-highlight animated-text' if despesa == @presenter.newest_record %>">
-              <div class="row">
-                <div class="col-md-3 edit-valor-btn" data-despesa-id="<%= despesa.id %>">
-                  <span class="panel-body-font ml-3" id="despesa-<%= despesa.id %>-descricao"><%= despesa.descricao %></span>
-                  <input
-                    type="text"
-                    class="form-control edit-descricao-input"
-                    data-despesa-id="<%= despesa.id %>"
-                    value="<%= despesa.descricao %>"
-                    style="display: none;"
-                  >
-                </div>
-                <div class="col-md-3 edit-valor-btn" data-despesa-id="<%= despesa.id %>">
-
-                  <span class="panel-body-font" id="despesa-<%= despesa.id %>-valor"><%= formatted_decimal(despesa.valor) %></span>
-                  <input
-                    type="text"
-                    class="form-control edit-valor-input"
-                    data-despesa-id="<%= despesa.id %>"
-                    value="<%= despesa.valor %>"
-                    style="display: none;"
-                  >
-                </div>
-                <div class="col-md-3 edit-valor-btn" data-despesa-id="<%= despesa.id %>">
-                  <span class="panel-body-font" id="despesa-<%= despesa.id %>-date"><%= formatted_date(despesa.date) %></span>
-                  <input
-                    type="date"
-                    class="form-control edit-date-input"
-                    data-despesa-id="<%= despesa.id %>"
-                    value="<%= despesa.date %>"
-                    style="display: none;"
-                  >
-                </div>
-                <div class="col-md-3 text-center">
-                  <input class="float-left" id="despesa-<%= despesa.id %>-repeating" type="checkbox" <%= despesa.repeating ? 'checked' : '' %> disabled>
-                  <%#= link_to 'Show', despesa, class: 'btn btn-sm btn-info' %>
-                  <button class="btn btn-sm btn-success update-valor-btn" data-despesa-id="<%= despesa.id %>" style="display: none;">
-                    <i class="fas fa-check"></i>
-                  </button>
-                  <button class="btn btn-sm btn-primary cancel-update-btn" data-despesa-id="<%= despesa.id %>" style="display: none;">
-                    <i class="fas fa-close"></i>
-                  </button>
-                  <!-- <button class="btn btn-sm btn-info edit-valor-btn" data-despesa-id="<%= despesa.id %>">Edit</button> -->
-                  <%#= link_to 'Edit', edit_despesa_path(despesa), class: 'btn btn-sm btn-primary' %>
-                  <%= link_to despesa, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger', style: 'display: none;' do %>
-                    <i class="fas fa-trash"></i>
-                  <% end %>
-                </div>
-              </div>
-            </div>
-          <% end %>
-          <div class="panel-body">
-            <div class="new-despesa" style="display: none;">
-              <%= form_with(model: Despesa.new, url: add_despesa_despesas_path, remote: true) do |form| %>
-                <div class="input-group">
-                  <%= form.text_field :descricao, value: despesas.last.descricao, class: 'form-control', required: true %>
-
-                  <%= form.text_field :valor, value: despesas.last.valor, class: 'form-control', required: true %>
-                  <%= form.date_field :date, value: despesas.last.date, class: 'form-control', required: false %>
-                  <%= form.select(:categoria_id, options_for_select(Categoria.all.map { |c| [c.name.gsub(/_/, ' ').capitalize, c.id] }, despesas.last.categoria_id), { include_blank: 'Select Category' }, class: 'form-control', required: true) %>
-
-                  <%= submit_tag "Save", class: "btn btn-success" %>
-                </div>
-              <% end %>
-            </div>
-            <div class="row">
-              <div class="col-md-3"><b class="panel-body-font ml-3">Total: </b></div>
-              <div class="col-md-3">
-                <b class="panel-body-font total-value"><%= formatted_decimal(despesas.sum(&:valor)) %></b>
-              </div>
-              <div class="col-md-6">
-                <button class="btn btn-sm btn-success add-despesa-btn" style='line-height: 1; padding: 3px;'>
-                  <i class="fas fa-plus"></i>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <% end %>
-      <div class="col-md-12">
-        <h4 class="text-center total-month" style="margin-top: 10px;">Total: <%=Despesa.total_spendings_current_month_from_user(current_user.id, despesas.first.date)%></h4>
-      </div>
-    <% end %>
-    <% end %>
-  </div>
-
-<h3 class="total-spent text-center" style="margin-top: 10px;">Total: <%=formatted_decimal(@presenter.total_current_month) %>
-  <span style="<%=positive_negative_style(@presenter.difference)%>">
-    <% if @presenter.difference.positive? %>
-      <i class="fa-solid fa-arrow-up" style="color: #f41a1a;"></i>
+  <div class="alert alert-warning mt-1" role="alert">
+    <% unless user_signed_in? %>
+      <%= link_to "Log in", new_user_session_path %> to see your expenses!
     <% else %>
-      <i class="fa-solid fa-arrow-down" style="color: #16c533;"></i>
+      You don't have any expenses!
     <% end %>
-    <%= sprintf("%+.2f", @presenter.difference)%> <%= I18n.t('text.comp_last_month')%>
-  </span>
-</h3>
-
-<br>
-
-<div class="panel delayed-job-panel bg-2 mb-2">
-  <div class="panel-heading">
-    <h4 class="panel-title" style="color: white;">
-      <%= I18n.t('text.future_expenses')%>
-    </h4>
   </div>
-  <% @presenter.jobs.each do |job| %>
-  <div class="panel-body">
-    <div class="row">
-      <div class="col-md-3">
-        <span class='panel-body-font ml-3'><%= job[:descricao] %></span>
-      </div>
-      <div class="col-md-3">
-        <span class='panel-body-font ml-3'><%= job[:valor] %></span>
-      </div>
-      <div class="col-md-3">
-        <span class='panel-body-font'><%= formatted_date(job[:date] + 1.month) %></span>
-      </div>
-      <div class="col-md-3 input-group">
-        <%= button_to run_delayed_job_path(job[:job_id]), method: :post, remote: true, class: 'btn btn-sm btn-primary' do %>
-          <i class="fas fa-check"></i>
-        <% end %>
-        <%= button_to delayed_job_path(job[:job_id]), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-danger" do %>
-          <i class="fas fa-trash"></i>
-        <% end %>
-      </div>
-    </div>
-  </div>
-<% end %>
-</div>
 
-<% end %>
+  <% else %>
 
-<% if user_signed_in? %>
-  <%= link_to new_despesa_path, class: 'btn btn-success spendings-button' do %>
-    <%=t('menu.new_despesas')%> <i class="fas fa-plus"></i>
+  <br>
+
+  <div class="d-none current_month_year" data-current-month-year="<%= @presenter.current_month_year %>"></div>
+
+  <%= render 'despesas/filter_and_export' %>
+
+  <%= render 'despesas_by_year', presenter: @presenter %>
+
+  <%= render 'total_spent_display', presenter: @presenter %>
+
+  <%= render 'delayed_jobs_panel', presenter: @presenter %>
+
   <% end %>
-<% end %>
+
+  <% if user_signed_in? %>
+    <%= link_to new_despesa_path, class: 'btn btn-success spendings-button' do %>
+      <%=t('menu.new_despesas')%> <i class="fas fa-plus"></i>
+    <% end %>
+  <% end %>
 
 </div>
 
 <%= stylesheet_link_tag 'index', media: 'all' %>
-
 <%= javascript_pack_tag 'index', defer: true %>
 

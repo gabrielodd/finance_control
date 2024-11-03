@@ -1,0 +1,12 @@
+<h3 class="total-spent text-center" style="margin-top: 10px;">Total: <%=formatted_decimal(presenter.total_current_month) %>
+  <span style="<%=positive_negative_style(presenter.difference)%>">
+    <% if presenter.difference.positive? %>
+      <i class="fa-solid fa-arrow-up" style="color: #f41a1a;"></i>
+    <% else %>
+      <i class="fa-solid fa-arrow-down" style="color: #16c533;"></i>
+    <% end %>
+    <%= sprintf("%+.2f", presenter.difference)%> <%= I18n.t('text.comp_last_month')%>
+  </span>
+</h3>
+
+<br>

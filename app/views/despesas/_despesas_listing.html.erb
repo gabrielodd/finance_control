@@ -1,0 +1,37 @@
+<div class="panel panel-primary bg-2" data-month="<%= despesas.first.mes_ano %>">
+  <div class="panel-heading">
+    <h4 class="panel-title" style="color: white;">
+    <%= I18n.t("despesa.descriptions.#{Categoria.find_by(id: categoria_id).name.downcase}", 
+                default: Categoria.find_by(id: categoria_id).name) %> 
+    </h4>
+  </div>
+  
+  <%= render 'despesas/month_section', despesas: despesas %>
+
+  <div class="panel-body">
+    <div class="new-despesa" style="display: none;">
+      <%= form_with(model: Despesa.new, url: add_despesa_despesas_path, remote: true) do |form| %>
+        <div class="input-group">
+          <%= form.text_field :descricao, value: despesas.last.descricao, class: 'form-control', required: true %>
+
+          <%= form.text_field :valor, value: despesas.last.valor, class: 'form-control', required: true %>
+          <%= form.date_field :date, value: despesas.last.date, class: 'form-control', required: false %>
+          <%= form.select(:categoria_id, options_for_select(Categoria.all.map { |c| [c.name.gsub(/_/, ' ').capitalize, c.id] }, despesas.last.categoria_id), { include_blank: 'Select Category' }, class: 'form-control', required: true) %>
+
+          <%= submit_tag "Save", class: "btn btn-success" %>
+        </div>
+      <% end %>
+    </div>
+    <div class="row">
+      <div class="col-md-3"><b class="panel-body-font ml-3">Total: </b></div>
+      <div class="col-md-3">
+        <b class="panel-body-font total-value"><%= formatted_decimal(despesas.sum(&:valor)) %></b>
+      </div>
+      <div class="col-md-6">
+        <button class="btn btn-sm btn-success add-despesa-btn" style='line-height: 1; padding: 3px;'>
+          <i class="fas fa-plus"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+<div class="panel delayed-job-panel bg-2 mb-2">
+  <div class="panel-heading">
+    <h4 class="panel-title" style="color: white;">
+      <%= I18n.t('text.future_expenses')%>
+    </h4>
+  </div>
+  <% presenter.jobs.each do |job| %>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-3">
+          <span class='panel-body-font ml-3'><%= job[:descricao] %></span>
+        </div>
+        <div class="col-md-3">
+          <span class='panel-body-font ml-3'><%= job[:valor] %></span>
+        </div>
+        <div class="col-md-3">
+          <span class='panel-body-font'><%= formatted_date(job[:date] + 1.month) %></span>
+        </div>
+        <div class="col-md-3 input-group">
+          <%= button_to run_delayed_job_path(job[:job_id]), method: :post, remote: true, class: 'btn btn-sm btn-primary' do %>
+            <i class="fas fa-check"></i>
+          <% end %>
+          <%= button_to delayed_job_path(job[:job_id]), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-danger" do %>
+            <i class="fas fa-trash"></i>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

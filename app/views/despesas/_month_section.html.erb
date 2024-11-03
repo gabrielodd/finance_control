@@ -1,0 +1,67 @@
+<div class="panel-body">
+  <div class="row">
+    <div class="col-md-3 mb-2">
+      <span class="ml-3 font-weight-bold panel-body-font"><%=t('attributes.description')%></span>
+    </div>
+    <div class="col-md-3">
+      <span class="font-weight-bold panel-body-font"><%=t('attributes.value')%></span>
+    </div>
+    <div class="col-md-3">
+      <span class="font-weight-bold panel-body-font"><%=t('attributes.date')%></span>
+    </div>
+    <div class="col-md-3">
+      <span class="font-weight-bold panel-body-font"><%=t('attributes.repeating')%></span>
+    </div>
+  </div>
+</div>
+
+<% despesas.each do |despesa| %>
+  <div class="panel-body <%= 'panel-highlight animated-text' if despesa == @presenter.newest_record %>">
+    <div class="row">
+      <div class="col-md-3 edit-valor-btn" data-despesa-id="<%= despesa.id %>">
+        <span class="panel-body-font ml-3" id="despesa-<%= despesa.id %>-descricao"><%= despesa.descricao %></span>
+        <input
+          type="text"
+          class="form-control edit-descricao-input"
+          data-despesa-id="<%= despesa.id %>"
+          value="<%= despesa.descricao %>"
+          style="display: none;"
+        >
+      </div>
+      <div class="col-md-3 edit-valor-btn" data-despesa-id="<%= despesa.id %>">
+
+        <span class="panel-body-font" id="despesa-<%= despesa.id %>-valor"><%= formatted_decimal(despesa.valor) %></span>
+        <input
+          type="text"
+          class="form-control edit-valor-input"
+          data-despesa-id="<%= despesa.id %>"
+          value="<%= despesa.valor %>"
+          style="display: none;"
+        >
+      </div>
+      <div class="col-md-3 edit-valor-btn" data-despesa-id="<%= despesa.id %>">
+        <span class="panel-body-font" id="despesa-<%= despesa.id %>-date"><%= formatted_date(despesa.date) %></span>
+        <input
+          type="date"
+          class="form-control edit-date-input"
+          data-despesa-id="<%= despesa.id %>"
+          value="<%= despesa.date %>"
+          style="display: none;"
+        >
+      </div>
+      <div class="col-md-3 text-center">
+        <input class="float-left" id="despesa-<%= despesa.id %>-repeating" type="checkbox" <%= despesa.repeating ? 'checked' : '' %> disabled>
+        <button class="btn btn-sm btn-success update-valor-btn" data-despesa-id="<%= despesa.id %>" style="display: none;">
+          <i class="fas fa-check"></i>
+        </button>
+        <button class="btn btn-sm btn-primary cancel-update-btn" data-despesa-id="<%= despesa.id %>" style="display: none;">
+          <i class="fas fa-close"></i>
+        </button>
+
+        <%= link_to despesa, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger', style: 'display: none;' do %>
+          <i class="fas fa-trash"></i>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

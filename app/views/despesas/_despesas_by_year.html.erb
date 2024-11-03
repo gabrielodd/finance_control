@@ -1,0 +1,41 @@
+<% prev_mes = nil %>
+<% prev_year = nil %>
+
+<div class="row">
+  <% presenter.despesas_grouped_by_year.each do |year, despesas| %>
+    <% despesas.group_by(&:mes).each do |month, despesas| %>
+      <% despesas.group_by(&:categoria_id).each do |categoria_id, despesas| %>
+      
+      <div class="col-md-12" data-year="<%= year %>">
+        <% if prev_year != year %>
+          <% if prev_year != nil %> 
+            <hr style="height:1px;border:none;color:#333;background-color:#333;">
+          <% end %>
+          <% prev_year = year %>
+          <h4 class="text-center"><%=year%>
+            <i class="fas fa-chevron-down toggle-year" data-year="<%= year %>"></i>
+          </h4>
+        <% end %>
+      </div>
+
+      <div class="col-md-12">
+        <% if prev_mes != despesas.first.mes %>
+          <% prev_mes = despesas.first.mes %>
+          <hr style="height:1px;border:none;color:#333;background-color:#333;">
+          <h4 class="text-center"><%=despesas.first.mes%>
+            <i class="fas fa-chevron-down toggle-month" data-month="<%= despesas.first.mes_ano %>"></i>
+          </h4>
+        <% end %>
+
+        <%= render 'despesas/despesas_listing', despesas: despesas, year: year, categoria_id: categoria_id %>
+      </div>
+
+      <% end %>
+
+      <div class="col-md-12">
+        <h4 class="text-center total-month" style="margin-top: 10px;">Total: <%=Despesa.total_spendings_current_month_from_user(current_user.id, despesas.first.date)%></h4>
+      </div>
+      
+    <% end %>
+  <% end %>
+</div>

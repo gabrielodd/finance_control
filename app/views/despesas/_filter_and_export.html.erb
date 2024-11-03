@@ -1,0 +1,19 @@
+<h3 class="text-center"><%= I18n.t('menu.spendings') %></h3>
+
+<div class="btn-group">
+  <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <%= I18n.t('menu.filters') %>
+  </button>
+  <div class="dropdown-menu">
+    <%= link_to I18n.t('menu.all'), despesas_path, class: 'dropdown-item' %>
+    <% @presenter.years_with_despesas.each do |year| %>
+      <%= link_to year, despesas_path(year: year), class: 'dropdown-item' %>
+    <% end %>
+  </div>
+</div>
+
+<%= link_to export_to_json_despesas_path(format: :json), class: "btn btn-primary" do %>
+  <i class="fas fa-file-export"></i> <%= I18n.t('menu.export_json') %>
+<% end %>
+
+<%= render 'despesas/import_modal' %>
