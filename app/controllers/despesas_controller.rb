@@ -1,5 +1,5 @@
 class DespesasController < ApplicationController
-  before_action :set_despesa, only: %i[ show edit update destroy ]
+  before_action :set_despesa, only: %i[ edit update destroy ]
   skip_before_action :verify_authenticity_token
 
   def index
@@ -8,6 +8,24 @@ class DespesasController < ApplicationController
       @despesas = @presenter.despesas
     else
       @despesas = []
+    end
+  end
+
+  def new
+    @despesa = Despesa.new
+  end
+
+  def create
+    service = DespesaService.new(despesa_params, current_user.id)
+    result = service.call
+
+    respond_to do |format|
+      if result[:errors].empty?
+        format.html { redirect_to despesas_url, notice: "Expenses were successfully created." }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: result[:errors].flatten, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -40,13 +58,6 @@ class DespesasController < ApplicationController
     redirect_to despesas_url
   end
 
-  def show
-  end
-
-  def new
-    @despesa = Despesa.new
-  end
-
   def update_valor
     @despesa = Despesa.find(params[:id])
     @despesa.update(valor: params[:valor], descricao: params[:descricao], date: params[:date])
@@ -64,20 +75,6 @@ class DespesasController < ApplicationController
       redirect_to despesas_url, notice: "Despesa was successfully created."
     else
       render json: { errors: @despesa.errors.full_messages }, status: :unprocessable_entity
-    end
-  end
-
-  def create
-    service = DespesaService.new(despesa_params, current_user.id)
-    result = service.call
-
-    respond_to do |format|
-      if result[:errors].empty?
-        format.html { redirect_to despesas_url, notice: "Expenses were successfully created." }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: result[:errors].flatten, status: :unprocessable_entity }
-      end
     end
   end
 
