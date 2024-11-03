@@ -43,6 +43,10 @@ class DespesaPresenter
     total_current_month - total_last_month
   end
 
+  def current_month_year
+    @date.strftime("%B %Y")
+  end
+
   def jobs
     Delayed::Job.all.select do |job|
       handler = YAML.load(job.handler)

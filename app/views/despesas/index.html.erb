@@ -30,6 +30,7 @@
   <i class="fas fa-file-export"></i> <%= I18n.t('menu.export_json')%>
 <% end %>
 
+<div class="d-none current_month_year" data-current-month-year="<%= @presenter.current_month_year %>"></div>
 <%= render 'import_modal' %>
 
   <div class="row">
@@ -55,11 +56,11 @@
           <% prev_mes = despesas.first.mes %>
           <hr style="height:1px;border:none;color:#333;background-color:#333;">
           <h4 class="text-center"><%=despesas.first.mes%>
-            <i class="fas fa-chevron-down toggle-month" data-month="<%= despesas.first.mes %>"></i>
+            <i class="fas fa-chevron-down toggle-month" data-month="<%= despesas.first.mes_ano %>"></i>
           </h4>
         <% end %>
 
-        <div class="panel panel-primary bg-2" data-month="<%= despesas.first.mes %>">
+        <div class="panel panel-primary bg-2" data-month="<%= despesas.first.mes_ano %>">
           <div class="panel-heading">
             <h4 class="panel-title" style="color: white;">
             <%= I18n.t("despesa.descriptions.#{Categoria.find_by(id: categoria_id).name.downcase}", 

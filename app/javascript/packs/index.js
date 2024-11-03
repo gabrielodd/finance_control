@@ -1,11 +1,9 @@
 $(document).ready(function() {
-  var latestMonth = $('.toggle-month').last().data('month');
-  var secondToLastMonth = $('.toggle-month').eq(-2).data('month');
+  var currentMonth = $('.current_month_year').data('current-month-year');
 
   $('.panel').hide();
   $('.delayed-job-panel').show();
-  $('.panel[data-month="' + latestMonth + '"]').show();
-  $('.panel[data-month="' + secondToLastMonth + '"]').show();
+  $('.panel[data-month="' + currentMonth + '"]').show();
 
   $('.toggle-month').click(function() {
     const month = $(this).data('month');
