@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_10_27_002911) do
+ActiveRecord::Schema.define(version: 2024_11_09_034713) do
 
   create_table "categoria", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
@@ -47,6 +47,14 @@ ActiveRecord::Schema.define(version: 2024_10_27_002911) do
     t.index ["user_id"], name: "index_despesas_on_user_id"
   end
 
+  create_table "user_configurations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "locale"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_user_configurations_on_user_id"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -63,4 +71,5 @@ ActiveRecord::Schema.define(version: 2024_10_27_002911) do
   add_foreign_key "categoria", "users"
   add_foreign_key "despesas", "categoria", column: "categoria_id"
   add_foreign_key "despesas", "users"
+  add_foreign_key "user_configurations", "users"
 end

@@ -20,7 +20,10 @@ class SettingsController < ApplicationController
 
   def change_locale
     locale = params[:locale]
-    
+    user_config = current_user.user_configuration || current_user.build_user_configuration
+    user_config.locale = locale
+    user_config.save
+
     session[:locale] = locale
     I18n.locale = locale
     
