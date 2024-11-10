@@ -9,11 +9,10 @@
           Configurations
         </div>
         <div class="card-body">
-          <div class="row">
-            <div class="col-md-12">
+
               <%= form_with url: change_locale_settings_path, method: :patch, local: true, id: 'locale-switcher-form' do |form| %>
                 <div class="language" role="radiogroup" aria-labelledby="language-switcher1">
-                  <p class="hidden" id="language-switcher1">Language:</p>
+                  <p id="language-switcher1">Language:</p>
                   <div class="language__container--left language__container--en">
                     <input class="language__control" type="radio" id="language1-1" name="locale" value="en"
                     <%= 'checked' if session[:locale] == 'en' %> > 
@@ -30,8 +29,25 @@
                   </div>
                 </div>
               <% end %>
-            </div>
-          </div>
+              <br>
+
+              <%= form_with url: change_panel_color_settings_path, method: :patch, local: true, id: 'panel-color-form' do |form| %>
+                <div class="panel-color-selection mt-4">
+                  <p>Select Panel Background Color:</p>
+                  <div class="d-flex justify-content-between">
+                    <% ['bg-1', 'bg-2', 'bg-3', 'bg-4'].each do |color_class| %>
+                      <div class="color-swatch <%= color_class %> <%= 'selected' if current_user.user_configuration&.panel_color == color_class %>">
+                        <h4 class="panel-title text-center" style="color: white;">
+                          Category
+                        </h4>
+                        <%= form.radio_button :panel_color, color_class, checked: (current_user.user_configuration&.panel_color == color_class), class: 'd-none', id: "panel_color_#{color_class}" %>
+                        <label for="panel_color_<%= color_class %>" class="swatch-label"></label>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+              <% end %>
+
         </div>
       </div>
 
@@ -40,9 +56,13 @@
 </div>
 
 <script>
-  document.querySelectorAll('input[name="locale"]').forEach(function(radio) {
+  document.querySelectorAll('input[name="locale"], input[name="panel_color"]').forEach(function(radio) {
     radio.addEventListener('change', function() {
-      document.getElementById('locale-switcher-form').submit();
+      if (radio.name === "locale") {
+        document.getElementById('locale-switcher-form').submit();
+      } else if (radio.name === "panel_color") {
+        document.getElementById('panel-color-form').submit();
+      }
     });
   });
 </script>

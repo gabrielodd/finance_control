@@ -30,6 +30,15 @@ class SettingsController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 
+  def change_panel_color
+    panel_color = params[:panel_color]
+    user_config = current_user.user_configuration || current_user.build_user_configuration
+    user_config.panel_color = panel_color
+    user_config.save
+
+    redirect_back(fallback_location: root_path)
+  end
+
   private
 
   def category_params

@@ -17,11 +17,19 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 .bg-1 {
-  background-image: radial-gradient( circle farthest-corner at 1.5% 1.4%,  rgba(159,227,255,1) 0%, rgba(255,177,219,1) 100.2% );
+  background-image: radial-gradient( circle farthest-corner at 1.5% 1.4%,  rgb(90, 152, 179) 0%, rgb(163, 77, 123) 100.2% );
 }
 
 .bg-2 {
   background-image: linear-gradient(to right,#2775ff,#7202bb)
+}
+
+.bg-3 {
+  background-image: linear-gradient(to right,#1e2947,#8f33a7)
+}
+
+.bg-4 {
+  background-image: linear-gradient(to right,#196e24,#1daca0)
 }
 
 .panel-heading {
