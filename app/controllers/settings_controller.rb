@@ -39,6 +39,15 @@ class SettingsController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 
+  def change_currency
+    currency = params[:currency]
+    user_config = current_user.user_configuration || current_user.build_user_configuration
+    user_config.currency = currency
+    user_config.save
+
+    redirect_back(fallback_location: root_path)
+  end
+
   private
 
   def category_params
