@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     collection do
       patch :change_locale
       patch :change_panel_color
+      patch :change_currency
       get :categorias
       post :create_category
     end

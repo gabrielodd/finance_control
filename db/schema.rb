@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_11_10_001825) do
+ActiveRecord::Schema.define(version: 2024_11_13_014802) do
 
   create_table "categoria", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 2024_11_10_001825) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "panel_color"
+    t.string "currency", default: "$"
     t.index ["user_id"], name: "index_user_configurations_on_user_id"
   end
 
