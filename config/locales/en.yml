@@ -41,6 +41,7 @@ en:
     all: "All"
     settings: "Settings"
     categories: "Categories"
+    configurations: "Configurations"
   text:
     future_expenses: "Future expenses"
     comp_last_month: "compared to last month"

@@ -5,59 +5,56 @@
 
     <div class="col-md-9">
       <div class="card mb-4">
-        <div class="card-header card-header-settings">
-          Configurations
-        </div>
         <div class="card-body">
+          <h4 class="card-title"><%=t('menu.configurations')%></h4>
+          <%= form_with url: change_locale_settings_path, method: :patch, local: true, id: 'locale-switcher-form' do |form| %>
+            <div class="language" role="radiogroup" aria-labelledby="language-switcher1">
+              <p id="language-switcher1">Language:</p>
+              <div class="language__container--left language__container--en">
+                <input class="language__control" type="radio" id="language1-1" name="locale" value="en"
+                <%= 'checked' if session[:locale] == 'en' %> > 
+                <label class="language__label" for="language1-1">
+                  EN
+                </label>
+              </div>
+              <div class="language__container--right language__container--pt">
+                <input class="language__control" type="radio" id="language1-2" name="locale" value="pt-BR"
+                <%= 'checked' if session[:locale] == 'pt-BR' %> >
+                <label class="language__label" for="language1-2">
+                  PT
+                </label>
+              </div>
+            </div>
+          <% end %>
+          <br>
 
-            <%= form_with url: change_locale_settings_path, method: :patch, local: true, id: 'locale-switcher-form' do |form| %>
-              <div class="language" role="radiogroup" aria-labelledby="language-switcher1">
-                <p id="language-switcher1">Language:</p>
-                <div class="language__container--left language__container--en">
-                  <input class="language__control" type="radio" id="language1-1" name="locale" value="en"
-                  <%= 'checked' if session[:locale] == 'en' %> > 
-                  <label class="language__label" for="language1-1">
-                    EN
-                  </label>
-                </div>
-                <div class="language__container--right language__container--pt">
-                  <input class="language__control" type="radio" id="language1-2" name="locale" value="pt-BR"
-                  <%= 'checked' if session[:locale] == 'pt-BR' %> >
-                  <label class="language__label" for="language1-2">
-                    PT
-                  </label>
+          <%= form_with url: change_currency_settings_path, method: :patch, local: true, id: 'currency-form' do |form| %>
+            <div class="panel-color-selection mt-4">
+              <p>Select Panel Currency:</p>
+              <div class="d-flex justify-content-between">
+                <div class="field">
+                  <%= form.select :currency, options_for_select(currency_options, selected: current_user&.user_configuration&.currency), {}, class: "form-control" %>
                 </div>
               </div>
-            <% end %>
-            <br>
+            </div>
+          <% end %>
 
-            <%= form_with url: change_currency_settings_path, method: :patch, local: true, id: 'currency-form' do |form| %>
-              <div class="panel-color-selection mt-4">
-                <p>Select Panel Currency:</p>
-                <div class="d-flex justify-content-between">
-                  <div class="field">
-                    <%= form.select :currency, options_for_select(currency_options, selected: current_user&.user_configuration&.currency), {}, class: "form-control" %>
+          <%= form_with url: change_panel_color_settings_path, method: :patch, local: true, id: 'panel-color-form' do |form| %>
+            <div class="panel-color-selection mt-4">
+              <p>Select Panel Background Color:</p>
+              <div class="d-flex justify-content-between">
+                <% ['bg-1', 'bg-2', 'bg-3', 'bg-4'].each do |color_class| %>
+                  <div class="color-swatch <%= color_class %> <%= 'selected' if current_user.user_configuration&.panel_color == color_class %>">
+                    <h4 class="panel-title text-center" style="color: white;">
+                      Category
+                    </h4>
+                    <%= form.radio_button :panel_color, color_class, checked: (current_user.user_configuration&.panel_color == color_class), class: 'd-none', id: "panel_color_#{color_class}" %>
+                    <label for="panel_color_<%= color_class %>" class="swatch-label"></label>
                   </div>
-                </div>
+                <% end %>
               </div>
-            <% end %>
-
-            <%= form_with url: change_panel_color_settings_path, method: :patch, local: true, id: 'panel-color-form' do |form| %>
-              <div class="panel-color-selection mt-4">
-                <p>Select Panel Background Color:</p>
-                <div class="d-flex justify-content-between">
-                  <% ['bg-1', 'bg-2', 'bg-3', 'bg-4'].each do |color_class| %>
-                    <div class="color-swatch <%= color_class %> <%= 'selected' if current_user.user_configuration&.panel_color == color_class %>">
-                      <h4 class="panel-title text-center" style="color: white;">
-                        Category
-                      </h4>
-                      <%= form.radio_button :panel_color, color_class, checked: (current_user.user_configuration&.panel_color == color_class), class: 'd-none', id: "panel_color_#{color_class}" %>
-                      <label for="panel_color_<%= color_class %>" class="swatch-label"></label>
-                    </div>
-                  <% end %>
-                </div>
-              </div>
-            <% end %>
+            </div>
+          <% end %>
 
         </div>
       </div>

@@ -41,6 +41,7 @@ pt-BR:
     all: "Todos"
     settings: "Configurações"
     categories: "Categorias"
+    configurations: "Configurações"
   text:
     future_expenses: "Lançamentos futuros"
     comp_last_month: "comparado ao ultimo mês"
