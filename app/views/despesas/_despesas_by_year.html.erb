@@ -9,7 +9,7 @@
       <div class="col-md-12" data-year="<%= year %>">
         <% if prev_year != year %>
           <% if prev_year != nil %> 
-            <hr style="height:1px;border:none;color:#333;background-color:#333;">
+            <hr style="height:2px;border:none;color:#333;background-color:#333;">
           <% end %>
           <% prev_year = year %>
           <h4 class="text-center"><%=year%>
@@ -21,10 +21,10 @@
       <div class="col-md-12">
         <% if prev_mes != despesas.first.mes %>
           <% prev_mes = despesas.first.mes %>
-          <hr style="height:1px;border:none;color:#333;background-color:#333;">
-          <h4 class="text-center"><%=despesas.first.mes%>
+          <hr style="height:2px;border:none;color:#333;background-color:#333;">
+          <h5 class="text-center"><%=despesas.first.mes%>
             <i class="fas fa-chevron-down toggle-month" data-month="<%= despesas.first.mes_ano %>"></i>
-          </h4>
+          </h5>
         <% end %>
 
         <%= render 'despesas/despesas_listing', despesas: despesas, year: year, categoria_id: categoria_id %>
@@ -33,7 +33,7 @@
       <% end %>
 
       <div class="col-md-12">
-        <h4 class="text-center total-month" style="margin-top: 10px;">Total: <%=Despesa.total_spendings_current_month_from_user(current_user.id, despesas.first.date)%></h4>
+        <h5 class="text-center total-month" style="margin-top: 10px;">Total: <%=formatted_decimal(Despesa.total_spendings_current_month_from_user(current_user.id, despesas.first.date))%></h4>
       </div>
       
     <% end %>

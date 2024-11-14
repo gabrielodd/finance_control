@@ -1,4 +1,4 @@
-<div class="panel panel-primary <%= current_user.user_configuration.panel_color %>" data-month="<%= despesas.first.mes_ano %>">
+<div class="panel <%= current_user.user_configuration.panel_color %>" data-month="<%= despesas.first.mes_ano %>">
   <div class="panel-heading">
     <h4 class="panel-title" style="color: white;">
     <%= I18n.t("despesa.descriptions.#{Categoria.find_by(id: categoria_id).name.downcase}", 

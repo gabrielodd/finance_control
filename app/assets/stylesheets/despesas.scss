@@ -17,7 +17,7 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 .bg-1 {
-  background-image: radial-gradient( circle farthest-corner at 1.5% 1.4%,  rgb(90, 152, 179) 0%, rgb(163, 77, 123) 100.2% );
+  background-image: radial-gradient( circle farthest-corner at 1.5% 1.4%,  rgb(29, 141, 189) 0%, rgb(180, 63, 126) 100.2% );
 }
 
 .bg-2 {
@@ -63,8 +63,8 @@ h1,h2,h3,h4,h5,h6 {
 
 .create hr {
   height: 2px;
-  width: calc(100% + 41px); /* 70px accounts for 50px + 35px padding on each side */
-  margin-left: -21px; /* Moves it to start from the very edge of the container */
+  width: calc(100% + 41px);
+  margin-left: -21px;
   margin-top: 20px;
   margin-bottom: 20px;
   border: 1px solid rgb(255, 255, 255);
