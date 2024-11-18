@@ -42,7 +42,7 @@ class Despesa < ApplicationRecord
     new_despesa.date = despesa.date + 1.month
     new_despesa.save
 
-    Despesa.delay(run_at: despesa.date + 1.month).create_every_month(new_despesa.id, new_despesa.user_id)
+    Despesa.delay(run_at: new_despesa.date + 1.month).create_every_month(new_despesa.id, new_despesa.user_id)
   end
 
   private

@@ -57,6 +57,7 @@ class DespesaPresenter
       despesa = Despesa.find_by(id: handler.args.first)
       {
         job_id: job.id,
+        run_at: job.run_at,
         descricao: despesa&.descricao,
         valor: despesa&.valor,
         date: despesa&.date
