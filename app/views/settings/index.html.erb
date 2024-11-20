@@ -5,11 +5,11 @@
 
     <div class="col-md-9">
       <div class="card mb-4">
-        <div class="card-body">
-          <h4 class="card-title"><%=t('menu.configurations')%></h4>
+        <h4 style="padding: 30px 30px 0px 30px;"><%=t('menu.configurations')%></h4>
+        <div class="card-body" style="padding: 40px;">
           <%= form_with url: change_locale_settings_path, method: :patch, local: true, id: 'locale-switcher-form' do |form| %>
             <div class="language" role="radiogroup" aria-labelledby="language-switcher1">
-              <p id="language-switcher1">Language:</p>
+              <h6 id="language-switcher1">Language</h6>
               <div class="language__container--left language__container--en">
                 <input class="language__control" type="radio" id="language1-1" name="locale" value="en"
                 <%= 'checked' if session[:locale] == 'en' %> > 
@@ -27,10 +27,10 @@
             </div>
           <% end %>
           <br>
-
+          <hr>
           <%= form_with url: change_currency_settings_path, method: :patch, local: true, id: 'currency-form' do |form| %>
             <div class="panel-color-selection mt-4">
-              <p>Select Panel Currency:</p>
+              <h6>Select Panel Currency</h6>
               <div class="d-flex justify-content-between">
                 <div class="field">
                   <%= form.select :currency, options_for_select(currency_options, selected: current_user&.user_configuration&.currency), {}, class: "form-control" %>
@@ -38,10 +38,10 @@
               </div>
             </div>
           <% end %>
-
+          <hr>
           <%= form_with url: change_panel_color_settings_path, method: :patch, local: true, id: 'panel-color-form' do |form| %>
             <div class="panel-color-selection mt-4">
-              <p>Select Panel Background Color:</p>
+              <h6>Select Panel Background Color</h6>
               <div class="d-flex justify-content-between">
                 <% ['bg-1', 'bg-2', 'bg-3', 'bg-4'].each do |color_class| %>
                   <div class="color-swatch <%= color_class %> <%= 'selected' if current_user.user_configuration&.panel_color == color_class %>">
@@ -55,28 +55,28 @@
               </div>
             </div>
           <% end %>
-
+          <hr>
           <%= form_with url: change_ordering_settings_path, method: :patch, local: true, id: 'ordering-form' do |form| %>
             <div class="mt-4">
               <div class="d-flex justify-content-between">
               <div>
-                <h5>Ordem das despesas</h5>
-                <p>Ordem (baseado na data) que suas transações serão listadas na tela</p>
+                <h6><%=t('settings.order_header')%></h6>
+                <p><%=t('settings.order_text')%></p>
               </div>
               <div class="d-flex flex-column ms-auto">
                 <div>
                   <%= radio_button_tag :order, 'asc', current_user.user_configuration&.order == 'asc', id: 'order_asc', class: 'form-check-input' %>
-                  <%= label_tag :order_asc, 'Crescente', class: 'form-check-label' %>
+                  <%= label_tag :order_asc, t('settings.asc'), class: 'form-check-label' %>
                 </div>
                 <div>
                   <%= radio_button_tag :order, 'desc', current_user.user_configuration&.order == 'desc', id: 'order_desc', class: 'form-check-input' %>
-                  <%= label_tag :order_desc, 'Decrescente', class: 'form-check-label' %>
+                  <%= label_tag :order_desc, t('settings.desc'), class: 'form-check-label' %>
                 </div>
               </div>
             </div>
           </div>
         <% end %>
-
+        <hr>
         </div>
       </div>
 

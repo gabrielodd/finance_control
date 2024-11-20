@@ -45,6 +45,11 @@ en:
   text:
     future_expenses: "Future expenses"
     comp_last_month: "compared to last month"
+  settings:
+    asc: "Ascending"
+    desc: "Descending"
+    order_header: "Expenses Order"
+    order_text: "Order (based on data) in which your transactions will be listed"
   json:
     success: "JSON data imported successfully!"
     error: "Invalid JSON file format. Please upload a valid JSON file."

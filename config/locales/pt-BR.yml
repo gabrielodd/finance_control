@@ -45,6 +45,11 @@ pt-BR:
   text:
     future_expenses: "Lançamentos futuros"
     comp_last_month: "comparado ao ultimo mês"
+  settings:
+    asc: "Crescente"
+    desc: "Decrescente"
+    order_header: "Ordem das despesas"
+    order_text: "Ordem (baseado na data) que suas transações serão listadas na tela"
   json:
     success: "Data importada com sucesso!"
     error: "Formato JSON inválido. Por favor envie um arquivo JSON válido."
