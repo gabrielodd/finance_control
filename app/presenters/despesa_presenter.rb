@@ -28,7 +28,8 @@ class DespesaPresenter
   end
 
   def despesas_grouped_by_year
-    despesas.order(:date).group_by(&:ano)
+    order = @user.user_configuration&.order == 'asc' ? :asc : :desc
+    despesas.order(date: order).group_by(&:ano)
   end
 
   def total_current_month

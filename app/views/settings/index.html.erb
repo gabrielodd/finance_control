@@ -30,7 +30,7 @@
           <hr>
           <%= form_with url: change_currency_settings_path, method: :patch, local: true, id: 'currency-form' do |form| %>
             <div class="panel-color-selection mt-4">
-              <h6>Select Panel Currency</h6>
+              <h6>Select Currency</h6>
               <div class="d-flex justify-content-between">
                 <div class="field">
                   <%= form.select :currency, options_for_select(currency_options, selected: current_user&.user_configuration&.currency), {}, class: "form-control" %>
@@ -85,12 +85,14 @@
 </div>
 
 <script>
-  document.querySelectorAll('input[name="locale"], input[name="panel_color"]').forEach(function(radio) {
+  document.querySelectorAll('input[name="locale"], input[name="panel_color"], input[name="order"]').forEach(function(radio) {
     radio.addEventListener('change', function() {
       if (radio.name === "locale") {
         document.getElementById('locale-switcher-form').submit();
       } else if (radio.name === "panel_color") {
         document.getElementById('panel-color-form').submit();
+      } else if (radio.name === "order") {
+        document.getElementById('ordering-form').submit();
       }
     });
   });
