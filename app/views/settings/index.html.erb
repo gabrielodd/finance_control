@@ -56,6 +56,27 @@
             </div>
           <% end %>
 
+          <%= form_with url: change_ordering_settings_path, method: :patch, local: true, id: 'ordering-form' do |form| %>
+            <div class="mt-4">
+              <div class="d-flex justify-content-between">
+              <div>
+                <h5>Ordem das despesas</h5>
+                <p>Ordem (baseado na data) que suas transações serão listadas na tela</p>
+              </div>
+              <div class="d-flex flex-column ms-auto">
+                <div>
+                  <%= radio_button_tag :order, 'asc', current_user.user_configuration&.order == 'asc', id: 'order_asc', class: 'form-check-input' %>
+                  <%= label_tag :order_asc, 'Crescente', class: 'form-check-label' %>
+                </div>
+                <div>
+                  <%= radio_button_tag :order, 'desc', current_user.user_configuration&.order == 'desc', id: 'order_desc', class: 'form-check-input' %>
+                  <%= label_tag :order_desc, 'Decrescente', class: 'form-check-label' %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+
         </div>
       </div>
 
