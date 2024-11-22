@@ -65,12 +65,12 @@
               </div>
               <div class="d-flex flex-column ms-auto">
                 <div>
-                  <%= radio_button_tag :order, 'asc', current_user.user_configuration&.order == 'asc', id: 'order_asc', class: 'form-check-input' %>
-                  <%= label_tag :order_asc, t('settings.asc'), class: 'form-check-label' %>
+                  <%= radio_button_tag :order, 'asc', current_user.user_configuration&.order == 'asc', id: 'order_asc', class: 'custom-radio' %>
+                  <%= label_tag :order_asc, t('settings.asc'), class: 'custom-radio-label' %>
                 </div>
                 <div>
-                  <%= radio_button_tag :order, 'desc', current_user.user_configuration&.order == 'desc', id: 'order_desc', class: 'form-check-input' %>
-                  <%= label_tag :order_desc, t('settings.desc'), class: 'form-check-label' %>
+                  <%= radio_button_tag :order, 'desc', current_user.user_configuration&.order == 'desc', id: 'order_desc', class: 'custom-radio' %>
+                  <%= label_tag :order_desc, t('settings.desc'), class: 'custom-radio-label' %>
                 </div>
               </div>
             </div>
