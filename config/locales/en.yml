@@ -46,6 +46,8 @@ en:
     future_expenses: "Future expenses"
     comp_last_month: "compared to last month"
   settings:
+    category_created: "Category created successfully."
+    category_updated: "Categories updated successfully."
     asc: "Ascending"
     desc: "Descending"
     order_header: "Expenses Order"

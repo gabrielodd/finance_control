@@ -46,6 +46,8 @@ pt-BR:
     future_expenses: "Lançamentos futuros"
     comp_last_month: "comparado ao ultimo mês"
   settings:
+    category_created: "Category criado com sucesso!"
+    category_updated: "Categorias criadas com sucesso!"
     asc: "Crescente"
     desc: "Decrescente"
     order_header: "Ordem das despesas"
