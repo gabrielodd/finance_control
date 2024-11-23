@@ -7,15 +7,20 @@
         <div class="card-body">
           <h4 class="card-title"><%=t('menu.categories')%></h4>
           <div class="row">
-            <div class="col-md-12">
-              <% @categories.each do |category| %>
-                <div class="form-check">
-                  <%= check_box_tag "category_ids[]", category.id, true, class: "form-check-input" %>
-                  <%= label_tag "category_#{category.id}", I18n.t("despesa.descriptions.#{Categoria.find_by(id: category.id).name.downcase}", 
-                        default: Categoria.find_by(id: category.id).name), class: "form-check-label" %>
+            <%= form_with url: update_categories_settings_path, method: :patch, local: true do |form| %>
+              <div class="col-md-12">
+                <% @categories.each do |category| %>
+                  <div class="form-check">
+                    <%= check_box_tag "category_ids[]", category.id, current_user.user_configuration.categories.include?(category.id), class: "form-check-input" %>
+                    <%= label_tag "category_#{category.id}", I18n.t("despesa.descriptions.#{Categoria.find_by(id: category.id).name.downcase}", 
+                          default: Categoria.find_by(id: category.id).name), class: "form-check-label" %>
+                  </div>
+                <% end %>
+                <div class="form-group">
+                  <%= form.submit "Save", class: "btn btn-success" %>
                 </div>
-              <% end %>
-            </div>
+              </div>
+            <% end %>
           </div>
         </div>
       </div>

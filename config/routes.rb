@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :investments, only: [:index]
   resources :settings, only: [:index] do
     collection do
+      patch :update_categories
       patch :change_locale
       patch :change_panel_color
       patch :change_currency

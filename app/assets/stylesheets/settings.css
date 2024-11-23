@@ -38,3 +38,15 @@
   cursor: pointer;
   opacity: 0;
 }
+
+.custom-radio {
+  display: inline-block;
+  font-size: 0.85rem; /* Smaller text size */
+  padding: 0;
+  border: 1px solid #266641;
+  cursor: pointer;
+  text-align: center;
+  color: #333;
+  background-color: #30ad4b;
+  transition: all 0.3s ease-in-out;
+}
