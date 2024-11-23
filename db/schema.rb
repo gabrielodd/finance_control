@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_11_20_015020) do
+ActiveRecord::Schema.define(version: 2024_11_22_064326) do
 
   create_table "categoria", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 2024_11_20_015020) do
     t.string "currency", default: "$"
     t.string "order"
     t.string "period"
+    t.text "categories"
     t.index ["user_id"], name: "index_user_configurations_on_user_id"
   end
 
