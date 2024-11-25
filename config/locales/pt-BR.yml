@@ -42,6 +42,7 @@ pt-BR:
     settings: "Configurações"
     categories: "Categorias"
     configurations: "Configurações"
+    create_category: "Criar categoria"
   text:
     future_expenses: "Lançamentos futuros"
     comp_last_month: "comparado ao ultimo mês"

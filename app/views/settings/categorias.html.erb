@@ -4,8 +4,8 @@
 
     <div class="col-md-9">
       <div class="card mb-4">
-        <div class="card-body">
-          <h4 class="card-title"><%=t('menu.categories')%></h4>
+        <h4 style="padding: 30px 30px 0px 30px;"><%=t('menu.categories')%></h4>
+        <div class="card-body" style="padding: 40px;">
           <div class="row">
             <%= form_with url: update_categories_settings_path, method: :patch, local: true do |form| %>
               <div class="col-md-12">
@@ -16,6 +16,7 @@
                           default: Categoria.find_by(id: category.id).name), class: "form-check-label" %>
                   </div>
                 <% end %>
+                <br>
                 <div class="form-group">
                   <%= form.submit "Save", class: "btn btn-success" %>
                 </div>
@@ -25,10 +26,8 @@
         </div>
       </div>
       <div class="card mb-4">
-        <div class="card-header card-header-settings">
-          <%= t('menu.create_category') %>
-        </div>
-        <div class="card-body">
+        <h4 style="padding: 30px 30px 0px 30px;"><%=t('menu.create_category')%></h4>
+        <div class="card-body" style="padding: 40px;">
           <div class="row">
             <div class="col-md-12">
               <%= form_with model: Categoria.new, url: create_category_settings_path, local: true do |form| %>
