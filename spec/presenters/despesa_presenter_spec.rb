@@ -49,7 +49,7 @@ RSpec.describe DespesaPresenter, type: :presenter do
   describe '#despesas_grouped_by_year' do
     it 'groups despesas by year' do
       grouped = despesa_presenter.despesas_grouped_by_year
-      years = [despesa1.ano, despesa2.ano, despesa3.ano].uniq.sort
+      years = [despesa1.ano, despesa2.ano, despesa3.ano].uniq
       expect(grouped.keys).to eq(years)
     end
   end
