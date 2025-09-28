@@ -73,15 +73,31 @@ RSpec.describe DespesaPresenter, type: :presenter do
   end
 
   describe '#jobs' do
-    let(:job1) { instance_double("Delayed::Job", handler: "--- !ruby/object:Delayed::PerformableMethod\nargs:\n- #{user.id}") }
-    let(:job2) { instance_double("Delayed::Job", handler: "--- !ruby/object:Delayed::PerformableMethod\nargs:\n- #{user.id + 1}") }
+    let(:job1) do
+      instance_double(
+        "Delayed::Job",
+        id: 1,
+        run_at: Time.current,
+        handler: "--- !ruby/object:Delayed::PerformableMethod\nargs:\n- #{user.id}"
+      )
+    end
+
+    let(:job2) do
+      instance_double(
+        "Delayed::Job",
+        id: 2,
+        run_at: Time.current,
+        handler: "--- !ruby/object:Delayed::PerformableMethod\nargs:\n- #{user.id + 1}"
+      )
+    end
 
     before do
       allow(Delayed::Job).to receive(:all).and_return([job1, job2])
     end
 
     it 'returns only the jobs related to the user' do
-      expect(despesa_presenter.jobs).to eq([job1])
+      result = despesa_presenter.jobs
+      expect(result.map { |h| h[:job_id] }).to eq([1])
     end
   end
 
