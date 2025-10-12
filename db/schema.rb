@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_11_22_064326) do
+ActiveRecord::Schema.define(version: 2025_09_28_214738) do
 
   create_table "categoria", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
@@ -43,8 +43,16 @@ ActiveRecord::Schema.define(version: 2024_11_22_064326) do
     t.bigint "user_id"
     t.date "date"
     t.boolean "repeating"
+    t.bigint "payment_id"
     t.index ["categoria_id"], name: "index_despesas_on_categoria_id"
+    t.index ["payment_id"], name: "index_despesas_on_payment_id"
     t.index ["user_id"], name: "index_despesas_on_user_id"
+  end
+
+  create_table "payments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_payments_on_user_id"
   end
 
   create_table "user_configurations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -75,6 +83,8 @@ ActiveRecord::Schema.define(version: 2024_11_22_064326) do
 
   add_foreign_key "categoria", "users"
   add_foreign_key "despesas", "categoria", column: "categoria_id"
+  add_foreign_key "despesas", "payments"
   add_foreign_key "despesas", "users"
+  add_foreign_key "payments", "users"
   add_foreign_key "user_configurations", "users"
 end
