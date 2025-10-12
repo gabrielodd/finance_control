@@ -43,6 +43,8 @@ pt-BR:
     categories: "Categorias"
     configurations: "Configurações"
     create_category: "Criar categoria"
+    payments: "Pagamentos"
+    create_payment: "Criar forma de pagamento"
   text:
     future_expenses: "Lançamentos futuros"
     comp_last_month: "comparado ao ultimo mês"

@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   end
 
   resources :investments, only: [:index]
+  resources :payments
   resources :settings, only: [:index] do
     collection do
       patch :update_categories

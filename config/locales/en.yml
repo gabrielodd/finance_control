@@ -43,6 +43,8 @@ en:
     categories: "Categories"
     configurations: "Configurations"
     create_category: "Create category"
+    payments: "Payments"
+    create_payment: "Create payment"
   text:
     future_expenses: "Future expenses"
     comp_last_month: "compared to last month"
