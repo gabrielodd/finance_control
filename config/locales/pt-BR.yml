@@ -37,6 +37,8 @@ pt-BR:
     new_Despesas: "Novas despesas"
     filters: "Filtros"
     export_json: "Exportar para JSON"
+    import_csv: "Importar CSV"
+    select_csv: "Selecionar arquivo CSV"
     submit_button: "Salvar"
     all: "Todos"
     settings: "Configurações"
@@ -66,3 +68,8 @@ pt-BR:
         valor: "Valor"
         date: "Data"
         repetir: "Repetir todo mês"
+  csv:
+    success: "CSV importado com sucesso"
+    error: "Erro ao importar CSV"
+    no_file: "Selecione um arquivo CSV"
+    preview: "Pré-visualização"

@@ -1,0 +1,89 @@
+<h3 class="text-center"><%= t('menu.import_csv') %></h3>
+
+<hr>
+
+<div class="card p-4">
+  <%= form_with url: upload_csv_despesas_path, local: true, multipart: true do |f| %>
+    <div class="form-group mb-3">
+      <%= label_tag :file, t('menu.select_csv') %>
+      <%= file_field_tag :file, class: 'form-control', accept: '.csv', id: 'csv-file-input' %>
+    </div>
+
+    <div class="form-group mb-3">
+      <%= label_tag :category, t('menu.category') %>
+      <%= f.select(:categoria_id, category_options, {}, class: 'form-control', required: true) %>
+    </div>
+
+    <%= submit_tag t('menu.import_csv'), class: 'btn btn-success' %>
+  <% end %>
+</div>
+
+<div id="csv-preview" class="mt-4" style="display: none;">
+  <h5><%= t('csv.preview') %></h5>
+
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th><%=t('attributes.description')%></th>
+          <th><%=t('attributes.value')%></th>
+          <th><%=t('attributes.date')%></th>
+        </tr>
+      </thead>
+
+      <tbody id="csv-preview-body"></tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const input = document.getElementById('csv-file-input')
+    const preview = document.getElementById('csv-preview')
+    const previewBody = document.getElementById('csv-preview-body')
+
+    input.addEventListener('change', event => {
+      const file = event.target.files[0]
+
+      if (!file) return
+
+      const reader = new FileReader()
+
+      reader.onload = function(e) {
+        const text = e.target.result
+
+        previewBody.innerHTML = ''
+
+        const lines = text.split(/\r?\n/).filter(line => line.trim())
+
+        if (lines.length <= 1) return
+
+        const separator = lines[0].includes(';') ? ';' : ','
+
+        lines.slice(1).forEach(line => {
+          const columns = line.split(separator)
+
+          if (columns.length < 3) return
+
+          const date = columns[0]
+          const descricao = columns[1]
+          const valor = columns[2]
+
+          const row = document.createElement('tr')
+
+          row.innerHTML = `
+            <td>${descricao}</td>
+            <td>${valor}</td>
+            <td>${date}</td>
+          `
+
+          previewBody.appendChild(row)
+        })
+
+        preview.style.display = 'block'
+      }
+
+      reader.readAsText(file)
+    })
+  })
+</script>

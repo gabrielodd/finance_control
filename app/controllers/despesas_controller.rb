@@ -1,3 +1,5 @@
+require 'csv'
+
 class DespesasController < ApplicationController
   before_action :set_despesa, only: %i[ edit update destroy ]
   skip_before_action :verify_authenticity_token
@@ -56,6 +58,39 @@ class DespesasController < ApplicationController
       flash[:error] = I18n.t('json.error')
     end
     redirect_to despesas_url
+  end
+
+  def import_csv
+  end
+
+  def upload_csv
+    file = params[:file]
+    categoria_id = params[:categoria_id]
+
+    if file.blank?
+      flash[:error] = I18n.t('csv.no_file')
+      return redirect_to import_csv_despesas_path
+    end
+
+    begin
+      CSV.foreach(file.path, headers: true) do |row|
+        Despesa.create(
+          descricao: row['title'],
+          valor: row['amount'],
+          date: row['date'],
+          categoria_id: categoria_id,
+          user_id: current_user.id
+        )
+      end
+
+      flash[:success] = I18n.t('csv.success')
+
+    rescue => e
+      Rails.logger.error(e.message)
+      flash[:error] = I18n.t('csv.error')
+    end
+
+    redirect_to despesas_path
   end
 
   def update_valor

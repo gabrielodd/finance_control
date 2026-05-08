@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     collection do
       get :export_to_json
       get 'import', to: 'despesas#import'
+      get :import_csv
+      post :upload_csv
       post 'import', to: 'despesas#import_json'
       post 'update_valor'
       post 'add_despesa'

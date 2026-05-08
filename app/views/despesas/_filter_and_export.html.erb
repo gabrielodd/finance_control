@@ -20,6 +20,10 @@
 
 <%= render 'despesas/import_modal' %>
 
+<%= link_to import_csv_despesas_path, class: 'btn btn-info' do %>
+  <i class="fas fa-file-csv"></i> <%= t('menu.import_csv') %>
+<% end %>
+
 <%= link_to new_despesa_path, class: 'btn btn-success spendings-button' do %>
   <i class="fas fa-plus"></i> <%=t('menu.new_despesas')%>
 <% end %>
